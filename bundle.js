@@ -116,7 +116,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../css/styles.css */ \"./src/css/styles.css\");\n\n\nconsole.log(\"Hello, World! From Webpack Check Mate Todo List!\");\nconsole.log(\"Check auto save and reload of webpack.\");\n\n\n//# sourceURL=webpack://todolisttop/./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../css/styles.css */ \"./src/css/styles.css\");\n\n\n// console.log(\"Hello, World! From Webpack Check Mate Todo List!\");\n// console.log(\"Check auto save and reload of webpack.\");\n\n\n//# sourceURL=webpack://todolisttop/./src/js/index.js?");
 
 /***/ })
 
