@@ -28,9 +28,18 @@ h2 {
 }
 h3 {
 }
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hidden {
+  display: none;
+}
 #wrapper {
   display: grid;
   grid-template-columns: 4fr 9fr;
   grid-template-rows: auto 1fr auto;
   height: 100vh;
+  overflow: hidden;
 }

@@ -1,2 +1,6 @@
 #main {
+  overflow-y: auto;
+}
+#main__all {
+  padding: 1rem;
 }

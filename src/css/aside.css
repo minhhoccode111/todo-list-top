@@ -1,7 +1,10 @@
 #aside {
   border-right: 1px solid #000;
   padding: 1rem;
+  overflow-y: auto;
   text-transform: capitalize;
+  position: relative;
+  padding-bottom: 7.6rem;
 }
 #aside__nav {
 }
@@ -33,9 +36,22 @@
 }
 #aside a {
   display: block;
+  transition: all 0.1s;
 }
 #aside a:hover {
   text-decoration: underline;
   background-color: lightslategray;
   color: white;
+}
+#aside__plus {
+  background-color: lightcoral;
+  border: 0px solid #000;
+  border-radius: 50%;
+  color: red;
+  padding: 1rem;
+  font-size: 3rem;
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
