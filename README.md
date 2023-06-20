@@ -1,8 +1,6 @@
-# todoListTOP
-
 # The Odin Project: Todo List
 
-# Check Mate (Check the list, Mate.)
+# Check Mate (Check the todo list, mate.)
 
 ## What I've learned.
 
@@ -45,3 +43,9 @@
     - **WE CANNOT STORE FUNCTIONS IN JSON**, so we'll have to figure out **how to add methods back to our object properties once we fetch them**
 
 ## Check Mate Documentation:
+
+## Live Demos
+
+- [All projects's live demos](https://minhhoccode111.github.io/allProjectssLiveDemo)
+
+- [Check mate demo](https://minhhoccode111.github.io/todoListTOP/)

@@ -8,7 +8,7 @@ module.exports = {
   },
   mode: "development",
   devServer: {
-    contentBase: "./dist",
+    static: "./dist",
     port: 8080,
   },
   module: {

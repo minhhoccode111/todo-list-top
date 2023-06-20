@@ -1,0 +1,12 @@
+#footer {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  text-align: center;
+  padding: 1rem;
+  background-color: lightblue;
+}
+
+#footer__words {
+}
+#footer__link {
+}
