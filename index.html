@@ -8,27 +8,225 @@
   <body>
     <div id="wrapper">
       <header id="header">
-        <h1 id="header__title">checkmate &#128196;</h1>
+        <h1 id="header__title" class="animate__animated animate__backInRight">
+          checkmate &#128196;
+        </h1>
+        <button id="header__about">About</button>
       </header>
       <aside id="aside">
-        <nav id="aside__nav"></nav>
+        <nav id="aside__nav">
+          <div class="nav__button__ctn parent">
+            <button class="nav__button button__all">all</button>
+            <span class="tinynum">1</span>
+          </div>
+          <div class="nav__button__ctn child">
+            <button class="nav__button button__today">today</button>
+            <span class="tinynum">1</span>
+          </div>
+          <div class="nav__button__ctn child">
+            <button class="nav__button button__week">week</button>
+            <span class="tinynum">1</span>
+          </div>
+          <div class="nav__button__ctn child">
+            <button class="nav__button button__month">month</button>
+            <span class="tinynum">1</span>
+          </div>
+          <div class="nav__button__ctn child">
+            <button class="nav__button button__year">year</button>
+            <span class="tinynum">1</span>
+          </div>
+          <div class="nav__button__ctn parent">
+            <button class="nav__button button__projects">projects</button>
+            <button class="project__add tinynum">+</button>
+          </div>
+          <div class="nav__button__ctn child">
+            <button class="nav__button button__work">work</button>
+            <span class="tinynum">2</span>
+          </div>
+          <div class="nav__button__ctn child">
+            <button class="nav__button button__learn">learn</button>
+            <span class="tinynum">2</span>
+          </div>
+          <div class="nav__button__ctn child">
+            <button class="nav__button button__gym">gym</button>
+            <span class="tinynum">2</span>
+          </div>
+          <div class="nav__button__ctn parent">
+            <button class="nav__button button__dairy">dairy</button>
+            <span class="tinynum">2</span>
+          </div>
+          <div class="nav__button__ctn parent">
+            <button class="nav__button button__notes">notes</button>
+            <span class="tinynum">2</span>
+          </div>
+        </nav>
       </aside>
       <main id="main">
-        <section id="main__todos">
-          <ul id="todos__all">
-            <li class="todo"></li>
-          </ul>
-          <ul id="todos__today">
-            <li class="todo"></li>
-          </ul>
-          <ul id="todos__week">
-            <li class="todo"></li>
-          </ul>
-          <ul id="todos__year">
-            <li class="todo"></li>
+        <section id="section__todos" class="">
+          <ul id="section__todos__ul">
+            <li class="todo__item low">
+              <h3 class="todo__item__title">Title</h3>
+              <em class="todo__item__date">21/6/23</em>
+              <button class="todo__item__edit edit">...</button>
+              <button class="todo__item__info info">?</button>
+              <button class="todo__item__del del">X</button>
+            </li>
+            <li class="todo__item med">
+              <h3 class="todo__item__title">Title</h3>
+              <em class="todo__item__date">21/6/23</em>
+              <button class="todo__item__edit edit">...</button>
+              <button class="todo__item__info info">?</button>
+              <button class="todo__item__del del">X</button>
+            </li>
+            <li class="todo__item high">
+              <h3 class="todo__item__title">Title</h3>
+              <em class="todo__item__date">21/6/23</em>
+              <button class="todo__item__edit edit">...</button>
+              <button class="todo__item__info info">?</button>
+              <button class="todo__item__del del">X</button>
+            </li>
           </ul>
         </section>
-        <section id="main__notes"></section>
+        <section id="section__projects" class="">
+          <ul id="section__projects__ul">
+            <li class="project__item">
+              <h3 class="project__item__title">work</h3>
+              <button class="project__item__edit edit">...</button>
+              <button class="project__item__info info">?</button>
+              <button class="project__item__del del">X</button>
+            </li>
+            <li class="project__item">
+              <h3 class="project__item__title">work</h3>
+              <button class="project__item__edit edit">...</button>
+              <button class="project__item__info info">?</button>
+              <button class="project__item__del del">X</button>
+            </li>
+            <li class="project__item">
+              <h3 class="project__item__title">work</h3>
+              <button class="project__item__edit edit">...</button
+              ><button class="project__item__info info">?</button
+              ><button class="project__item__del del">X</button>
+            </li>
+          </ul>
+        </section>
+        <section id="section__dairy" class="">
+          <ul id="section__dairy__ul">
+            <li class="dairy__item">
+              <details class="dairy__item__details">
+                <summary class="dairy__item__details__summary">
+                  <em class="dairy__item__date">21/6/23</em>
+                </summary>
+                <p class="dairy__item__day">
+                  Hát cho giờ ra chơi, mà trời mưa rơi, như ngày em không thấy
+                  nắng, em thấy không có bạn, em đứt ngang dây đàn, em sẽ không
+                  ghi bàn hôm nay. Cứ ngồi đây thôi cùng lời anh nói cứ để cơn
+                  giông đó tới, cho tới hôm em về, giữ lấy cánh thư để trong
+                  tay. Bởi vì sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ
+                  là chuyện cười hôm nay, dù nói không buồn cười mấy. Nhưng cười
+                  để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy
+                  chưa em. Cho dù ta ưa, một ngày không mưa, nhưng làm sao cây
+                  sống mãi. Nếu nắng chang chang hoài, không có hôm mưa lại,
+                  những cái hôm em phải chào thua. Buông hai tay, buông hai tay,
+                  em đã cố đã cố hôm nay, giờ kệ nó đi em không làm gì...Chỉ
+                  nhìn mặt trời đi qua, sẽ có ngày em thấy, những chuyện buồn
+                  hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười
+                  mấy, nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai,
+                  thấy chưa thấy chưa em...Có sao có sao đâu...Told you told you
+                  so...
+                </p>
+                <hr />
+                <p class="dairy__item__night">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Sapiente, ipsam nulla? Delectus aliquam tenetur laborum!
+                  Delectus, reprehenderit nam! Esse iste odio laudantium fuga
+                  aspernatur est aliquid voluptate dolor totam officia!
+                </p>
+              </details>
+            </li>
+            <li class="dairy__item">
+              <details class="dairy__item__details">
+                <summary class="dairy__item__details__summary">
+                  <em class="dairy__item__date">21/6/23</em>
+                </summary>
+                <p class="dairy__item__day">
+                  Hát cho giờ ra chơi, mà trời mưa rơi, như ngày em không thấy
+                  nắng, em thấy không có bạn, em đứt ngang dây đàn, em sẽ không
+                  ghi bàn hôm nay. Cứ ngồi đây thôi cùng lời anh nói cứ để cơn
+                  giông đó tới, cho tới hôm em về, giữ lấy cánh thư để trong
+                  tay. Bởi vì sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ
+                  là chuyện cười hôm nay, dù nói không buồn cười mấy. Nhưng cười
+                  để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy
+                  chưa em. Cho dù ta ưa, một ngày không mưa, nhưng làm sao cây
+                  sống mãi. Nếu nắng chang chang hoài, không có hôm mưa lại,
+                  những cái hôm em phải chào thua. Buông hai tay, buông hai tay,
+                  em đã cố đã cố hôm nay, giờ kệ nó đi em không làm gì...Chỉ
+                  nhìn mặt trời đi qua, sẽ có ngày em thấy, những chuyện buồn
+                  hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười
+                  mấy, nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai,
+                  thấy chưa thấy chưa em...Có sao có sao đâu...Told you told you
+                  so...
+                </p>
+                <hr />
+                <p class="dairy__item__night">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Distinctio aut doloremque mollitia, blanditiis sint quo qui
+                  architecto aliquam voluptates modi consectetur facere sapiente
+                  unde delectus reprehenderit officia perspiciatis accusantium
+                  sit!
+                </p>
+              </details>
+            </li>
+          </ul>
+          <div id="section__dairy__inputs__ctn">
+            <em id="dairy__date">21/6/23</em>
+            <div id="dairy__form__day">
+              <p class="">Your thoughts all day long.</p>
+              <br />
+              <textarea
+                wrap="hard"
+                id="dairy__input__day"
+                placeholder="All day long."
+                value=""
+                oninput="autoResize()"
+              ></textarea>
+              <br />
+            </div>
+            <div id="dairy__form__night">
+              <p class="">Your thoughts before bed.</p>
+              <br />
+              <textarea
+                wrap="hard"
+                id="dairy__input__night"
+                placeholder="Before bed."
+                value=""
+                oninput="autoResize()"
+              ></textarea>
+              <br />
+            </div>
+          </div>
+        </section>
+        <section id="section__notes" class="">
+          <ul id="section__notes__ul">
+            <li class="note__item">
+              <input class="note__item__title" placeholder="Title" />
+              <button class="note__item__del del">X</button>
+              <input class="note__item__detail" placeholder="Detail" />
+              <button class="note__item__info info">?</button>
+            </li>
+            <li class="note__item">
+              <input class="note__item__title" placeholder="Title" />
+              <button class="note__item__del del">X</button>
+              <input class="note__item__detail" placeholder="Detail" />
+              <button class="note__item__info info">?</button>
+            </li>
+            <li class="note__item">
+              <input class="note__item__title" placeholder="Title" />
+              <button class="note__item__del del">X</button>
+              <input class="note__item__detail" placeholder="Detail" />
+              <button class="note__item__info info">?</button>
+            </li>
+          </ul>
+        </section>
       </main>
       <button id="button__plus">&#10133;</button>
       <footer id="footer">
@@ -39,6 +237,14 @@
         </p>
       </footer>
     </div>
+    <script>
+      function autoResize() {
+        let day = document.getElementById("dairy__input__day");
+        let night = document.getElementById("dairy__input__night");
+        day.style.height = day.scrollHeight + "px";
+        night.style.height = night.scrollHeight + "px";
+      }
+    </script>
     <script src="./bundle.js" defer type="module"></script>
   </body>
 </html>
