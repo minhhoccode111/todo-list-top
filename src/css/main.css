@@ -1,7 +1,7 @@
 #main {
   overflow-y: auto;
   font-size: 2rem;
-  padding: 1rem;
+  padding: 1rem 0 7.6rem;
 }
 #section__todos {
 }
@@ -17,8 +17,6 @@
 #section__projects__ul {
 }
 #section__dairy__ul {
-}
-#section__notes__ul {
 }
 
 .todo__item {
@@ -87,14 +85,7 @@
   grid-column-end: 3;
   justify-self: center;
 }
-#section__dairy__inputs__ctn label {
-}
-#section__dairy__inputs__ctn textarea {
-  padding: 1rem;
-  width: 100%;
-  resize: vertical;
-  height: auto;
-  overflow-y: hidden;
+#section__dairy__inputs__ctn div {
 }
 #dairy__form__day {
 }
@@ -115,5 +106,33 @@
 .dairy__item p {
 }
 
+#section__notes__ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  align-content: start;
+}
+
 .note__item {
+  background-color: lightgray;
+  padding: 0.8rem;
+  margin: 0.8rem 0.4rem;
+}
+.note__item__header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+.note__item__title {
+  background-color: rgb(238, 238, 238);
+  padding: 0.4rem 1rem;
+  flex: 1;
+}
+.note__item__detail {
+  flex: 1;
+}
+.note__item button {
+  align-self: start;
+  padding: 0.4rem;
+  border: 1px solid #000;
 }

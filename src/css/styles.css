@@ -65,3 +65,9 @@ button.del {
   color: white;
   background-color: red;
 }
+
+div[contenteditable="true"] {
+  background-color: rgb(238, 238, 238);
+  padding: 0.4rem 1rem;
+  border-radius: 0.4rem;
+}

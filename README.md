@@ -7,6 +7,11 @@
 - Using Webpack
 - ES6 Modules
 - add .gitignore to ignore node_modules/ folder
+- textarea element expand height along with text wrap or line break
+- `div[contenteditable="true"][spellcheck="false"]` will create a div can be written on like a textarea element
+- grid-template-columns: repeat(auto-fit,minmax(25rem,1fr))
+- flex-basis, flex-shrink, flex-grow
+- details,summary,em,... elements.
 -
 
 ## Requirements from The Odin Project:
