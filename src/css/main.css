@@ -1,6 +1,119 @@
 #main {
   overflow-y: auto;
-}
-#main__all {
+  font-size: 2rem;
   padding: 1rem;
+}
+#section__todos {
+}
+#section__projects {
+}
+#section__dairy {
+}
+#section__notes {
+}
+
+#section__todos__ul {
+}
+#section__projects__ul {
+}
+#section__dairy__ul {
+}
+#section__notes__ul {
+}
+
+.todo__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-flow: row nowrap;
+  background-color: lightgrey;
+  margin: 0.8rem 0.4rem;
+  border-left-width: 0.8rem;
+  border-left-style: solid;
+  border-left-color: transparent;
+}
+.todo__item.low {
+  border-left-color: green;
+}
+.todo__item.med {
+  border-left-color: yellow;
+}
+.todo__item.high {
+  border-left-color: red;
+}
+
+.todo__item h3 {
+  flex: 1;
+  margin: 1rem 0;
+}
+.todo__item em {
+  font-size: 1.2rem;
+}
+.todo__item button {
+  align-self: center;
+  height: 2rem;
+  border: 1px solid #000;
+  flex-basis: 2rem;
+}
+
+.project__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-flow: row nowrap;
+  background-color: lightgrey;
+  margin: 0.8rem 0.4rem;
+}
+.project__item h3 {
+  margin: 1rem 0 1rem 1rem;
+  flex: 1;
+}
+.project__item button {
+  align-self: center;
+  height: 2rem;
+  border: 1px solid #000;
+  flex-basis: 2rem;
+}
+#section__dairy__inputs__ctn {
+  padding: 0.8rem;
+  margin: 0.8rem 0.4rem;
+  background-color: lightgray;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+#section__dairy__inputs__ctn em {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+}
+#section__dairy__inputs__ctn label {
+}
+#section__dairy__inputs__ctn textarea {
+  padding: 1rem;
+  width: 100%;
+  resize: vertical;
+  height: auto;
+  overflow-y: hidden;
+}
+#dairy__form__day {
+}
+#dairy__form__night {
+}
+.dairy__item {
+  background-color: lightgray;
+  padding: 0.8rem;
+  margin: 0.8rem 0.4rem;
+}
+.dairy__item details {
+  font-size: 1.6rem;
+}
+.dairy__item summary {
+}
+.dairy__item em {
+}
+.dairy__item p {
+}
+
+.note__item {
 }

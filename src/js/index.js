@@ -7,6 +7,7 @@ import "./../css/footer.css";
 import "./../css/aside.css";
 import "./../css/reset.css";
 import "./../css/main.css";
+import "animate.css";
 
 //import javaScript
 
