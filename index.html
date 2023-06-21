@@ -114,7 +114,7 @@
             <li class="dairy__item">
               <details class="dairy__item__details">
                 <summary class="dairy__item__details__summary">
-                  <em class="dairy__item__date">21/6/23</em>
+                  <em class="dairy__item__date">19/6/23</em>
                 </summary>
                 <p class="dairy__item__day">
                   Hát cho giờ ra chơi, mà trời mưa rơi, như ngày em không thấy
@@ -146,7 +146,7 @@
             <li class="dairy__item">
               <details class="dairy__item__details">
                 <summary class="dairy__item__details__summary">
-                  <em class="dairy__item__date">21/6/23</em>
+                  <em class="dairy__item__date">20/6/23</em>
                 </summary>
                 <p class="dairy__item__day">
                   Hát cho giờ ra chơi, mà trời mưa rơi, như ngày em không thấy
@@ -181,49 +181,113 @@
             <em id="dairy__date">21/6/23</em>
             <div id="dairy__form__day">
               <p class="">Your thoughts all day long.</p>
-              <br />
-              <textarea
-                wrap="hard"
+              <hr />
+              <div
                 id="dairy__input__day"
-                placeholder="All day long."
-                value=""
-                oninput="autoResize()"
-              ></textarea>
-              <br />
+                contenteditable="true"
+                spellcheck="false"
+              >
+                Day. Edit here!
+              </div>
             </div>
             <div id="dairy__form__night">
               <p class="">Your thoughts before bed.</p>
-              <br />
-              <textarea
-                wrap="hard"
+              <hr />
+              <div
                 id="dairy__input__night"
-                placeholder="Before bed."
-                value=""
-                oninput="autoResize()"
-              ></textarea>
-              <br />
+                contenteditable="true"
+                spellcheck="false"
+              >
+                Night. Edit here!
+              </div>
             </div>
           </div>
         </section>
         <section id="section__notes" class="">
           <ul id="section__notes__ul">
             <li class="note__item">
-              <input class="note__item__title" placeholder="Title" />
-              <button class="note__item__del del">X</button>
-              <input class="note__item__detail" placeholder="Detail" />
-              <button class="note__item__info info">?</button>
+              <div class="note__item__header">
+                <div
+                  class="note__item__title"
+                  contenteditable="true"
+                  spellcheck="false"
+                >
+                  Title
+                </div>
+                <button class="note__item__info info">?</button>
+                <button class="note__item__del del">X</button>
+              </div>
+
+              <div
+                class="note__item__detail"
+                contenteditable="true"
+                spellcheck="false"
+              >
+                Detail
+              </div>
             </li>
             <li class="note__item">
-              <input class="note__item__title" placeholder="Title" />
-              <button class="note__item__del del">X</button>
-              <input class="note__item__detail" placeholder="Detail" />
-              <button class="note__item__info info">?</button>
+              <div class="note__item__header">
+                <div
+                  class="note__item__title"
+                  contenteditable="true"
+                  spellcheck="false"
+                >
+                  Title
+                </div>
+                <button class="note__item__info info">?</button>
+                <button class="note__item__del del">X</button>
+              </div>
+
+              <div
+                class="note__item__detail"
+                contenteditable="true"
+                spellcheck="false"
+              >
+                Detail
+              </div>
             </li>
             <li class="note__item">
-              <input class="note__item__title" placeholder="Title" />
-              <button class="note__item__del del">X</button>
-              <input class="note__item__detail" placeholder="Detail" />
-              <button class="note__item__info info">?</button>
+              <div class="note__item__header">
+                <div
+                  class="note__item__title"
+                  contenteditable="true"
+                  spellcheck="false"
+                >
+                  Title
+                </div>
+                <button class="note__item__info info">?</button>
+                <button class="note__item__del del">X</button>
+              </div>
+
+              <div
+                class="note__item__detail"
+                contenteditable="true"
+                spellcheck="false"
+              >
+                Detail
+              </div>
+            </li>
+            <li class="note__item">
+              <div class="note__item__header">
+                <div
+                  class="note__item__title"
+                  contenteditable="true"
+                  spellcheck="false"
+                >
+                  Title
+                </div>
+                <button class="note__item__info info">?</button>
+                <button class="note__item__del del">X</button>
+              </div>
+
+              <div
+                class="note__item__detail"
+                contenteditable="true"
+                spellcheck="false"
+              >
+                Detail
+              </div>
             </li>
           </ul>
         </section>
@@ -237,14 +301,7 @@
         </p>
       </footer>
     </div>
-    <script>
-      function autoResize() {
-        let day = document.getElementById("dairy__input__day");
-        let night = document.getElementById("dairy__input__night");
-        day.style.height = day.scrollHeight + "px";
-        night.style.height = night.scrollHeight + "px";
-      }
-    </script>
+    <script></script>
     <script src="./bundle.js" defer type="module"></script>
   </body>
 </html>
