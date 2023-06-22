@@ -13,6 +13,13 @@
 - flex-basis, flex-shrink, flex-grow
 - details,summary,em,... elements.
 - If you are not using form submit button and listen for that form's submit event, then the "required" attribute of inputs inside that form is not going to work correctly.
+- DOM event occur when we change a `<div contenteditable="true"></div>` is "input" event (no matter you type, paste, delete or perform other editing actions)
+- DOM event occur when we open or close a `<details>` element is the "toggle" event
+- we can set a `<dialog></dialog>` open by default in HTML without using javaScript with open attribute `<dialog open></dialog>`
+- to show or hide a `<dialog></dialog>` element we can use the DOM API methods `show()` and `close()` with that element
+- but the `show()` method set the `<dialog></dialog>` element style to `display: block;` we can change this default behavior with the css selector: `dialog[open] {display: flex;}` (or any display style you want)
+- we can use `input.disabled = true;` to disable any input with javaScript
+-
 
 ## Requirements from The Odin Project:
 
