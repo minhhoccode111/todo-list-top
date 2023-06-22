@@ -62,7 +62,12 @@
   background-color: lightgrey;
   margin: 0.8rem 0.4rem;
 }
-.project__item h3 {
+.project__item a:hover {
+  text-decoration: none;
+}
+.project__item a {
+  color: #000;
+  cursor: pointer;
   margin: 1rem 0 1rem 1rem;
   flex: 1;
 }
