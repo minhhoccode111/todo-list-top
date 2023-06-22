@@ -12,7 +12,7 @@
 - grid-template-columns: repeat(auto-fit,minmax(25rem,1fr))
 - flex-basis, flex-shrink, flex-grow
 - details,summary,em,... elements.
--
+- If you are not using form submit button and listen for that form's submit event, then the "required" attribute of inputs inside that form is not going to work correctly.
 
 ## Requirements from The Odin Project:
 

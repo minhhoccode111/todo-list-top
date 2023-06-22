@@ -6,51 +6,53 @@
     <title>Check Mate</title>
     <style>
       /* chat gpt */
-      .form-group {
+      #of__todo .form__group {
         margin-bottom: 15px;
       }
 
-      label {
+      #of__todo label {
         display: block;
         margin-bottom: 5px;
         font-weight: bold;
       }
 
-      input[type="text"],
-      textarea,
-      input[type="date"],
-      input[type="button"] {
+      #of__todo input[type="text"],
+      #of__todo textarea,
+      #of__todo input[type="date"],
+      #of__todo input[type="button"],
+      #of__todo input[type="submit"] {
         width: 100%;
         padding: 5px;
         border: 1px solid #ccc;
         border-radius: 4px;
       }
 
-      textarea {
+      #of__todo textarea {
         resize: vertical;
       }
 
-      input[type="button"][value="Create Todo"] {
+      #of__todo input[type="button"][value="Create Todo"] {
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+      }
+      #of__todo input[type="submit"][value="Create Todo"] {
         background-color: #4caf50;
         color: white;
         cursor: pointer;
       }
 
-      input[type="button"][value="Create Todo"]:hover {
+      #of__todo input[type="button"][value="Create Todo"]:hover {
         background-color: #45a049;
       }
-      input[type="button"][value="Cancel"] {
+      #of__todo input[type="button"][value="Cancel"] {
         background-color: #af4c4c;
         color: white;
         cursor: pointer;
       }
 
-      input[type="button"][value="Cancel"]:hover {
+      #of__todo input[type="button"][value="Cancel"]:hover {
         background-color: #a04545;
-      }
-
-      h1 {
-        text-align: center;
       }
     </style>
   </head>
@@ -363,53 +365,99 @@
     </div>
     <dialog id="of__todo" open>
       <h2 id="dialog__todo__message">Create a new todo</h2>
-      <form id="todoForm">
-        <div class="form-group">
-          <label for="title">Title:</label>
-          <input type="text" id="title" name="title" maxlength="60" required />
+      <form id="form__of__todo">
+        <div class="form__group">
+          <label for="title__of__todo">Title:</label>
+          <input
+            type="text"
+            id="title__of__todo"
+            name="title__of__todo"
+            maxlength="60"
+            required
+          />
         </div>
-        <div class="form-group">
-          <label for="detail">Detail:</label>
-          <textarea id="detail" name="detail" rows="4" required></textarea>
+        <div class="form__group">
+          <label for="detail__of__todo">Detail:</label>
+          <textarea
+            id="detail__of__todo"
+            name="detail__of__todo"
+            rows="4"
+            required
+          ></textarea>
         </div>
-        <div class="form-group">
-          <label for="dueDate">Due Date:</label>
-          <input type="date" id="dueDate" name="dueDate" value="" />
+        <div class="form__group">
+          <label for="dueDate__of__todo">Due Date:</label>
+          <input
+            type="date"
+            id="dueDate__of__todo"
+            name="dueDate__of__todo"
+            value=""
+          />
         </div>
-        <div class="form-group">
-          <label for="hasDueDate">Has Due Date:</label>
-          <input type="radio" id="hasDueDate" name="hasDueDate" value="yes" />
+        <div class="form__group">
+          <label for="hasDueDate__of__todo">Has Due Date:</label>
+          <input
+            type="radio"
+            id="hasDueDate__of__todo"
+            name="hasDueDate__of__todo"
+            value="yes"
+          />
           Yes
           <input
             type="radio"
-            id="noDueDate"
-            name="hasDueDate"
+            id="noDueDate__of__todo"
+            name="hasDueDate__of__todo"
             value="no"
             checked
           />
           No
         </div>
-        <div class="form-group">
-          <label for="priority">Priority:</label>
-          <input type="radio" id="low" name="priority" value="low" checked />
-          Low <input type="radio" id="med" name="priority" value="med" /> Medium
-          <input type="radio" id="high" name="priority" value="high" /> High
-        </div>
-        <div class="form-group">
-          <label for="isDone">Is Done:</label>
-          <input type="radio" id="isDone" name="isDone" value="true" /> Yes
+        <div class="form__group">
+          <label for="priority__of__todo">Priority:</label>
           <input
             type="radio"
-            id="notDone"
-            name="isDone"
+            id="low__of__todo"
+            name="priority__of__todo"
+            value="low"
+            checked
+          />
+          Low
+          <input
+            type="radio"
+            id="med__of__todo"
+            name="priority__of__todo"
+            value="med"
+          />
+          Medium
+          <input
+            type="radio"
+            id="high__of__todo"
+            name="priority__of__todo"
+            value="high"
+          />
+          High
+        </div>
+        <div class="form__group">
+          <label for="isDone__of__todo">Is Done:</label>
+          <input
+            type="radio"
+            id="isDone__of__todo"
+            name="isDone__of__todo"
+            value="true"
+          />
+          Yes
+          <input
+            type="radio"
+            id="notDone__of__todo"
+            name="isDone__of__todo"
             value="false"
             checked
           />
           No
         </div>
-        <div class="form-group">
-          <input type="button" value="Create Todo" />
-          <input type="button" value="Cancel" />
+        <div class="form__group">
+          <input type="submit" id="create__of__todo" value="Create Todo" />
+          <input type="button" id="cancel__of__todo" value="Cancel" />
         </div>
       </form>
     </dialog>
@@ -423,37 +471,40 @@
     </dialog>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var dueDateInput = document.getElementById("dueDate");
+        let dueDateInput = document.getElementById("dueDate__of__todo");
         dueDateInput.disabled = true;
 
         document
-          .getElementById("hasDueDate")
+          .getElementById("hasDueDate__of__todo")
           .addEventListener("change", function () {
             dueDateInput.disabled = this.value !== "yes";
           });
       });
 
       document
-        .querySelector(`input[value="Create Todo"][type="button"]`)
-        .addEventListener("click", function (event) {
+        .querySelector(
+          // `input#create__of__todo[value="Create Todo"][type="button"]`
+          `#form__of__todo`
+        )
+        .addEventListener("submit", function (event) {
           event.preventDefault();
 
           // Retrieve form data
-          var title = document.getElementById("title").value;
-          var detail = document.getElementById("detail").value;
-          var dueDate = document.getElementById("dueDate").value;
-          var hasDueDate = document.querySelector(
-            'input[name="hasDueDate"]:checked'
+          let title = document.getElementById("title__of__todo").value;
+          let detail = document.getElementById("detail__of__todo").value;
+          let dueDate = document.getElementById("dueDate__of__todo").value;
+          let hasDueDate = document.querySelector(
+            'input[name="hasDueDate__of__todo"]:checked'
           ).value;
-          var priority = document.querySelector(
-            'input[name="priority"]:checked'
+          let priority = document.querySelector(
+            'input[name="priority__of__todo"]:checked'
           ).value;
-          var isDone = document.querySelector(
-            'input[name="isDone"]:checked'
+          let isDone = document.querySelector(
+            'input[name="isDone__of__todo"]:checked'
           ).value;
 
           // Create a new Todo object
-          var todo = {
+          let todo = {
             title: title,
             detail: detail,
             dueDate: dueDate,
@@ -466,10 +517,11 @@
           console.log(todo);
 
           // Reset the form
-          document.getElementById("todoForm").reset();
+          document.getElementById("form__of__todo").reset();
+          document.getElementById("of__todo").close();
         });
       document
-        .querySelector(`input[value="Cancel"][type="button"]`)
+        .querySelector(`input#cancel__of__todo[value="Cancel"][type="button"]`)
         .addEventListener("click", () => {
           document.getElementById("of__todo").close();
         });
