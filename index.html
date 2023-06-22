@@ -4,6 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Check Mate</title>
+    <style>
+      /* chat gpt */
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      textarea,
+      input[type="date"],
+      input[type="button"] {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      input[type="button"][value="Create Todo"] {
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+      }
+
+      input[type="button"][value="Create Todo"]:hover {
+        background-color: #45a049;
+      }
+      input[type="button"][value="Cancel"] {
+        background-color: #af4c4c;
+        color: white;
+        cursor: pointer;
+      }
+
+      input[type="button"][value="Cancel"]:hover {
+        background-color: #a04545;
+      }
+
+      h1 {
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <div id="wrapper">
@@ -11,7 +60,12 @@
         <h1 id="header__title" class="animate__animated animate__backInRight">
           checkmate &#128196;
         </h1>
-        <button id="header__about">About</button>
+        <button
+          id="header__about"
+          class="animate__animated animate__backInRight"
+        >
+          About
+        </button>
       </header>
       <aside id="aside">
         <nav id="aside__nav">
@@ -90,22 +144,28 @@
         <section id="section__projects" class="">
           <ul id="section__projects__ul">
             <li class="project__item">
-              <h3 class="project__item__title">work</h3>
+              <a href="#" class="project__item__title">work</a>
               <button class="project__item__edit edit">...</button>
               <button class="project__item__info info">?</button>
               <button class="project__item__del del">X</button>
             </li>
             <li class="project__item">
-              <h3 class="project__item__title">work</h3>
+              <a href="#" class="project__item__title">work</a>
               <button class="project__item__edit edit">...</button>
               <button class="project__item__info info">?</button>
               <button class="project__item__del del">X</button>
             </li>
             <li class="project__item">
-              <h3 class="project__item__title">work</h3>
-              <button class="project__item__edit edit">...</button
-              ><button class="project__item__info info">?</button
-              ><button class="project__item__del del">X</button>
+              <a href="#" class="project__item__title">work</a>
+              <button class="project__item__edit edit">...</button>
+              <button class="project__item__info info">?</button>
+              <button class="project__item__del del">X</button>
+            </li>
+            <li class="project__item">
+              <a href="#" class="project__item__title">work</a>
+              <button class="project__item__edit edit">...</button>
+              <button class="project__item__info info">?</button>
+              <button class="project__item__del del">X</button>
             </li>
           </ul>
         </section>
@@ -294,14 +354,126 @@
       </main>
       <button id="button__plus">&#10133;</button>
       <footer id="footer">
-        <p id="footer__words">
+        <p id="footer__words" class="animate__animated animate__backInRight">
           Made with love by
           <a href="#" id="footer__link">Đặng Hoàng Minh.</a>
           :)
         </p>
       </footer>
     </div>
-    <script></script>
+    <dialog id="of__todo" open>
+      <h2 id="dialog__todo__message">Create a new todo</h2>
+      <form id="todoForm">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" maxlength="60" required />
+        </div>
+        <div class="form-group">
+          <label for="detail">Detail:</label>
+          <textarea id="detail" name="detail" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="dueDate">Due Date:</label>
+          <input type="date" id="dueDate" name="dueDate" value="" />
+        </div>
+        <div class="form-group">
+          <label for="hasDueDate">Has Due Date:</label>
+          <input type="radio" id="hasDueDate" name="hasDueDate" value="yes" />
+          Yes
+          <input
+            type="radio"
+            id="noDueDate"
+            name="hasDueDate"
+            value="no"
+            checked
+          />
+          No
+        </div>
+        <div class="form-group">
+          <label for="priority">Priority:</label>
+          <input type="radio" id="low" name="priority" value="low" checked />
+          Low <input type="radio" id="med" name="priority" value="med" /> Medium
+          <input type="radio" id="high" name="priority" value="high" /> High
+        </div>
+        <div class="form-group">
+          <label for="isDone">Is Done:</label>
+          <input type="radio" id="isDone" name="isDone" value="true" /> Yes
+          <input
+            type="radio"
+            id="notDone"
+            name="isDone"
+            value="false"
+            checked
+          />
+          No
+        </div>
+        <div class="form-group">
+          <input type="button" value="Create Todo" />
+          <input type="button" value="Cancel" />
+        </div>
+      </form>
+    </dialog>
+    <dialog id="of__note"></dialog>
+    <dialog id="of__project"></dialog>
+
+    <dialog id="of__about">
+      <div id="about__content">Hello, World!</div>
+      <hr />
+      <button id="about__close" class="del">X</button>
+    </dialog>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var dueDateInput = document.getElementById("dueDate");
+        dueDateInput.disabled = true;
+
+        document
+          .getElementById("hasDueDate")
+          .addEventListener("change", function () {
+            dueDateInput.disabled = this.value !== "yes";
+          });
+      });
+
+      document
+        .querySelector(`input[value="Create Todo"][type="button"]`)
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+
+          // Retrieve form data
+          var title = document.getElementById("title").value;
+          var detail = document.getElementById("detail").value;
+          var dueDate = document.getElementById("dueDate").value;
+          var hasDueDate = document.querySelector(
+            'input[name="hasDueDate"]:checked'
+          ).value;
+          var priority = document.querySelector(
+            'input[name="priority"]:checked'
+          ).value;
+          var isDone = document.querySelector(
+            'input[name="isDone"]:checked'
+          ).value;
+
+          // Create a new Todo object
+          var todo = {
+            title: title,
+            detail: detail,
+            dueDate: dueDate,
+            hasDueDate: hasDueDate === "yes",
+            priority: priority,
+            isDone: isDone === "true",
+          };
+
+          // Perform further processing with the Todo object (e.g., store it, display it, etc.)
+          console.log(todo);
+
+          // Reset the form
+          document.getElementById("todoForm").reset();
+        });
+      document
+        .querySelector(`input[value="Cancel"][type="button"]`)
+        .addEventListener("click", () => {
+          document.getElementById("of__todo").close();
+        });
+    </script>
     <script src="./bundle.js" defer type="module"></script>
   </body>
 </html>
