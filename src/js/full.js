@@ -3,15 +3,15 @@ import * as fns from "date-fns";
 
 // ******************** MODULE CREATE HTML ********************
 const CreateHtml = (() => {
-  const todo = () => {};
-  const note = () => {};
-  const dairy = () => {};
-  const project = () => {};
+  const todoItem = () => {};
+  const noteItem = () => {};
+  const dairyItem = () => {};
+  const projectItem = () => {};
   return {
-    todo,
-    note,
-    dairy,
-    project,
+    todoItem,
+    noteItem,
+    dairyItem,
+    projectItem,
   };
 })();
 
@@ -194,7 +194,7 @@ const Controller = (() => {
 
 // ******************** MODULE HANDLE EVENTS ********************
 const FormListener = (() => {
-  function DueDateInput(type) {
+  function listenFor(type) {
     const dueDateInput = document.getElementById(`dueDate__of__${type}`);
     const inputs = document.querySelectorAll(
       `input[name="hasDueDate__of__${type}"]`
@@ -246,10 +246,13 @@ const FormListener = (() => {
           isDone,
           project
         );
+        Controller.pushToData(obj, "all"); //or today, week, month, year, gym, clean, work, or just leave 2nd argument empty
       } else if (type === "note") {
         obj = Create.Note(title, detail, dueDate, hasDueDate);
+        Controller.pushToData(obj);
       } else if (type === "project") {
         obj = Create.Project(title, detail, dueDate, hasDueDate);
+        Controller.pushToData(obj);
       }
 
       //console.log obj
@@ -268,21 +271,32 @@ const FormListener = (() => {
       });
   }
   return {
-    DueDateInput,
+    listenFor,
   };
 })();
 
 // ******************** MODULE HANDLE EVENTS ********************
 const Listener = (() => {
+  let allButtonsProject = document.querySelectorAll(
+    `nav#aside__nav .nav__button`
+  );
+  const buttonAddProject = document.querySelector(".project__add.tinynum");
+  const buttonPlus = document.getElementById("button__plus");
+
+  const refreshAllButtonProject = () => {
+    allButtonsProject = document.querySelectorAll(
+      `nav#aside__nav .nav__button`
+    );
+  };
   document.addEventListener("DOMContentLoaded", function () {
     // Todo form
-    FormListener.DueDateInput("todo");
+    FormListener.listenFor("todo");
 
     // Project form
-    FormListener.DueDateInput("project");
+    FormListener.listenFor("project");
 
     // Note form
-    FormListener.DueDateInput("note");
+    FormListener.listenFor("note");
   });
 })();
 
