@@ -1,11 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
-  function handleDueDateInput(inputId, checkboxId) {
+  function handleDueDateInput(inputId, radioGroupName) {
     const dueDateInput = document.getElementById(inputId);
-    dueDateInput.disabled = true;
+    const inputs = document.querySelectorAll(radioGroupName);
 
-    document.getElementById(checkboxId).addEventListener("change", function () {
-      dueDateInput.disabled = this.value !== "yes";
-      dueDateInput.required = this.value === "yes";
+    inputs.forEach((input) => {
+      input.addEventListener("change", function () {
+        if (this.value === "yes") {
+          dueDateInput.disabled = false;
+          dueDateInput.setAttribute("required", "required");
+        } else if (this.value === "no") {
+          dueDateInput.disabled = true;
+          dueDateInput.removeAttribute("required");
+        }
+      });
     });
   }
 
@@ -52,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Todo form
-  handleDueDateInput("dueDate__of__todo", "hasDueDate__of__todo");
+  handleDueDateInput("dueDate__of__todo", `input[name="hasDueDate__of__todo"]`);
   handleFormSubmit("#form__of__todo", "todo", {
     priority: document.querySelector('input[name="priority__of__todo"]:checked')
       .value,
@@ -62,10 +69,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Project form
-  handleDueDateInput("dueDate__of__project", "hasDueDate__of__project");
+  handleDueDateInput(
+    "dueDate__of__project",
+    `input[name="hasDueDate__of__project"]`
+  );
   handleFormSubmit("#form__of__project", "project");
 
   // Note form
-  handleDueDateInput("dueDate__of__note", "hasDueDate__of__note");
+  handleDueDateInput("dueDate__of__note", `input[name="hasDueDate__of__note"]`);
   handleFormSubmit("#form__of__note", "note");
 });

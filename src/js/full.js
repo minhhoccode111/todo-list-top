@@ -1,3 +1,6 @@
+// import library
+import * as fns from "date-fns";
+
 // ******************** MODULE CREATE HTML ********************
 const CreateHtml = (() => {
   const todo = () => {};
@@ -17,13 +20,11 @@ const Display = (() => {
   const todo = () => {};
   const note = () => {};
   const dairy = () => {};
-  const project = () => {};
 
   return {
     todo,
     note,
     dairy,
-    project,
   };
 })();
 
@@ -37,15 +38,77 @@ const DB = (() => {
   };
 })();
 
-// ******************** MODULE FACTORY FUNCTION ********************
+// ******************** MODULE PROTOTYPE OF FACTORIES FUNCTION ********************
+const Prototype = (() => {
+  const todo = {
+    constructor: "Todo",
+  };
+  const note = {
+    project: "note",
+    constructor: "Note",
+  };
+  const dairy = {
+    isOpened: false,
+    project: "dairy",
+    constructor: "Dairy",
+  };
+  const project = {
+    project: "project",
+    constructor: "Project",
+  };
+  return { todo, note, dairy, project };
+})();
+
+// ******************** MODULE FACTORIES FUNCTION ********************
 const Create = (() => {
-  const PROTO = {};
+  //Todo Factory function
+  function Todo(title, detail, dueDate, hasDueDate, priority, isDone, project) {
+    const createdDate = fns.format(new Date(), "yyyy-MM-dd");
+    return Object.assign(Object.create(Prototype.todo), {
+      title,
+      detail,
+      isDone,
+      project,
+      dueDate,
+      priority,
+      hasDueDate,
+      createdDate,
+    });
+  }
 
-  const Todo = () => {};
-  const Note = () => {};
-  const Dairy = () => {};
-  const Project = () => {};
-
+  //Note Factory function
+  function Note(title, detail, dueDate, hasDueDate) {
+    const createdDate = fns.format(new Date(), "yyyy-MM-dd");
+    return Object.assign(Object.create(Prototype.note), {
+      title,
+      detail,
+      isDone,
+      dueDate,
+      priority,
+      hasDueDate,
+      createdDate,
+    });
+  }
+  //Dairy Factory function
+  function Dairy(day, night) {
+    const createdDate = fns.format(new Date(), "yyyy-MM-dd");
+    return Object.assign(Object.create(Prototype.dairy), {
+      day,
+      night,
+      createdDate,
+    });
+  }
+  //Project Factory function
+  function Project(title, detail, dueDate, hasDueDate) {
+    const createdDate = fns.format(new Date(), "yyyy-MM-dd");
+    return Object.assign(Object.create(Prototype.project), {
+      title,
+      detail,
+      dueDate,
+      hasDueDate,
+      createdDate,
+    });
+  }
   return {
     Todo,
     Note,
@@ -53,51 +116,89 @@ const Create = (() => {
     Project,
   };
 })();
+console.log(
+  Create.Todo("hoang", "minh", "2023-6-23", true, "high", true, "all")
+);
 
 // ******************** MODULE TO CONTROL APP STATE ********************
 const Controller = (() => {
   let data = {
-    todo: {
-      all: [],
-      week: [],
-      year: [],
-      today: [],
-    },
+    today: [],
+    clean: [],
+    week: [],
+    year: [],
+    work: [],
     note: [],
-    dairy: {
-      "2023-6-17": {
+    all: [],
+    gym: [],
+    dairy: [
+      {
+        createdDate: "2023-6-17",
         day: `Minh khong vui vi Ut khong yeu Minh`,
         night: `Today I learned very well, I'm so proud of me`,
+        isOpened: false,
       },
-      "2023-6-18": {
+      {
+        createdDate: "2023-6-18",
         day: `Minh khong vui vi Ut khong yeu Minh`,
         night: `Today I learned very well, I'm so proud of me`,
+        isOpened: false,
       },
-      "2023-6-19": {
-        day: `Minh khong vui vi Ut khong yeu Minh`,
-        night: `Today I learned very well, I'm so proud of me`,
+    ],
+    project: [
+      {
+        createdDate: "2023-6-23",
+        title: "gym",
+        detail: "This is a gym project to store Todos of gym project!",
+        dueDate: "",
+        hasDueDate: false,
       },
-      "2023-6-20": {
-        day: `Minh khong vui vi Ut khong yeu Minh`,
-        night: `Today I learned very well, I'm so proud of me`,
+      {
+        createdDate: "2023-6-23",
+        title: "work",
+        detail: "This is a work project to store Todos of work project!",
+        dueDate: "",
+        hasDueDate: false,
       },
-    },
-    project: {
-      gym: [],
-      clean: [],
-      work: [],
-    },
+      {
+        createdDate: "2023-6-23",
+        title: "clean",
+        detail: "This is a clean project to store Todos of clean project!",
+        dueDate: "",
+        hasDueDate: false,
+      },
+    ], //this property is used to store project's info when we create a new project and set that project to one of date object's property
+  };
+  let currentState = "all";
+  const setState = (v) => (currentState = v);
+  const getState = () => currentState;
+
+  //if we don't specify the 2nd argument, then we just push obj to the current project we're in.
+  const pushToData = (obj, project = currentState) => {
+    data[project].push(obj);
+  };
+
+  const addNewProject = (title, detail, dueDate, hasDueDate) => {
+    if (data.hasOwnProperty(title)) {
+      alert("That project is already existed!");
+      return;
+    } else {
+      data[title] = [];
+      const newProject = Create.Project(title, detail, dueDate, hasDueDate);
+      pushToData(newProject, "project");
+    }
   };
 
   const getData = () => data;
 
-  return { getData };
+  return { getData, setState, getState, pushToData, addNewProject };
 })();
 
 // ******************** MODULE HANDLE EVENTS ********************
-const Handler = (() => {
-  return {};
-})();
+const Listener = (() => {})();
+
+// ******************** MODULE HANDLE EVENTS ********************
+const FormListener = (() => {})();
 
 // ******************** MODULE TO SEND NOTIFICATION AND REMINDER ********************
 const Noti = (() => {

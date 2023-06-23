@@ -19,6 +19,7 @@
 - to show or hide a `<dialog></dialog>` element we can use the DOM API methods `show()` and `close()` with that element
 - but the `show()` method set the `<dialog></dialog>` element style to `display: block;` we can change this default behavior with the css selector: `dialog[open] {display: flex;}` (or any display style you want)
 - we can use `input.disabled = true;` to disable any input with javaScript
+- when we want to listen to `<input type='radio'/>` 'change' event, we have to select all inputs element with the same name `document.querySelectorAll('input[name="radioInputGroupName"]').forEach(input=>{input.addEventListener('change',()=>{//do something with its value maybe})})`
 -
 
 ## Requirements from The Odin Project:
