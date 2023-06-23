@@ -195,10 +195,105 @@ const Controller = (() => {
 })();
 
 // ******************** MODULE HANDLE EVENTS ********************
-const Listener = (() => {})();
+const FormListener = (() => {
+  function DueDateInput(inputId, radioGroupName) {
+    const dueDateInput = document.getElementById(inputId);
+    const inputs = document.querySelectorAll(radioGroupName);
+
+    inputs.forEach((input) => {
+      input.addEventListener("change", function () {
+        if (this.value === "yes") {
+          dueDateInput.disabled = false;
+          dueDateInput.setAttribute("required", "required");
+        } else if (this.value === "no") {
+          dueDateInput.disabled = true;
+          dueDateInput.removeAttribute("required");
+        }
+      });
+    });
+  }
+
+  function FormSubmit(formId, objectType, additionalProperties = {}) {
+    const form = document.querySelector(formId);
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      // Retrieve form data
+      const title = document.getElementById(`title__of__${objectType}`).value;
+      const detail = document.getElementById(`detail__of__${objectType}`).value;
+      const dueDate = document.getElementById(
+        `dueDate__of__${objectType}`
+      ).value;
+      const hasDueDate =
+        document.querySelector(
+          `input[name="hasDueDate__of__${objectType}"]:checked`
+        ).value === "yes";
+
+      // Create a new object based on the objectType
+
+      const obj = {
+        title,
+        detail,
+        dueDate,
+        hasDueDate,
+        ...additionalProperties, // Include additional properties specific to the object type
+      };
+
+      // Perform further processing with the object (e.g., store it, display it, etc.)
+      console.log(obj);
+
+      // Reset the form
+      form.reset();
+      document.getElementById(`of__${objectType}`).close();
+    });
+
+    document
+      .querySelector(
+        `input#cancel__of__${objectType}[value="Cancel"][type="button"]`
+      )
+      .addEventListener("click", () => {
+        document.getElementById(`of__${objectType}`).close();
+      });
+  }
+  return {
+    DueDateInput,
+    FormSubmit,
+  };
+})();
 
 // ******************** MODULE HANDLE EVENTS ********************
-const FormListener = (() => {})();
+const Listener = (() => {
+  document.addEventListener("DOMContentLoaded", function () {
+    // Todo form
+    FormListener.DueDateInput(
+      "dueDate__of__todo",
+      `input[name="hasDueDate__of__todo"]`
+    );
+    FormListener.FormSubmit("#form__of__todo", "todo", {
+      priority: document.querySelector(
+        'input[name="priority__of__todo"]:checked'
+      ).value,
+      isDone:
+        document.querySelector('input[name="isDone__of__todo"]:checked')
+          .value === "true",
+    });
+
+    // Project form
+    FormListener.DueDateInput(
+      "dueDate__of__project",
+      `input[name="hasDueDate__of__project"]`
+    );
+    FormListener.FormSubmit("#form__of__project", "project");
+
+    // Note form
+    FormListener.DueDateInput(
+      "dueDate__of__note",
+      `input[name="hasDueDate__of__note"]`
+    );
+    FormListener.FormSubmit("#form__of__note", "note");
+  });
+})();
 
 // ******************** MODULE TO SEND NOTIFICATION AND REMINDER ********************
 const Noti = (() => {

@@ -12,7 +12,7 @@ import "animate.css";
 
 //import javaScript
 import "./full.js";
-import "./form.js";
+// import "./form.js";
 
 //import library
 import * as fns from "date-fns";
