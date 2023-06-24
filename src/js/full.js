@@ -65,17 +65,17 @@ const DB = (() => {
     for (let project in objData) {
       for (let i = 0; i < project.length; i++) {
         let obj = objData[project][i];
-        if (objData[project] === "note") {
+        if (project === "note") {
           objData[project][i] = Object.assign(
             Object.create(Prototype.note),
             obj
           );
-        } else if (objData[project] === "project") {
+        } else if (project === "project") {
           objData[project][i] = Object.assign(
             Object.create(Prototype.project),
             obj
           );
-        } else if (objData[project] === "dairy") {
+        } else if (project === "dairy") {
           objData[project][i] = Object.assign(
             Object.create(Prototype.dairy),
             obj
@@ -219,17 +219,16 @@ const Data = (() => {
       },
     ], //this property is used to store project's info when we create a new project and set that project to one of date object's property
   };
-  const get = () => data;
-  const set = (obj, project) => {
-    data[project].push(obj);
-    setToDB();
-  };
-
   const setToDB = () => DB.set(data, "data");
   const loadDB = () => {
     if (DB.check("data")) {
       data = DB.restore(DB.get("data"));
     }
+  };
+  const get = () => data;
+  const set = (obj, project) => {
+    data[project].push(obj);
+    setToDB();
   };
 
   const newProject = (title, detail, dueDate, hasDueDate) => {
@@ -334,7 +333,6 @@ const FormListener = (() => {
       const hasDueDate =
         document.querySelector(`input[name="hasDueDate__of__${type}"]:checked`)
           .value === "yes";
-      const project = Current.get();
 
       if (type === "todo") {
         const priority = document.querySelector(
@@ -351,14 +349,14 @@ const FormListener = (() => {
           hasDueDate,
           priority,
           isDone,
-          project
+          Current.get()
         );
       } else if (type === "note") {
         obj = Create.Note(title, detail, dueDate, hasDueDate);
       } else if (type === "project") {
         obj = Create.Project(title, detail, dueDate, hasDueDate);
       }
-      Data.set(obj, project); //or today, week, month, year, gym, clean, work, or just leave 2nd argument empty
+      Data.set(obj, Current.get()); //or today, week, month, year, gym, clean, work, or just leave 2nd argument empty
 
       //console.log obj
       console.log(obj);
@@ -419,6 +417,7 @@ const Listener = (() => {
   document.addEventListener("DOMContentLoaded", function () {
     Data.loadDB();
     Dairy.loadDB();
+    console.dir(Data.get());
   });
 })();
 
@@ -428,33 +427,4 @@ const Noti = (() => {
 })();
 
 // ******************** MODULE TO TEST IN CONSOLE ********************
-const test = (() => {
-  // Controller.addNewProject("tomorrow");
-  // // // console.log(Controller.getAllProjects());
-  // Controller.setState("tomorrow");
-  // Controller.pushToData(
-  //   Create.Todo(
-  //     "title",
-  //     "detail",
-  //     "",
-  //     false,
-  //     "high",
-  //     false,
-  //     Controller.getState()
-  //   )
-  // );
-  // DB.set(Controller.getData());
-  // // console.log(Controller.getData());
-  // console.dir(Controller.getData());
-  // console.dir(DB.get());
-  // Controller.setData(DB.get());
-  // console.dir(Controller.getData());
-  // Controller.setData(DB.restore(DB.get()));
-  // console.dir(Controller.getData());
-  // if (DB.check) {
-  //   console.dir(DB.get());
-  //   Controller.setData(DB.get());
-  // }
-  // console.dir(Controller.getData());
-  // console.dir(DB.get("data"));
-})();
+const test = (() => {})();
