@@ -1,5 +1,6 @@
 // import library
 import * as fns from "date-fns";
+import { cs } from "date-fns/locale";
 
 // ******************** MODULE CREATE HTML ********************
 const CreateHtml = (() => {
@@ -17,14 +18,16 @@ const CreateHtml = (() => {
 
 // ******************** MODULE DISPLAY ********************
 const Display = (() => {
+  const project = () => {};
+  const dairy = () => {};
   const todo = () => {};
   const note = () => {};
-  const dairy = () => {};
 
   return {
+    project,
+    dairy,
     todo,
     note,
-    dairy,
   };
 })();
 
@@ -51,40 +54,42 @@ const Prototype = (() => {
 
 // ******************** MODULE INTERACT WITH DATABASE ********************
 const DB = (() => {
-  const set = (object, name = "date") => {
+  const set = (object, name = "data") => {
     localStorage.setItem(name, JSON.stringify(object));
   };
-  const get = (name = "date") => JSON.parse(localStorage.getItem(name));
+  const get = (name = "data") => JSON.parse(localStorage.getItem(name));
 
-  const check = (name = "date") => {
-    JSON.parse(localStorage.getItem(name)) === null;
+  const check = (name = "data") => {
+    JSON.parse(localStorage.getItem(name)) !== null;
   };
-  const restore = (objDate) => {
-    for (let project in objDate) {
-      for (let item of project) {
-        if (project === "note") {
-          project[item] = Object.assign(
+  const restore = (objData) => {
+    for (let project in objData) {
+      for (let i = 0; i < project.length; i++) {
+        let obj = objData[project][i];
+        if (objData[project] === "note") {
+          objData[project][i] = Object.assign(
             Object.create(Prototype.note),
-            project[item]
+            obj
           );
-        } else if (project === "dairy") {
-          project[item] = Object.assign(
-            Object.create(Prototype.dairy),
-            project[item]
-          );
-        } else if (project === "project") {
-          project[item] = Object.assign(
+        } else if (objData[project] === "project") {
+          objData[project][i] = Object.assign(
             Object.create(Prototype.project),
-            project[item]
+            obj
+          );
+        } else if (objData[project] === "dairy") {
+          objData[project][i] = Object.assign(
+            Object.create(Prototype.dairy),
+            obj
           );
         } else {
-          project[item] = Object.assign(
+          objData[project][i] = Object.assign(
             Object.create(Prototype.todo),
-            project[item]
+            obj
           );
         }
       }
     }
+    return objData;
   };
   return {
     restore,
@@ -100,7 +105,7 @@ const Create = (() => {
   function Todo(title, detail, dueDate, hasDueDate, priority, isDone, project) {
     const createdDate = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
     const isTimeExpired =
-      dueDate && fns.isBefore(fns.parseISO(dueDate), createdDate);
+      dueDate != "" && fns.isBefore(fns.parseISO(dueDate), createdDate);
     return Object.assign(Object.create(Prototype.todo), {
       title,
       detail,
@@ -234,9 +239,17 @@ const Controller = (() => {
     }
   };
   const getProject = (project = currentState) => data[project];
+  const getAllProjects = () => {
+    let arr = [];
+    for (const project in data) {
+      arr.push(project);
+    }
+    return arr;
+  };
 
   return {
     setData,
+    getAllProjects,
     getData,
     setState,
     getState,
@@ -300,7 +313,7 @@ const FormListener = (() => {
           isDone,
           project
         );
-        Controller.pushToData(obj, "all"); //or today, week, month, year, gym, clean, work, or just leave 2nd argument empty
+        Controller.pushToData(obj); //or today, week, month, year, gym, clean, work, or just leave 2nd argument empty
       } else if (type === "note") {
         obj = Create.Note(title, detail, dueDate, hasDueDate);
         Controller.pushToData(obj);
@@ -367,13 +380,45 @@ const Listener = (() => {
   };
   document.addEventListener("DOMContentLoaded", function () {
     //update date object in Controller
-    if (!DB.check()) {
-      Controller.setData(DB.restore(DB.get()));
-    }
+    // if (DB.check()) {
+    //   Controller.setData(DB.restore(DB.get()));
+    // }
   });
 })();
 
 // ******************** MODULE TO SEND NOTIFICATION AND REMINDER ********************
 const Noti = (() => {
   return {};
+})();
+
+// ******************** MODULE TO TEST IN CONSOLE ********************
+const test = (() => {
+  // Controller.addNewProject("tomorrow");
+  // // // console.log(Controller.getAllProjects());
+  // Controller.setState("tomorrow");
+  // Controller.pushToData(
+  //   Create.Todo(
+  //     "title",
+  //     "detail",
+  //     "",
+  //     false,
+  //     "high",
+  //     false,
+  //     Controller.getState()
+  //   )
+  // );
+  // DB.set(Controller.getData());
+  // // console.log(Controller.getData());
+  // console.dir(Controller.getData());
+  // console.dir(DB.get());
+  // Controller.setData(DB.get());
+  // console.dir(Controller.getData());
+  // Controller.setData(DB.restore(DB.get()));
+  // console.dir(Controller.getData());
+  // if (DB.check) {
+  //   console.dir(DB.get());
+  //   Controller.setData(DB.get());
+  // }
+  // console.dir(Controller.getData());
+  console.dir(DB.get());
 })();
