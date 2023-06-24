@@ -28,16 +28,6 @@ const Display = (() => {
   };
 })();
 
-// ******************** MODULE INTERACT WITH DATABASE ********************
-const DB = (() => {
-  const get = () => {};
-  const set = () => {};
-  return {
-    get,
-    set,
-  };
-})();
-
 // ******************** MODULE PROTOTYPE OF FACTORIES FUNCTION ********************
 const Prototype = (() => {
   const todo = {
@@ -59,11 +49,58 @@ const Prototype = (() => {
   return { todo, note, dairy, project };
 })();
 
+// ******************** MODULE INTERACT WITH DATABASE ********************
+const DB = (() => {
+  const set = (object, name = "date") => {
+    localStorage.setItem(name, JSON.stringify(object));
+  };
+  const get = (name = "date") => JSON.parse(localStorage.getItem(name));
+
+  const check = (name = "date") => {
+    JSON.parse(localStorage.getItem(name)) === null;
+  };
+  const restore = (objDate) => {
+    for (let project in objDate) {
+      for (let item of project) {
+        if (project === "note") {
+          project[item] = Object.assign(
+            Object.create(Prototype.note),
+            project[item]
+          );
+        } else if (project === "dairy") {
+          project[item] = Object.assign(
+            Object.create(Prototype.dairy),
+            project[item]
+          );
+        } else if (project === "project") {
+          project[item] = Object.assign(
+            Object.create(Prototype.project),
+            project[item]
+          );
+        } else {
+          project[item] = Object.assign(
+            Object.create(Prototype.todo),
+            project[item]
+          );
+        }
+      }
+    }
+  };
+  return {
+    restore,
+    check,
+    get,
+    set,
+  };
+})();
+
 // ******************** MODULE FACTORIES FUNCTION ********************
 const Create = (() => {
   //Todo Factory function
   function Todo(title, detail, dueDate, hasDueDate, priority, isDone, project) {
-    const createdDate = fns.format(new Date(), "yyyy-MM-dd");
+    const createdDate = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
+    const isTimeExpired =
+      dueDate && fns.isBefore(fns.parseISO(dueDate), createdDate);
     return Object.assign(Object.create(Prototype.todo), {
       title,
       detail,
@@ -73,23 +110,27 @@ const Create = (() => {
       priority,
       hasDueDate,
       createdDate,
+      isTimeExpired,
     });
   }
 
   //Note Factory function
   function Note(title, detail, dueDate, hasDueDate) {
-    const createdDate = fns.format(new Date(), "yyyy-MM-dd");
+    const createdDate = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
+    const isTimeExpired =
+      dueDate && fns.isBefore(fns.parseISO(dueDate), createdDate);
     return Object.assign(Object.create(Prototype.note), {
       title,
       detail,
       dueDate,
       hasDueDate,
       createdDate,
+      isTimeExpired,
     });
   }
   //Dairy Factory function
   function Dairy(day, night) {
-    const createdDate = fns.format(new Date(), "yyyy-MM-dd");
+    const createdDate = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
     return Object.assign(Object.create(Prototype.dairy), {
       day,
       night,
@@ -98,13 +139,16 @@ const Create = (() => {
   }
   //Project Factory function
   function Project(title, detail, dueDate, hasDueDate) {
-    const createdDate = fns.format(new Date(), "yyyy-MM-dd");
+    const createdDate = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
+    const isTimeExpired =
+      dueDate && fns.isBefore(fns.parseISO(dueDate), createdDate);
     return Object.assign(Object.create(Prototype.project), {
       title,
       detail,
       dueDate,
       hasDueDate,
       createdDate,
+      isTimeExpired,
     });
   }
   return {
@@ -114,9 +158,6 @@ const Create = (() => {
     Project,
   };
 })();
-console.log(
-  Create.Todo("hoang", "minh", "2023-6-23", true, "high", true, "all")
-);
 
 // ******************** MODULE TO CONTROL APP STATE ********************
 const Controller = (() => {
@@ -132,41 +173,47 @@ const Controller = (() => {
     dairy: [
       {
         createdDate: "2023-6-17",
-        day: `Minh khong vui vi Ut khong yeu Minh`,
+        day: `Today I do ToDo List project on The Odin Project!`,
         night: `Today I learned very well, I'm so proud of me`,
         isOpened: false,
       },
       {
         createdDate: "2023-6-18",
-        day: `Minh khong vui vi Ut khong yeu Minh`,
+        day: `Today I do ToDo List project on The Odin Project!`,
         night: `Today I learned very well, I'm so proud of me`,
         isOpened: false,
       },
     ],
     project: [
       {
-        createdDate: "2023-6-23",
         title: "gym",
         detail: "This is a gym project to store Todos of gym project!",
         dueDate: "",
         hasDueDate: false,
+        createdDate: "2023-6-23",
+        isTimeExpired: false,
       },
       {
-        createdDate: "2023-6-23",
         title: "work",
         detail: "This is a work project to store Todos of work project!",
         dueDate: "",
         hasDueDate: false,
+        createdDate: "2023-6-23",
+        isTimeExpired: false,
       },
       {
-        createdDate: "2023-6-23",
         title: "clean",
         detail: "This is a clean project to store Todos of clean project!",
         dueDate: "",
         hasDueDate: false,
+        createdDate: "2023-6-23",
+        isTimeExpired: false,
       },
     ], //this property is used to store project's info when we create a new project and set that project to one of date object's property
   };
+  const getData = () => data;
+  const setData = (v) => (data = v);
+
   let currentState = "all";
   const setState = (v) => (currentState = v);
   const getState = () => currentState;
@@ -182,14 +229,21 @@ const Controller = (() => {
       return;
     } else {
       data[title] = [];
-      const newProject = Create.Project(title, detail, dueDate, hasDueDate);
-      pushToData(newProject, "project");
+      const project = Create.Project(title, detail, dueDate, hasDueDate);
+      pushToData(project, "project");
     }
   };
+  const getProject = (project = currentState) => data[project];
 
-  const getData = () => data;
-
-  return { getData, setState, getState, pushToData, addNewProject };
+  return {
+    setData,
+    getData,
+    setState,
+    getState,
+    pushToData,
+    addNewProject,
+    getProject,
+  };
 })();
 
 // ******************** MODULE HANDLE EVENTS ********************
@@ -277,11 +331,34 @@ const FormListener = (() => {
 
 // ******************** MODULE HANDLE EVENTS ********************
 const Listener = (() => {
+  //all buttons in #aside to display project and switch state in controller
   let allButtonsProject = document.querySelectorAll(
     `nav#aside__nav .nav__button`
   );
-  const buttonAddProject = document.querySelector(".project__add.tinynum");
+  //button to toggle dialog to get input
   const buttonPlus = document.getElementById("button__plus");
+  //specific dialog of each object we want to create
+  const ofTodo = document.getElementById("of__todo");
+  const ofNote = document.getElementById("of__note");
+  const ofProject = document.getElementById("of__project");
+
+  buttonPlus.addEventListener("click", () => {
+    const state = Controller.getState();
+    //we must hide this buttonPlus if currentState is 'dairy'
+    if (state === "note") {
+      // Note form
+      FormListener.listenFor("note");
+      ofNote.show();
+    } else if (state === "project") {
+      // Project form
+      FormListener.listenFor("project");
+      ofProject.show();
+    } else {
+      // Todo form
+      FormListener.listenFor("todo");
+      ofTodo.show();
+    }
+  });
 
   const refreshAllButtonProject = () => {
     allButtonsProject = document.querySelectorAll(
@@ -289,14 +366,10 @@ const Listener = (() => {
     );
   };
   document.addEventListener("DOMContentLoaded", function () {
-    // Todo form
-    FormListener.listenFor("todo");
-
-    // Project form
-    FormListener.listenFor("project");
-
-    // Note form
-    FormListener.listenFor("note");
+    //update date object in Controller
+    if (!DB.check()) {
+      Controller.setData(DB.restore(DB.get()));
+    }
   });
 })();
 

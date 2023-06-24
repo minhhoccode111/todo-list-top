@@ -14,8 +14,6 @@ dialog {
 dialog[open] {
   display: flex;
 }
-dialog#of__todo {
-}
 dialog h2 {
   font-size: 3rem;
   font-weight: bold;
@@ -25,18 +23,8 @@ dialog form {
   width: 100%;
   max-width: 40rem;
 }
-dialog#of__todo {
-}
-dialog#of__todo {
-}
-dialog#of__project {
-}
-dialog#of__note {
-}
-dialog#of__about {
-}
+
 /* forms style of dialog popup form */
-/* chat gpt */
 dialog .form__group {
   margin-bottom: 15px;
 }

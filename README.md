@@ -20,7 +20,7 @@
 - but the `show()` method set the `<dialog></dialog>` element style to `display: block;` we can change this default behavior with the css selector: `dialog[open] {display: flex;}` (or any display style you want)
 - we can use `input.disabled = true;` to disable any input with javaScript
 - when we want to listen to `<input type='radio'/>` 'change' event, we have to select all inputs element with the same name `document.querySelectorAll('input[name="radioInputGroupName"]').forEach(input=>{input.addEventListener('change',()=>{//do something with its value maybe})})`
--
+- when we compare dates with FNS library, if we pass is that function an empty string then it gonna throw an error NOT A FALSE. So we must double check the date we pass in first `const isTimeExpired = dueDate && isBefore(dueDate, createdDate);`
 
 ## Requirements from The Odin Project:
 

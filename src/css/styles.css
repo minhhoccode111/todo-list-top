@@ -57,6 +57,7 @@ button {
   position: absolute;
   bottom: 6.4rem;
   right: 2rem;
+  z-index: 90;
 }
 button.edit {
 }
