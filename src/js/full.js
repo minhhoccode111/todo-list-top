@@ -1,6 +1,5 @@
 // import library
 import * as fns from "date-fns";
-import { cs } from "date-fns/locale";
 
 // ******************** MODULE CREATE HTML ********************
 const CreateHtml = (() => {
@@ -54,12 +53,12 @@ const Prototype = (() => {
 
 // ******************** MODULE INTERACT WITH DATABASE ********************
 const DB = (() => {
-  const set = (object, name = "data") => {
+  const set = (object, name) => {
     localStorage.setItem(name, JSON.stringify(object));
   };
-  const get = (name = "data") => JSON.parse(localStorage.getItem(name));
+  const get = (name) => JSON.parse(localStorage.getItem(name));
 
-  const check = (name = "data") => {
+  const check = (name) => {
     JSON.parse(localStorage.getItem(name)) !== null;
   };
   const restore = (objData) => {
@@ -101,12 +100,14 @@ const DB = (() => {
 
 // ******************** MODULE FACTORIES FUNCTION ********************
 const Create = (() => {
+  let i = 0;
   //Todo Factory function
   function Todo(title, detail, dueDate, hasDueDate, priority, isDone, project) {
     const createdDate = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
     const isTimeExpired =
       dueDate != "" && fns.isBefore(fns.parseISO(dueDate), createdDate);
     return Object.assign(Object.create(Prototype.todo), {
+      id: i++,
       title,
       detail,
       isDone,
@@ -125,6 +126,7 @@ const Create = (() => {
     const isTimeExpired =
       dueDate && fns.isBefore(fns.parseISO(dueDate), createdDate);
     return Object.assign(Object.create(Prototype.note), {
+      id: i++,
       title,
       detail,
       dueDate,
@@ -148,6 +150,7 @@ const Create = (() => {
     const isTimeExpired =
       dueDate && fns.isBefore(fns.parseISO(dueDate), createdDate);
     return Object.assign(Object.create(Prototype.project), {
+      id: i++,
       title,
       detail,
       dueDate,
@@ -164,8 +167,8 @@ const Create = (() => {
   };
 })();
 
-// ******************** MODULE TO CONTROL APP STATE ********************
-const Controller = (() => {
+// ******************** MODULE TO INTERACT WITH DATA OF THE APP ********************
+const Data = (() => {
   let data = {
     today: [],
     clean: [],
@@ -216,30 +219,30 @@ const Controller = (() => {
       },
     ], //this property is used to store project's info when we create a new project and set that project to one of date object's property
   };
-  const getData = () => data;
-  const setData = (v) => (data = v);
-
-  let currentState = "all";
-  const setState = (v) => (currentState = v);
-  const getState = () => currentState;
-
-  //if we don't specify the 2nd argument, then we just push obj to the current project we're in.
-  const pushToData = (obj, project = currentState) => {
+  const get = () => data;
+  const set = (obj, project) => {
     data[project].push(obj);
+    setToDB();
   };
 
-  const addNewProject = (title, detail, dueDate, hasDueDate) => {
+  const setToDB = () => DB.set(data, "data");
+  const loadDB = () => {
+    if (DB.check("data")) {
+      data = DB.restore(DB.get("data"));
+    }
+  };
+
+  const newProject = (title, detail, dueDate, hasDueDate) => {
     if (data.hasOwnProperty(title)) {
       alert("That project is already existed!");
       return;
     } else {
       data[title] = [];
       const project = Create.Project(title, detail, dueDate, hasDueDate);
-      pushToData(project, "project");
+      set(project, "project");
     }
   };
-  const getProject = (project = currentState) => data[project];
-  const getAllProjects = () => {
+  const projects = () => {
     let arr = [];
     for (const project in data) {
       arr.push(project);
@@ -248,20 +251,57 @@ const Controller = (() => {
   };
 
   return {
-    setData,
-    getAllProjects,
-    getData,
-    setState,
-    getState,
-    pushToData,
-    addNewProject,
-    getProject,
+    get,
+    set,
+    loadDB,
+    setToDB,
+    projects,
+    newProject,
   };
 })();
 
+// ******************** MODULE TO MODIFY CURRENT PROJECT WE ARE IN  ********************
+const Current = (() => {
+  let project = "all";
+  const set = (v) => (project = v);
+  const get = () => project;
+
+  return {
+    get,
+    set,
+  };
+})();
+
+// ******************** MODULE DAIRY  ********************
+const Dairy = (() => {
+  let obj = Create.Dairy("", "");
+  const get = () => obj;
+  const setDay = (str) => (obj.day = str);
+  const setNight = (str) => (obj.night = str);
+  const setToDB = () => DB.set(obj, "dairy");
+  const loadDB = () => {
+    //if 'dairy' in DB !== null
+    if (DB.check("dairy")) {
+      //then give back its prototype
+      obj = Object.assign(Object.create(Prototype.dairy), DB.get("dairy"));
+      let created = obj.createdDate;
+      let today = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
+      //if the dairy we just loaded is created before today
+      if (fns.isBefore(created, today)) {
+        //then push current dairy object to data's dairy project in controller
+        Data.set(obj, "dairy");
+        //then create a new dairy
+        obj = Create.Dairy("", "");
+        //then set the new created dairy to DB
+        setToDB();
+      }
+    }
+  };
+  return { get, setDay, setNight, loadDB };
+})();
 // ******************** MODULE HANDLE EVENTS ********************
 const FormListener = (() => {
-  function listenFor(type) {
+  function listen(type) {
     const dueDateInput = document.getElementById(`dueDate__of__${type}`);
     const inputs = document.querySelectorAll(
       `input[name="hasDueDate__of__${type}"]`
@@ -294,7 +334,7 @@ const FormListener = (() => {
       const hasDueDate =
         document.querySelector(`input[name="hasDueDate__of__${type}"]:checked`)
           .value === "yes";
-      const project = Controller.getState();
+      const project = Current.get();
 
       if (type === "todo") {
         const priority = document.querySelector(
@@ -313,14 +353,12 @@ const FormListener = (() => {
           isDone,
           project
         );
-        Controller.pushToData(obj); //or today, week, month, year, gym, clean, work, or just leave 2nd argument empty
       } else if (type === "note") {
         obj = Create.Note(title, detail, dueDate, hasDueDate);
-        Controller.pushToData(obj);
       } else if (type === "project") {
         obj = Create.Project(title, detail, dueDate, hasDueDate);
-        Controller.pushToData(obj);
       }
+      Data.set(obj, project); //or today, week, month, year, gym, clean, work, or just leave 2nd argument empty
 
       //console.log obj
       console.log(obj);
@@ -338,7 +376,7 @@ const FormListener = (() => {
       });
   }
   return {
-    listenFor,
+    listen,
   };
 })();
 
@@ -356,19 +394,19 @@ const Listener = (() => {
   const ofProject = document.getElementById("of__project");
 
   buttonPlus.addEventListener("click", () => {
-    const state = Controller.getState();
-    //we must hide this buttonPlus if currentState is 'dairy'
-    if (state === "note") {
+    const project = Current.get();
+    //we must hide this buttonPlus if Current.get() is 'dairy'
+    if (project === "note") {
       // Note form
-      FormListener.listenFor("note");
+      FormListener.listen("note");
       ofNote.show();
-    } else if (state === "project") {
+    } else if (project === "project") {
       // Project form
-      FormListener.listenFor("project");
+      FormListener.listen("project");
       ofProject.show();
     } else {
       // Todo form
-      FormListener.listenFor("todo");
+      FormListener.listen("todo");
       ofTodo.show();
     }
   });
@@ -379,10 +417,8 @@ const Listener = (() => {
     );
   };
   document.addEventListener("DOMContentLoaded", function () {
-    //update date object in Controller
-    // if (DB.check()) {
-    //   Controller.setData(DB.restore(DB.get()));
-    // }
+    Data.loadDB();
+    Dairy.loadDB();
   });
 })();
 
@@ -420,5 +456,5 @@ const test = (() => {
   //   Controller.setData(DB.get());
   // }
   // console.dir(Controller.getData());
-  console.dir(DB.get());
+  // console.dir(DB.get("data"));
 })();
