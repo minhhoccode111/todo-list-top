@@ -1,20 +1,21 @@
 // import library
-import * as fns from "date-fns";
+import * as FNS from "date-fns";
 
-// ******************** MODULE CREATE HTML ********************
-const CreateHtml = (() => {
-  const todoItem = () => {};
-  const noteItem = () => {};
-  const dairyItem = () => {};
-  const projectItem = () => {};
-  return {
-    todoItem,
-    noteItem,
-    dairyItem,
-    projectItem,
+// ******************** MODULE TO USE DATE-FNS ********************
+const DoFns = (() => {
+  const parse = (date = new Date()) => {
+    if (typeof date === "string") {
+      return FNS.parseISO(date);
+    } else {
+      return FNS.parseISO(FNS.format(date, "yyyy-MM-dd"));
+    }
   };
+  const isBefore = (date0, date1 = new Date()) => FNS.isBefore(date0, date1);
+  return { parse, isBefore };
 })();
-
+console.dir(DoFns.parse(new Date()).toJSON());
+console.dir(DoFns.parse("2023-06-25").toJSON());
+console.dir(JSON.parse(JSON.stringify(DoFns.parse(new Date()).toJSON())));
 // ******************** MODULE DISPLAY ********************
 const Display = (() => {
   const project = () => {};
@@ -31,7 +32,14 @@ const Display = (() => {
 })();
 
 // ******************** MODULE PROTOTYPE OF FACTORIES FUNCTION ********************
+
+// ******************** MODULE PROTOTYPE OF FACTORIES FUNCTION ********************
 const Prototype = (() => {
+  const proto = {
+    test: function () {
+      console.dir(this.title);
+    },
+  };
   const todo = {
     constructor: "Todo",
   };
@@ -48,6 +56,10 @@ const Prototype = (() => {
     project: "project",
     constructor: "Project",
   };
+  Object.setPrototypeOf(todo, proto);
+  Object.setPrototypeOf(note, proto);
+  Object.setPrototypeOf(dairy, proto);
+  Object.setPrototypeOf(project, proto);
   return { todo, note, dairy, project };
 })();
 
@@ -58,12 +70,10 @@ const DB = (() => {
   };
   const get = (name) => JSON.parse(localStorage.getItem(name));
 
-  const check = (name) => {
-    JSON.parse(localStorage.getItem(name)) !== null;
-  };
+  const check = (name) => JSON.parse(localStorage.getItem(name)) !== null;
   const restore = (objData) => {
     for (let project in objData) {
-      for (let i = 0; i < project.length; i++) {
+      for (let i = 0; i < objData[project].length; i++) {
         let obj = objData[project][i];
         if (project === "note") {
           objData[project][i] = Object.assign(
@@ -99,15 +109,39 @@ const DB = (() => {
 })();
 
 // ******************** MODULE FACTORIES FUNCTION ********************
+const UniqueId = (() => {
+  let id = 0;
+  const get = () => {
+    let i = id;
+    id++;
+    DB.set(id, "id");
+    return i;
+  };
+  const loadDB = () => {
+    if (DB.check("id")) {
+      id = DB.get("id");
+    }
+  };
+  return {
+    get,
+    loadDB,
+  };
+})();
+
+// ******************** MODULE FACTORIES FUNCTION ********************
 const Create = (() => {
-  let i = 0;
   //Todo Factory function
   function Todo(title, detail, dueDate, hasDueDate, priority, isDone, project) {
-    const createdDate = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
-    const isTimeExpired =
-      dueDate != "" && fns.isBefore(fns.parseISO(dueDate), createdDate);
+    const id = UniqueId.get();
+    const createdDate = DoFns.parse(new Date());
+    console.dir(dueDate);
+    let isTimeExpired = false;
+    if (dueDate != "") {
+      dueDate = DoFns.parse(dueDate);
+      isTimeExpired = DoFns.isBefore(dueDate, createdDate);
+    }
     return Object.assign(Object.create(Prototype.todo), {
-      id: i++,
+      id,
       title,
       detail,
       isDone,
@@ -122,11 +156,15 @@ const Create = (() => {
 
   //Note Factory function
   function Note(title, detail, dueDate, hasDueDate) {
-    const createdDate = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
-    const isTimeExpired =
-      dueDate && fns.isBefore(fns.parseISO(dueDate), createdDate);
+    const id = UniqueId.get();
+    const createdDate = DoFns.parse(new Date());
+    let isTimeExpired = false;
+    if (dueDate != "") {
+      dueDate = DoFns.parse(dueDate);
+      isTimeExpired = DoFns.isBefore(dueDate, createdDate);
+    }
     return Object.assign(Object.create(Prototype.note), {
-      id: i++,
+      id,
       title,
       detail,
       dueDate,
@@ -137,7 +175,7 @@ const Create = (() => {
   }
   //Dairy Factory function
   function Dairy(day, night) {
-    const createdDate = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
+    const createdDate = DoFns.parse(new Date());
     return Object.assign(Object.create(Prototype.dairy), {
       day,
       night,
@@ -146,11 +184,15 @@ const Create = (() => {
   }
   //Project Factory function
   function Project(title, detail, dueDate, hasDueDate) {
-    const createdDate = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
-    const isTimeExpired =
-      dueDate && fns.isBefore(fns.parseISO(dueDate), createdDate);
+    const id = UniqueId.get();
+    const createdDate = DoFns.parse(new Date());
+    let isTimeExpired = false;
+    if (dueDate != "") {
+      dueDate = DoFns.parse(dueDate);
+      isTimeExpired = DoFns.isBefore(dueDate, createdDate);
+    }
     return Object.assign(Object.create(Prototype.project), {
-      id: i++,
+      id,
       title,
       detail,
       dueDate,
@@ -170,13 +212,14 @@ const Create = (() => {
 // ******************** MODULE TO INTERACT WITH DATA OF THE APP ********************
 const Data = (() => {
   let data = {
+    all: [],
     today: [],
-    clean: [],
     week: [],
+    month: [],
+    clean: [],
     year: [],
     work: [],
     note: [],
-    all: [],
     gym: [],
     dairy: [
       {
@@ -284,9 +327,9 @@ const Dairy = (() => {
       //then give back its prototype
       obj = Object.assign(Object.create(Prototype.dairy), DB.get("dairy"));
       let created = obj.createdDate;
-      let today = fns.parseISO(fns.format(new Date(), "yyyy-MM-dd"));
+      let today = DoFns.parse(new Date());
       //if the dairy we just loaded is created before today
-      if (fns.isBefore(created, today)) {
+      if (DoFns.isBefore(created, today)) {
         //then push current dairy object to data's dairy project in controller
         Data.set(obj, "dairy");
         //then create a new dairy
@@ -357,6 +400,9 @@ const FormListener = (() => {
         obj = Create.Project(title, detail, dueDate, hasDueDate);
       }
       Data.set(obj, Current.get()); //or today, week, month, year, gym, clean, work, or just leave 2nd argument empty
+      obj.test();
+      //disabled dueDateInput again
+      dueDateInput.disabled = true;
 
       //console.log obj
       console.log(obj);
@@ -396,15 +442,12 @@ const Listener = (() => {
     //we must hide this buttonPlus if Current.get() is 'dairy'
     if (project === "note") {
       // Note form
-      FormListener.listen("note");
       ofNote.show();
     } else if (project === "project") {
       // Project form
-      FormListener.listen("project");
       ofProject.show();
     } else {
       // Todo form
-      FormListener.listen("todo");
       ofTodo.show();
     }
   });
@@ -413,11 +456,24 @@ const Listener = (() => {
     allButtonsProject = document.querySelectorAll(
       `nav#aside__nav .nav__button`
     );
+    allButtonsProject.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        console.log(e.target.textContent);
+        Current.set(e.target.textContent);
+      });
+    });
   };
+  refreshAllButtonProject();
   document.addEventListener("DOMContentLoaded", function () {
+    //load data from database
     Data.loadDB();
     Dairy.loadDB();
-    console.dir(Data.get());
+    UniqueId.loadDB();
+    //listen for form submit
+    FormListener.listen("note");
+    FormListener.listen("project");
+    FormListener.listen("todo");
+    //
   });
 })();
 
@@ -427,4 +483,9 @@ const Noti = (() => {
 })();
 
 // ******************** MODULE TO TEST IN CONSOLE ********************
-const test = (() => {})();
+const test = (() => {
+  // reset localStorage
+  // DB.set(null, "data");
+  // DB.set(null, "dairy");
+  // DB.set(null, "id");
+})();

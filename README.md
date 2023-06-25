@@ -22,7 +22,7 @@
 - when we want to listen to `<input type='radio'/>` 'change' event, we have to select all inputs element with the same name `document.querySelectorAll('input[name="radioInputGroupName"]').forEach(input=>{input.addEventListener('change',()=>{//do something with its value maybe})})`
 - when we compare dates with FNS library, if we pass is that function an empty string then it gonna throw an error NOT A FALSE. So we must double check the date we pass in first `const isTimeExpired = dueDate!=='' && isBefore(dueDate, createdDate);`
 - By combining the `blur` event with a suitable delay or timeout of `input` event, we can determine when the user has stopped typing and trigger the creation of an object (of update it).
--
+- About `parseISO()` method in date-fns library, if we pass is a string date argument e.g. "2023-6-25" then it work just fine. `fns.parseISO("2023-6-25")` but if we want to pass a `new Date()` javaScript object to it, then we have to format it first so that it can work correctly `fns.parseISO(fns.format(new Date()))`
 
 ## Requirements from The Odin Project:
 
