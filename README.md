@@ -23,6 +23,15 @@
 - when we compare dates with FNS library, if we pass is that function an empty string then it gonna throw an error NOT A FALSE. So we must double check the date we pass in first `const isTimeExpired = dueDate!=='' && isBefore(dueDate, createdDate);`
 - By combining the `blur` event with a suitable delay or timeout of `input` event, we can determine when the user has stopped typing and trigger the creation of an object (of update it).
 - About `parseISO()` method in date-fns library, if we pass is a string date argument e.g. "2023-6-25" then it work just fine. `fns.parseISO("2023-6-25")` but if we want to pass a `new Date()` javaScript object to it, then we have to format it first so that it can work correctly `fns.parseISO(fns.format(new Date()))`
+- Inside a prototype object of an object, `this` is point to that object when object use that method, but if that method create and return html elements and we want to bind events listener to elements in that html while creating them inside prototype's method at the same time, then normally `this` inside `addEventListener` is point to the element we are listening but if we want `this` to point to the object which is using the prototype's method then we have 2 approach:
+  1. Using arrow function: because arrow function inherit the `this` value from their surrounding scope `element.addEventListener('click',()=>{console.log(this)});//'this' refers to the object using prototype method`
+  2. Using closure: create a variable that references the object and use it inside the event listener call back
+  ```
+  let self = this;
+  element.addEventListener('click',function(){
+    console.log(self);//'self' refers to object using that prototype method;
+  })
+  ```
 
 ## Requirements from The Odin Project:
 

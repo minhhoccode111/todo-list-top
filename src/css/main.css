@@ -3,22 +3,6 @@
   font-size: 2rem;
   padding: 1rem 0 7.6rem;
 }
-#section__todos {
-}
-#section__projects {
-}
-#section__dairy {
-}
-#section__notes {
-}
-
-#section__todos__ul {
-}
-#section__projects__ul {
-}
-#section__dairy__ul {
-}
-
 .todo__item {
   display: flex;
   align-items: center;
@@ -52,6 +36,18 @@
   height: 2rem;
   border: 1px solid #000;
   flex-basis: 2rem;
+}
+
+.todo__item.done {
+  opacity: 0.4;
+}
+.todo__item.done h3 {
+  text-decoration: line-through;
+}
+.todo__item.done em {
+  text-decoration: line-through;
+}
+.todo__item.done button {
 }
 
 .project__item {
@@ -90,12 +86,6 @@
   grid-column-end: 3;
   justify-self: center;
 }
-#section__dairy__inputs__ctn div {
-}
-#dairy__form__day {
-}
-#dairy__form__night {
-}
 .dairy__item {
   background-color: lightgray;
   padding: 0.8rem;
@@ -104,18 +94,12 @@
 .dairy__item details {
   font-size: 1.6rem;
 }
-.dairy__item summary {
-}
-.dairy__item em {
-}
-.dairy__item p {
-}
 
-#section__notes__ul {
+/* #section__notes__ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   align-content: start;
-}
+} */
 
 .note__item {
   background-color: lightgray;

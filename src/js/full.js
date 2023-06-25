@@ -13,54 +13,111 @@ const DoFns = (() => {
   const isBefore = (date0, date1 = new Date()) => FNS.isBefore(date0, date1);
   return { parse, isBefore };
 })();
-console.dir(DoFns.parse(new Date()).toJSON());
-console.dir(DoFns.parse("2023-06-25").toJSON());
-console.dir(JSON.parse(JSON.stringify(DoFns.parse(new Date()).toJSON())));
-// ******************** MODULE DISPLAY ********************
-const Display = (() => {
-  const project = () => {};
-  const dairy = () => {};
-  const todo = () => {};
-  const note = () => {};
-
-  return {
-    project,
-    dairy,
-    todo,
-    note,
-  };
-})();
-
-// ******************** MODULE PROTOTYPE OF FACTORIES FUNCTION ********************
 
 // ******************** MODULE PROTOTYPE OF FACTORIES FUNCTION ********************
 const Prototype = (() => {
   const proto = {
-    test: function () {
-      console.dir(this.title);
+    get: function (property) {
+      return this[property] || "";
     },
   };
   const todo = {
     constructor: "Todo",
+    display: function () {
+      let style = this.isDone ? "done" : "";
+      let text = this.isDone ? "&#x2713;" : "";
+      return `
+      <div class="todo__item ${this.priority} ${style}" data-id="${this.id}">
+          <h3 class="todo__item__title">${this.title}</h3>
+          <em class="todo__item__date">${this.dueDate}</em>
+          <button class="todo__item__done done">${text}</button>
+          <button class="todo__item__edit edit" data-id=${this.id}>...</button>
+          <button class="todo__item__info info" data-id=${this.id}>?</button>
+          <button class="todo__item__del del" data-id=${this.id}>X</button>
+        </div>
+      `;
+    },
   };
   const note = {
     project: "note",
     constructor: "Note",
+    display: function () {
+      return `<div class="note__item" data-id="${this.id}">
+      <div class="note__item__header">
+        <div
+          class="note__item__title"
+          contenteditable="true"
+          spellcheck="false"
+        >
+          ${this.title}
+        </div>
+        <button class="note__item__info info" data-id=${this.id}>?</button>
+        <button class="note__item__del del" data-id=${this.id}>X</button>
+      </div>
+
+      <div
+        class="note__item__detail"
+        contenteditable="true"
+        spellcheck="false"
+      >
+        ${this.detail}
+      </div>
+    </div>`;
+    },
   };
-  const dairy = {
+  const diary = {
     isOpened: false,
-    project: "dairy",
-    constructor: "Dairy",
+    project: "diary",
+    constructor: "Diary",
+    display: function () {
+      return `<div class="dairy__item">
+      <details class="dairy__item__details">
+        <summary class="dairy__item__details__summary">
+          <em class="dairy__item__date">${this.createdDate}</em>
+        </summary>
+        <p class="dairy__item__day">${this.day}</p>
+        <hr />
+        <p class="dairy__item__night">${this.night}</p>
+      </details>
+    </div>`;
+    },
   };
   const project = {
     project: "project",
     constructor: "Project",
+    display: function () {
+      return `
+        <div class="project__item" data-id="${this.id}">
+          <a href="#" class="project__item__title">${this.title}</a>
+          <button class="project__item__edit edit" data-id=${this.id}>...</button>
+          <button class="project__item__info info" data-id=${this.id}>?</button>
+          <button class="project__item__del del" data-id=${this.id}>X</button>
+        </div>
+        `;
+    },
   };
   Object.setPrototypeOf(todo, proto);
   Object.setPrototypeOf(note, proto);
-  Object.setPrototypeOf(dairy, proto);
+  Object.setPrototypeOf(diary, proto);
   Object.setPrototypeOf(project, proto);
-  return { todo, note, dairy, project };
+  const restore = (data) => {
+    for (let state in data) {
+      for (let i = 0; i < data[state].length; i++) {
+        let obj = data[state][i];
+        if (state === "note") {
+          Object.setPrototypeOf(obj, note);
+        } else if (state === "project") {
+          Object.setPrototypeOf(obj, project);
+        } else if (state === "diary") {
+          Object.setPrototypeOf(obj, diary);
+        } else {
+          Object.setPrototypeOf(obj, todo);
+        }
+      }
+    }
+    return data;
+  };
+  return { todo, note, diary, project, restore };
 })();
 
 // ******************** MODULE INTERACT WITH DATABASE ********************
@@ -71,37 +128,8 @@ const DB = (() => {
   const get = (name) => JSON.parse(localStorage.getItem(name));
 
   const check = (name) => JSON.parse(localStorage.getItem(name)) !== null;
-  const restore = (objData) => {
-    for (let project in objData) {
-      for (let i = 0; i < objData[project].length; i++) {
-        let obj = objData[project][i];
-        if (project === "note") {
-          objData[project][i] = Object.assign(
-            Object.create(Prototype.note),
-            obj
-          );
-        } else if (project === "project") {
-          objData[project][i] = Object.assign(
-            Object.create(Prototype.project),
-            obj
-          );
-        } else if (project === "dairy") {
-          objData[project][i] = Object.assign(
-            Object.create(Prototype.dairy),
-            obj
-          );
-        } else {
-          objData[project][i] = Object.assign(
-            Object.create(Prototype.todo),
-            obj
-          );
-        }
-      }
-    }
-    return objData;
-  };
+
   return {
-    restore,
     check,
     get,
     set,
@@ -173,10 +201,10 @@ const Create = (() => {
       isTimeExpired,
     });
   }
-  //Dairy Factory function
-  function Dairy(day, night) {
+  //Diary Factory function
+  function Diary(day, night) {
     const createdDate = DoFns.parse(new Date());
-    return Object.assign(Object.create(Prototype.dairy), {
+    return Object.assign(Object.create(Prototype.diary), {
       day,
       night,
       createdDate,
@@ -204,7 +232,7 @@ const Create = (() => {
   return {
     Todo,
     Note,
-    Dairy,
+    Diary,
     Project,
   };
 })();
@@ -216,12 +244,9 @@ const Data = (() => {
     today: [],
     week: [],
     month: [],
-    clean: [],
     year: [],
-    work: [],
     note: [],
-    gym: [],
-    dairy: [
+    diary: [
       {
         createdDate: "2023-6-17",
         day: `Today I do ToDo List project on The Odin Project!`,
@@ -265,7 +290,7 @@ const Data = (() => {
   const setToDB = () => DB.set(data, "data");
   const loadDB = () => {
     if (DB.check("data")) {
-      data = DB.restore(DB.get("data"));
+      data = Prototype.restore(DB.get("data"));
     }
   };
   const get = () => data;
@@ -273,32 +298,22 @@ const Data = (() => {
     data[project].push(obj);
     setToDB();
   };
-
-  const newProject = (title, detail, dueDate, hasDueDate) => {
-    if (data.hasOwnProperty(title)) {
-      alert("That project is already existed!");
-      return;
-    } else {
-      data[title] = [];
-      const project = Create.Project(title, detail, dueDate, hasDueDate);
-      set(project, "project");
+  const del = (id, project) => {
+    let index;
+    for (i = 0; i < data[project].length; i++) {
+      if ((data[project][i].id = id)) index = i;
+      break;
     }
-  };
-  const projects = () => {
-    let arr = [];
-    for (const project in data) {
-      arr.push(project);
-    }
-    return arr;
+    data[project].splice(index, 1);
+    setToDB();
   };
 
   return {
     get,
     set,
+    del,
     loadDB,
     setToDB,
-    projects,
-    newProject,
   };
 })();
 
@@ -314,27 +329,53 @@ const Current = (() => {
   };
 })();
 
+// ******************** MODULE PROJECTs TO MODIFY PROJECTS IN DATA   ********************
+const Projects = (() => {
+  const add = (title, detail, dueDate, hasDueDate) => {
+    if (Data.get().hasOwnProperty(title)) {
+      alert("That project is already existed!");
+      return;
+    } else {
+      Data.get()[title] = [];
+      const project = Create.Project(title, detail, dueDate, hasDueDate);
+      Data.set(project, "project");
+    }
+  };
+  const all = () => {
+    let arr = [];
+    for (const project in Data.get()) {
+      arr.push(project);
+    }
+    return arr;
+  };
+  const del = (project) => {
+    delete Data[project];
+    Data.setToDB();
+  };
+  return { all, add, del };
+})();
+
 // ******************** MODULE DAIRY  ********************
-const Dairy = (() => {
-  let obj = Create.Dairy("", "");
+const Diary = (() => {
+  let obj = Create.Diary("", "");
   const get = () => obj;
   const setDay = (str) => (obj.day = str);
   const setNight = (str) => (obj.night = str);
-  const setToDB = () => DB.set(obj, "dairy");
+  const setToDB = () => DB.set(obj, "diary");
   const loadDB = () => {
-    //if 'dairy' in DB !== null
-    if (DB.check("dairy")) {
+    //if 'diary' in DB !== null
+    if (DB.check("diary")) {
       //then give back its prototype
-      obj = Object.assign(Object.create(Prototype.dairy), DB.get("dairy"));
+      obj = Object.assign(Object.create(Prototype.diary), DB.get("diary"));
       let created = obj.createdDate;
       let today = DoFns.parse(new Date());
-      //if the dairy we just loaded is created before today
+      //if the diary we just loaded is created before today
       if (DoFns.isBefore(created, today)) {
-        //then push current dairy object to data's dairy project in controller
-        Data.set(obj, "dairy");
-        //then create a new dairy
-        obj = Create.Dairy("", "");
-        //then set the new created dairy to DB
+        //then push current diary object to data's diary project in controller
+        Data.set(obj, "diary");
+        //then create a new diary
+        obj = Create.Diary("", "");
+        //then set the new created diary to DB
         setToDB();
       }
     }
@@ -400,7 +441,7 @@ const FormListener = (() => {
         obj = Create.Project(title, detail, dueDate, hasDueDate);
       }
       Data.set(obj, Current.get()); //or today, week, month, year, gym, clean, work, or just leave 2nd argument empty
-      obj.test();
+
       //disabled dueDateInput again
       dueDateInput.disabled = true;
 
@@ -430,6 +471,16 @@ const Listener = (() => {
   let allButtonsProject = document.querySelectorAll(
     `nav#aside__nav .nav__button`
   );
+  const sectionsInMain = document.querySelectorAll("#main section");
+  const hideAllSectionsBut = (type) => {
+    sectionsInMain.forEach((section) => {
+      if (section.id.includes(type)) {
+        section.classList.remove("hidden");
+        return;
+      }
+      section.classList.add("hidden");
+    });
+  };
   //button to toggle dialog to get input
   const buttonPlus = document.getElementById("button__plus");
   //specific dialog of each object we want to create
@@ -439,7 +490,7 @@ const Listener = (() => {
 
   buttonPlus.addEventListener("click", () => {
     const project = Current.get();
-    //we must hide this buttonPlus if Current.get() is 'dairy'
+    //we must hide this buttonPlus if Current.get() is 'diary'
     if (project === "note") {
       // Note form
       ofNote.show();
@@ -460,15 +511,17 @@ const Listener = (() => {
       button.addEventListener("click", (e) => {
         console.log(e.target.textContent);
         Current.set(e.target.textContent);
+        if (1) {
+        } //FIXME
       });
     });
   };
   refreshAllButtonProject();
   document.addEventListener("DOMContentLoaded", function () {
     //load data from database
-    Data.loadDB();
-    Dairy.loadDB();
-    UniqueId.loadDB();
+    // Data.loadDB();
+    // Diary.loadDB();
+    // UniqueId.loadDB();
     //listen for form submit
     FormListener.listen("note");
     FormListener.listen("project");
@@ -486,6 +539,7 @@ const Noti = (() => {
 const test = (() => {
   // reset localStorage
   // DB.set(null, "data");
-  // DB.set(null, "dairy");
+  // DB.set(null, "diary");
   // DB.set(null, "id");
+  //init app state
 })();
