@@ -42,7 +42,7 @@
             <span class="tinynum">1</span>
           </div>
           <div class="nav__button__ctn parent">
-            <button class="nav__button button__dairy">dairy</button>
+            <button class="nav__button button__diary">diary</button>
             <span class="tinynum">2</span>
           </div>
           <div class="nav__button__ctn parent">
@@ -116,24 +116,24 @@
         </div>
         <!-- </ul> -->
         <!-- </section> -->
-        <!-- <section id="section__dairy" class="hidden"> -->
-        <!-- <ul id="section__dairy__ul"> -->
-        <div class="dairy__item">
-          <details class="dairy__item__details">
-            <summary class="dairy__item__details__summary">
-              <em class="dairy__item__date">19/6/23</em>
+        <!-- <section id="section__diary" class="hidden"> -->
+        <!-- <ul id="section__diary__ul"> -->
+        <div class="diary__item">
+          <details class="diary__item__details">
+            <summary class="diary__item__details__summary">
+              <em class="diary__item__date">19/6/23</em>
             </summary>
-            <p class="dairy__item__day"></p>
+            <p class="diary__item__day"></p>
             <hr />
-            <p class="dairy__item__night"></p>
+            <p class="diary__item__night"></p>
           </details>
         </div>
-        <div class="dairy__item">
-          <details class="dairy__item__details">
-            <summary class="dairy__item__details__summary">
-              <em class="dairy__item__date">20/6/23</em>
+        <div class="diary__item">
+          <details class="diary__item__details">
+            <summary class="diary__item__details__summary">
+              <em class="diary__item__date">20/6/23</em>
             </summary>
-            <p class="dairy__item__day">
+            <p class="diary__item__day">
               Hát cho giờ ra chơi, mà trời mưa rơi, như ngày em không thấy nắng,
               em thấy không có bạn, em đứt ngang dây đàn, em sẽ không ghi bàn
               hôm nay. Cứ ngồi đây thôi cùng lời anh nói cứ để cơn giông đó tới,
@@ -151,7 +151,7 @@
               you so...
             </p>
             <hr />
-            <p class="dairy__item__night">
+            <p class="diary__item__night">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Distinctio aut doloremque mollitia, blanditiis sint quo qui
               architecto aliquam voluptates modi consectetur facere sapiente
@@ -160,24 +160,24 @@
           </details>
         </div>
         <!-- </ul> -->
-        <div id="section__dairy__inputs__ctn">
-          <em id="dairy__date">21/6/23</em>
-          <div id="dairy__form__day">
+        <div id="section__diary__inputs__ctn">
+          <em id="diary__last__modified">Last modified: 21/6/23 12:54</em>
+          <div id="diary__form__day">
             <p class="">Your thoughts all day long.</p>
             <hr />
             <div
-              id="dairy__input__day"
+              id="diary__input__day"
               contenteditable="true"
               spellcheck="false"
             >
               Day. Edit here!
             </div>
           </div>
-          <div id="dairy__form__night">
+          <div id="diary__form__night">
             <p class="">Your thoughts before bed.</p>
             <hr />
             <div
-              id="dairy__input__night"
+              id="diary__input__night"
               contenteditable="true"
               spellcheck="false"
             >
@@ -197,6 +197,7 @@
             >
               Title
             </div>
+            <em>Last modified: 2023-06-26 13:00</em>
             <button class="note__item__info info">?</button>
             <button class="note__item__del del">X</button>
           </div>
@@ -602,6 +603,108 @@
         </div>
       </form>
     </dialog>
+
+    <dialog id="of__info">
+      <h2 id="dialog__info__message">Create a new todo</h2>
+      <form id="form__of__info">
+        <div class="form__group">
+          <label for="title__of__info">Title:</label>
+          <input
+            type="text"
+            id="title__of__info"
+            name="title__of__info"
+            maxlength="60"
+            required
+          />
+        </div>
+        <div class="form__group">
+          <label for="detail__of__info">Detail:</label>
+          <textarea
+            id="detail__of__info"
+            name="detail__of__info"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+        <div class="form__group">
+          <label for="dueDate__of__info">Due Date:</label>
+          <input
+            type="date"
+            id="dueDate__of__info"
+            name="dueDate__of__info"
+            value=""
+            required
+            disabled
+          />
+        </div>
+        <div class="form__group">
+          <label for="hasDueDate__of__info">Has Due Date:</label>
+          <input
+            type="radio"
+            id="hasDueDate__of__info"
+            name="hasDueDate__of__info"
+            value="yes"
+          />
+          Yes
+          <input
+            type="radio"
+            id="noDueDate__of__info"
+            name="hasDueDate__of__info"
+            value="no"
+            checked
+          />
+          No
+        </div>
+        <div class="form__group">
+          <label for="priority__of__info">Priority:</label>
+          <input
+            type="radio"
+            id="low__of__info"
+            name="priority__of__info"
+            value="low"
+            checked
+          />
+          Low
+          <input
+            type="radio"
+            id="med__of__info"
+            name="priority__of__info"
+            value="med"
+          />
+          Medium
+          <input
+            type="radio"
+            id="high__of__info"
+            name="priority__of__info"
+            value="high"
+          />
+          High
+        </div>
+        <div class="form__group">
+          <label for="isDone__of__info">Is Done:</label>
+          <input
+            type="radio"
+            id="isDone__of__info"
+            name="isDone__of__info"
+            value="true"
+          />
+          Yes
+          <input
+            type="radio"
+            id="notDone__of__info"
+            name="isDone__of__info"
+            value="false"
+            checked
+          />
+          No
+        </div>
+        <div class="form__group">
+          <input type="submit" id="create__of__info" value="Create Todo" />
+          <input type="button" id="cancel__of__info" value="Cancel" />
+        </div>
+      </form>
+    </dialog>
+
     <dialog id="of__about">
       <div id="about__content">Hello, World!</div>
       <hr />

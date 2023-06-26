@@ -73,7 +73,7 @@
   border: 1px solid #000;
   flex-basis: 2rem;
 }
-#section__dairy__inputs__ctn {
+#section__diary__inputs__ctn {
   padding: 0.8rem;
   margin: 0.8rem 0.4rem;
   background-color: lightgray;
@@ -81,17 +81,17 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
-#section__dairy__inputs__ctn em {
+#section__diary__inputs__ctn em {
   grid-column-start: 1;
   grid-column-end: 3;
   justify-self: center;
 }
-.dairy__item {
+.diary__item {
   background-color: lightgray;
   padding: 0.8rem;
   margin: 0.8rem 0.4rem;
 }
-.dairy__item details {
+.diary__item details {
   font-size: 1.6rem;
 }
 

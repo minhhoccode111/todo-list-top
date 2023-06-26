@@ -11,7 +11,7 @@ import "./../css/main.css";
 import "animate.css";
 
 //import javaScript
-import "./full.js";
+// import "./full.js";
 // import "./form.js";
 
 //import library

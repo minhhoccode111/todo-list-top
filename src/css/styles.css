@@ -40,6 +40,9 @@ button {
 .hidden {
   display: none;
 }
+.bold {
+  font-weight: bold;
+}
 #wrapper {
   display: grid;
   grid-template-columns: 4fr 9fr;
