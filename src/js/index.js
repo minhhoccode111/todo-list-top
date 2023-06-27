@@ -12,6 +12,16 @@ import "animate.css";
 
 //import javaScript
 import "./fns.js";
+import "./database.js";
+import "./prototype.js";
+import "./create.js";
+import "./current.js";
+import "./id.js";
+import "./data.js";
+import "./diary.js";
+import "./display.js";
+import "./form.js";
+import "./listener.js";
 
 //import module
 import * as database from "./database.js";
@@ -21,3 +31,5 @@ export function resetApp() {
   database.set(null, "id");
   database.set(null, "data");
 }
+import * as data from "./data.js";
+// console.log(data.projects.all()); //test

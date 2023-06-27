@@ -1,6 +1,6 @@
-import { now, today, inputToDate } from "./fns.js";
-import * as FNS from "date-fns";
-import * as id from "./id.js";
+import { now, today, checkExpired } from "./fns.js";
+import { get as getId } from "./id.js";
+import * as Prototype from "./prototype";
 
 //Todo Factory function
 export function Todo(
@@ -12,11 +12,10 @@ export function Todo(
   isDone,
   project
 ) {
-  const id = id.get();
+  const id = getId();
   const createdDate = today();
   const lastModified = now();
-  dueDate = inputToDate(dueDate);
-  let isTimeExpired = false;
+  let isTimeExpired = checkExpired(dueDate);
 
   return Object.assign(Object.create(Prototype.todo), {
     id,
@@ -35,13 +34,10 @@ export function Todo(
 
 //Note Factory function
 export function Note(title, detail, dueDate, hasDueDate) {
-  const id = id.get();
-  const createdDate = fns.parse(new Date());
-  let isTimeExpired = false;
-  if (dueDate !== "") {
-    dueDate = fns.parse(dueDate);
-    isTimeExpired = fns.isBefore(dueDate, createdDate);
-  }
+  const id = getId();
+  const createdDate = today();
+  const lastModified = now();
+  let isTimeExpired = checkExpired(dueDate);
   return Object.assign(Object.create(Prototype.note), {
     id,
     title,
@@ -49,27 +45,28 @@ export function Note(title, detail, dueDate, hasDueDate) {
     dueDate,
     hasDueDate,
     createdDate,
+    lastModified,
     isTimeExpired,
   });
 }
 //Diary Factory function
 export function Diary(day, night) {
-  const createdDate = fns.parse(new Date());
+  const createdDate = today();
+  const lastModified = now();
+
   return Object.assign(Object.create(Prototype.diary), {
     day,
     night,
     createdDate,
+    lastModified,
   });
 }
 //Project Factory function
 export function Project(title, detail, dueDate, hasDueDate) {
-  const id = id.get();
-  const createdDate = fns.parse(new Date());
-  let isTimeExpired = false;
-  if (dueDate !== "") {
-    dueDate = fns.parse(dueDate);
-    isTimeExpired = fns.isBefore(dueDate, createdDate);
-  }
+  const id = getId();
+  const createdDate = today();
+  const lastModified = now();
+  let isTimeExpired = checkExpired(dueDate);
   return Object.assign(Object.create(Prototype.project), {
     id,
     title,
@@ -77,6 +74,7 @@ export function Project(title, detail, dueDate, hasDueDate) {
     dueDate,
     hasDueDate,
     createdDate,
+    lastModified,
     isTimeExpired,
   });
 }

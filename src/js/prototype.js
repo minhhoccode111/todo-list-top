@@ -1,4 +1,4 @@
-import { now, today, checkExpired } from "./fns.js";
+import { now, checkExpired } from "./fns.js";
 
 // ******************** MODULE PROTOTYPE OF FACTORIES FUNCTION ********************
 const proto = {
@@ -9,7 +9,7 @@ const proto = {
     this.lastModified = now();
   },
   setExpired: function () {
-    // this.isTimeExpired = checkExpired(this.dueDate);
+    this.isTimeExpired = checkExpired(this.dueDate);
   },
 };
 export const todo = {

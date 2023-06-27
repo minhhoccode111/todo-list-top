@@ -2,4 +2,17 @@ let current = "all";
 
 export const get = () => current;
 
-export const set = (v) => (current = v);
+const set = (v) => (current = v);
+
+const asideBtns = document.querySelectorAll("#aside .nav__button");
+
+asideBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    set(e.target.textContent);
+    console.log(get());
+  });
+});
+
+export const refresh = () => {
+  asideBtns = document.querySelectorAll("#aside .nav__button");
+};

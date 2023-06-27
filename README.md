@@ -4,8 +4,10 @@
 
 ## What I've learned.
 
+- Don't over doing stuffs too much
 - Using Webpack
 - ES6 Modules
+- `import` and `export` keywords
 - add .gitignore to ignore node_modules/ folder
 - textarea element expand height along with text wrap or line break
 - `div[contenteditable="true"][spellcheck="false"]` will create a div can be written on like a textarea element
@@ -71,6 +73,15 @@
     - **WE CANNOT STORE FUNCTIONS IN JSON**, so we'll have to figure out **how to add methods back to our object properties once we fetch them**
 
 ## Check Mate Documentation:
+
+## Check Mate ideas to implement:
+
+- Sort by createdDate
+- Sort by dueDate
+- Sort by done
+- Sort by isTimeExpired
+- Add Note project to write notes on different app state(not just Todo project)
+- Implement an efficiency way to do stuffs without loop and loop and loop and forever loop (I mean loop too much!)
 
 ## Live Demos
 
