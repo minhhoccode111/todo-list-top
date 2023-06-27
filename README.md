@@ -33,6 +33,9 @@
     console.log(self);//'self' refers to object using that prototype method;
   })
   ```
+- `format()` take a Date object and a format we want then return a time stamp or a string date format
+- `parseISO()` take date string and return a Date object
+- `isBefore()` take both 2 arguments Date objects
 
 ## Requirements from The Odin Project:
 

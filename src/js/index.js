@@ -11,10 +11,7 @@ import "./../css/main.css";
 import "animate.css";
 
 //import javaScript
-// import "./full.js";
-// import "./form.js";
-import "./create.js";
-// import "./current.js";
+import "./fns.js";
 
 //import module
 import * as database from "./database.js";
