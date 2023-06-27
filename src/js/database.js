@@ -1,4 +1,7 @@
+//this is database.js
+
 export const set = (variable, name) => {
+  if (variable === null) localStorage.removeItem(name);
   localStorage.setItem(name, JSON.stringify(variable));
 };
 

@@ -13,6 +13,7 @@
   border-left-width: 0.8rem;
   border-left-style: solid;
   border-left-color: transparent;
+  padding-left: 0.8rem;
 }
 .todo__item.low {
   border-left-color: green;
@@ -46,8 +47,6 @@
 }
 .todo__item.done em {
   text-decoration: line-through;
-}
-.todo__item.done button {
 }
 
 .project__item {
@@ -91,15 +90,15 @@
   padding: 0.8rem;
   margin: 0.8rem 0.4rem;
 }
-.diary__item details {
+.diary__item > details {
   font-size: 1.6rem;
-}
-
-/* #section__notes__ul {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-  align-content: start;
-} */
+  grid-template-columns: repeat(2, 1fr);
+}
+.diary__item > details > summary {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
 
 .note__item {
   background-color: lightgray;

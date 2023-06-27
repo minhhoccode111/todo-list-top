@@ -1,3 +1,5 @@
+//this is prototype.js
+
 import { now, checkExpired } from "./fns.js";
 
 // ******************** MODULE PROTOTYPE OF FACTORIES FUNCTION ********************
@@ -14,6 +16,12 @@ const proto = {
 };
 export const todo = {
   constructor: "Todo",
+  classDone: function () {
+    return this.isDone ? "done" : "";
+  },
+  htmlDone: function () {
+    return this.isDone ? "&#x2713;" : "";
+  },
 };
 export const note = {
   project: "note",
@@ -23,6 +31,9 @@ export const diary = {
   isOpened: false,
   project: "diary",
   constructor: "Diary",
+  htmlOpened: function () {
+    return this.isOpened ? "open" : "";
+  },
 };
 export const project = {
   project: "project",

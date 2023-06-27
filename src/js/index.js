@@ -1,3 +1,5 @@
+//this is index.js
+
 // import css
 import "./../css/responsive.css";
 import "./../css/animation.css";
@@ -27,9 +29,10 @@ import "./listener.js";
 import * as database from "./database.js";
 
 export function resetApp() {
-  database.set(null, "dairy");
+  database.set(null, "diary");
   database.set(null, "id");
   database.set(null, "data");
 }
-import * as data from "./data.js";
+// import * as data from "./data.js";
 // console.log(data.projects.all()); //test
+resetApp();
