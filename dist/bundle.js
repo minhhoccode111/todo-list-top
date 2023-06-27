@@ -290,13 +290,33 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/js/create.js":
+/*!**************************!*\
+  !*** ./src/js/create.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   Diary: () => (/* binding */ Diary),\n/* harmony export */   Note: () => (/* binding */ Note),\n/* harmony export */   Project: () => (/* binding */ Project),\n/* harmony export */   Todo: () => (/* binding */ Todo)\n/* harmony export */ });\nconst Todo = () => {};\n\nconst Note = () => {};\n\nconst Project = () => {};\n\nconst Diary = () => {};\n\n\n//# sourceURL=webpack://todolisttop/./src/js/create.js?");
+
+/***/ }),
+
+/***/ "./src/js/database.js":
+/*!****************************!*\
+  !*** ./src/js/database.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   check: () => (/* binding */ check),\n/* harmony export */   get: () => (/* binding */ get),\n/* harmony export */   set: () => (/* binding */ set)\n/* harmony export */ });\nconst set = (variable, name) => {\n  localStorage.setItem(name, JSON.stringify(variable));\n};\n\nconst get = (name) => JSON.parse(localStorage.getItem(name));\n\nconst check = (name) => localStorage.getItem(name) !== null;\n\n\n//# sourceURL=webpack://todolisttop/./src/js/database.js?");
+
+/***/ }),
+
 /***/ "./src/js/index.js":
 /*!*************************!*\
   !*** ./src/js/index.js ***!
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_responsive_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../css/responsive.css */ \"./src/css/responsive.css\");\n/* harmony import */ var _css_animation_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../css/animation.css */ \"./src/css/animation.css\");\n/* harmony import */ var _css_dialogs_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../css/dialogs.css */ \"./src/css/dialogs.css\");\n/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../css/styles.css */ \"./src/css/styles.css\");\n/* harmony import */ var _css_header_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../css/header.css */ \"./src/css/header.css\");\n/* harmony import */ var _css_footer_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../css/footer.css */ \"./src/css/footer.css\");\n/* harmony import */ var _css_aside_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../css/aside.css */ \"./src/css/aside.css\");\n/* harmony import */ var _css_reset_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../css/reset.css */ \"./src/css/reset.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var animate_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! animate.css */ \"./node_modules/animate.css/animate.css\");\n// import css\n\n\n\n\n\n\n\n\n\n\n\n//import javaScript\n// import \"./full.js\";\n// import \"./form.js\";\n\n//import library\n\n\n// #################### ABOUT BUTTON CLICK ####################\n// const about = document.getElementById(\"of__about\");\n// const aboutBtn = document.getElementById(\"header__about\");\n// const aboutClose = document.getElementById(\"about__close\");\n\n// aboutBtn.addEventListener(\"click\", () => {\n//   about.show();\n//   // about.style.display = \"flex\";\n// });\n// aboutClose.addEventListener(\"click\", () => {\n//   about.close();\n//   about.style.display = \"none\";\n// });\n\n\n//# sourceURL=webpack://todolisttop/./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   resetApp: () => (/* binding */ resetApp)\n/* harmony export */ });\n/* harmony import */ var _css_responsive_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../css/responsive.css */ \"./src/css/responsive.css\");\n/* harmony import */ var _css_animation_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../css/animation.css */ \"./src/css/animation.css\");\n/* harmony import */ var _css_dialogs_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../css/dialogs.css */ \"./src/css/dialogs.css\");\n/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../css/styles.css */ \"./src/css/styles.css\");\n/* harmony import */ var _css_header_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../css/header.css */ \"./src/css/header.css\");\n/* harmony import */ var _css_footer_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../css/footer.css */ \"./src/css/footer.css\");\n/* harmony import */ var _css_aside_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../css/aside.css */ \"./src/css/aside.css\");\n/* harmony import */ var _css_reset_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../css/reset.css */ \"./src/css/reset.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var animate_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! animate.css */ \"./node_modules/animate.css/animate.css\");\n/* harmony import */ var _create_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./create.js */ \"./src/js/create.js\");\n/* harmony import */ var _database_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./database.js */ \"./src/js/database.js\");\n// import css\n\n\n\n\n\n\n\n\n\n\n\n//import javaScript\n// import \"./full.js\";\n// import \"./form.js\";\n\n// import \"./current.js\";\n\n//import module\n\n\nfunction resetApp() {\n  _database_js__WEBPACK_IMPORTED_MODULE_11__.set(null, \"dairy\");\n  _database_js__WEBPACK_IMPORTED_MODULE_11__.set(null, \"id\");\n  _database_js__WEBPACK_IMPORTED_MODULE_11__.set(null, \"data\");\n}\n\n\n//# sourceURL=webpack://todolisttop/./src/js/index.js?");
 
 /***/ })
 

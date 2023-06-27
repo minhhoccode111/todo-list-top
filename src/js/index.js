@@ -13,20 +13,14 @@ import "animate.css";
 //import javaScript
 // import "./full.js";
 // import "./form.js";
+import "./create.js";
+// import "./current.js";
 
-//import library
-import * as fns from "date-fns";
+//import module
+import * as database from "./database.js";
 
-// #################### ABOUT BUTTON CLICK ####################
-// const about = document.getElementById("of__about");
-// const aboutBtn = document.getElementById("header__about");
-// const aboutClose = document.getElementById("about__close");
-
-// aboutBtn.addEventListener("click", () => {
-//   about.show();
-//   // about.style.display = "flex";
-// });
-// aboutClose.addEventListener("click", () => {
-//   about.close();
-//   about.style.display = "none";
-// });
+export function resetApp() {
+  database.set(null, "dairy");
+  database.set(null, "id");
+  database.set(null, "data");
+}
