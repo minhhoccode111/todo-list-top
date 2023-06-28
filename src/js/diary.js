@@ -20,39 +20,20 @@ export const load = () => {
   if (isBefore(new Date(obj.createdDate), new Date())) {
     Data.add(obj, "diary");
     obj = Diary("", "");
-    set();
+    // set();
   }
 };
 
 export const day = (v) => {
   obj.day = v;
-  set();
+  // set();
 };
 
 export const night = (v) => {
   obj.day = v;
-  set();
+  // set();
 };
 
-// export const typeInput = () => {
-//   return `<div id="section__diary__inputs__ctn">
-//             <em id="diary__last__modified">Last modified: ${obj.lastModified}</em>
-//             <div id="diary__form__day">
-//               <p class="">Your thoughts all day long.</p>
-//               <hr />
-//               <div id="diary__input__day" contenteditable="true" spellcheck="false">
-//                 ${obj.day}
-//               </div>
-//             </div>
-//             <div id="diary__form__night">
-//               <p class="">Your thoughts before bed.</p>
-//               <hr />
-//               <div id="diary__input__night" contenteditable="true" spellcheck="false">
-//                 ${obj.night}
-//               </div>
-//             </div>
-//           </div>`;
-// };
 export const typeInput = (obj) => {
   const container = document.createElement("div");
   container.id = "section__diary__inputs__ctn";

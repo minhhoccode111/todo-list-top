@@ -16,6 +16,6 @@ export const load = () => {
 export const get = () => {
   let i = id;
   id++;
-  set();
+  // set();
   return i;
 };

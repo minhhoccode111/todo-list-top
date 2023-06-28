@@ -50,13 +50,15 @@ dialog textarea {
   resize: vertical;
 }
 
-dialog input[type="submit"][value="Create Todo"] {
+dialog input[type="submit"][value="Create Todo"],
+dialog input[type="submit"][value="Confirm edit"] {
   background-color: #4caf50;
   color: white;
   cursor: pointer;
 }
 
-dialog input[type="button"][value="Create Todo"]:hover {
+dialog input[type="button"][value="Create Todo"]:hover,
+dialog input[type="button"][value="Confirm edit"]:hover {
   background-color: #45a049;
 }
 dialog input[type="button"][value="Cancel"] {
@@ -89,3 +91,15 @@ dialog input[type="button"][value="Create Note"]:hover {
   background-color: #45a049;
 }
 /* add note form */
+#of__info {
+}
+#of__info > div {
+}
+#of__info > div > h3 {
+  font-weight: bold;
+  display: flex;
+}
+#of__info > div > h3 > span {
+  font-weight: normal;
+  margin-left: 1rem;
+}

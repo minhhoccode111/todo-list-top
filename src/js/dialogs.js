@@ -2,17 +2,15 @@
 
 import * as Create from "./create.js";
 import * as Current from "./current.js";
-import { main } from "./listener.js";
 import * as Display from "./display.js";
 import * as Data from "./data.js";
 
-export function listen(type) {
+export function listenForCreate(type) {
   const dialog = document.getElementById(`of__${type}`);
   const dueDateInput = document.getElementById(`dueDate__of__${type}`);
   const inputs = document.querySelectorAll(
     `input[name="hasDueDate__of__${type}"]`
   );
-
   inputs.forEach((input) => {
     input.addEventListener("change", function () {
       if (this.value === "yes") {
@@ -25,13 +23,9 @@ export function listen(type) {
       }
     });
   });
-
-  // function FormSubmit(formId, objectType, additionalProperties = {}) {
   const form = document.getElementById(`form__of__${type}`);
-
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-
     // Retrieve form data
     let obj;
     const title = document.getElementById(`title__of__${type}`).value;
@@ -40,7 +34,6 @@ export function listen(type) {
     const hasDueDate =
       document.querySelector(`input[name="hasDueDate__of__${type}"]:checked`)
         .value === "yes";
-
     if (type === "todo") {
       const priority = document.querySelector(
         'input[name="priority__of__todo"]:checked'
@@ -48,7 +41,6 @@ export function listen(type) {
       const isDone =
         document.querySelector('input[name="isDone__of__todo"]:checked')
           .value === "true";
-
       obj = Create.Todo(
         title,
         detail,
@@ -63,18 +55,10 @@ export function listen(type) {
     } else if (type === "project") {
       obj = Create.Project(title, detail, dueDate, hasDueDate);
     }
-
-    Data.add(obj, Current.get());
-
-    //display
-    main.innerHTML = Display.items(Current.get());
-
-    //disabled dueDateInput again
-    dueDateInput.disabled = true;
-
-    //console.log obj
+    Data.add(obj, Current.get()); //add to Data
+    Display.projectItems(Current.get()); //display
+    dueDateInput.disabled = true; //disable again
     console.log(obj);
-
     // Reset the form
     form.reset();
     dialog.close();
@@ -85,5 +69,7 @@ export function listen(type) {
     .querySelector(`input#cancel__of__${type}[value="Cancel"][type="button"]`)
     .addEventListener("click", () => {
       dialog.close();
+      dueDateInput.disabled = true;
+      form.reset();
     });
 }

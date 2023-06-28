@@ -200,21 +200,21 @@ export const load = () => {
   }
 };
 
-//use to set data to database
-const set = () => database.set(data, "data");
+// use to set data to database
+export const set = () => database.set(data, "data");
 
 export const get = () => data;
 
 export const add = (obj, project) => {
   data[project].push(obj);
-  set();
+  // set();
 };
 
 export const del = (project, id) => {
   for (let i = 0; i < date[project].length; i++) {
     if (data[project][i].id === id) {
       data[project].splice(i, 1);
-      set();
+      // set();
       return;
     }
   }
@@ -235,12 +235,12 @@ const addAProjectToData = (name) => {
     return;
   }
   data[name] = [];
-  set();
+  // set();
 };
 
 const delAProjectFromData = (name) => {
   delete data[name];
-  set();
+  // set();
 };
 
 const getProjectItems = (name) => {

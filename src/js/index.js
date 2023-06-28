@@ -22,8 +22,10 @@ import "./id.js";
 import "./data.js";
 import "./diary.js";
 import "./display.js";
-import "./form.js";
+import "./dialogs.js";
 import "./listener.js";
+import "./edit.js";
+import "./info.js";
 
 //import module
 import * as database from "./database.js";
@@ -32,8 +34,8 @@ export function resetApp() {
   database.set(null, "diary");
   database.set(null, "id");
   database.set(null, "data");
-  // database.set(null, "dairy");//typos
-  // database.set(null, "date");//typos
+  database.set(null, "dairy"); //typos
+  database.set(null, "date"); //typos
 }
 // import * as data from "./data.js";
 // console.log(data.projects.all()); //test

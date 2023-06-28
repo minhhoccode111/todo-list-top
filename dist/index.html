@@ -73,7 +73,7 @@
         <div class="todo__item low">
           <h3 class="todo__item__title">Title</h3>
           <em class="todo__item__date">21/6/23</em>
-          <button class="todo__item__done done"></button>
+          <button class="todo__item__done done">&#x2713;</button>
           <button class="todo__item__edit edit">...</button>
           <button class="todo__item__info info">?</button>
           <button class="todo__item__del del">X</button>
@@ -503,7 +503,7 @@
       </form>
     </dialog>
     <dialog id="of__edit">
-      <h2 id="dialog__edit__message">Create a new todo</h2>
+      <h2 id="dialog__edit__message">Edit this todo</h2>
       <form id="form__of__edit">
         <div class="form__group">
           <label for="title__of__edit">Title:</label>
@@ -597,111 +597,59 @@
           No
         </div>
         <div class="form__group">
-          <input type="submit" id="create__of__edit" value="Create Todo" />
+          <input type="submit" id="create__of__edit" value="Confirm edit" />
           <input type="button" id="cancel__of__edit" value="Cancel" />
         </div>
       </form>
     </dialog>
 
-    <dialog id="of__info">
-      <h2 id="dialog__info__message">Create a new todo</h2>
-      <form id="form__of__info">
+    <dialog id="of__info" class="">
+      <h2 id="dialog__info__message">Information</h2>
+      <div id="ctn__of__info">
+        <h3>
+          Title:
+          <span id="title__of__info"></span>
+        </h3>
+        <h3>
+          Detail:
+          <span id="detail__of__info"></span>
+        </h3>
+        <h3>
+          Project:
+          <span id="project__of__info"></span>
+        </h3>
+        <h3>
+          Done:
+          <span id="isDone__of__info"></span>
+        </h3>
+        <h3>
+          Due date:
+          <span id="dueDate__of__info"></span>
+        </h3>
+        <h3>
+          Has due date:
+          <span id="hasDueDate__of__info"></span>
+        </h3>
+        <h3>
+          Priority:
+          <span id="priority__of__info"></span>
+        </h3>
+        <h3>
+          Created date:
+          <span id="createdDate__of__info"></span>
+        </h3>
+        <h3>
+          Last modified:
+          <span id="lastModified__of__info"></span>
+        </h3>
+        <h3>
+          Is time expired:
+          <span id="isTimeExpired__of__info"></span>
+        </h3>
         <div class="form__group">
-          <label for="title__of__info">Title:</label>
-          <input
-            type="text"
-            id="title__of__info"
-            name="title__of__info"
-            maxlength="60"
-            required
-          />
-        </div>
-        <div class="form__group">
-          <label for="detail__of__info">Detail:</label>
-          <textarea
-            id="detail__of__info"
-            name="detail__of__info"
-            rows="4"
-            required
-          ></textarea>
-        </div>
-        <div class="form__group">
-          <label for="dueDate__of__info">Due Date:</label>
-          <input
-            type="date"
-            id="dueDate__of__info"
-            name="dueDate__of__info"
-            value=""
-            required
-            disabled
-          />
-        </div>
-        <div class="form__group">
-          <label for="hasDueDate__of__info">Has Due Date:</label>
-          <input
-            type="radio"
-            id="hasDueDate__of__info"
-            name="hasDueDate__of__info"
-            value="yes"
-          />
-          Yes
-          <input
-            type="radio"
-            id="noDueDate__of__info"
-            name="hasDueDate__of__info"
-            value="no"
-            checked
-          />
-          No
-        </div>
-        <div class="form__group">
-          <label for="priority__of__info">Priority:</label>
-          <input
-            type="radio"
-            id="low__of__info"
-            name="priority__of__info"
-            value="low"
-            checked
-          />
-          Low
-          <input
-            type="radio"
-            id="med__of__info"
-            name="priority__of__info"
-            value="med"
-          />
-          Medium
-          <input
-            type="radio"
-            id="high__of__info"
-            name="priority__of__info"
-            value="high"
-          />
-          High
-        </div>
-        <div class="form__group">
-          <label for="isDone__of__info">Is Done:</label>
-          <input
-            type="radio"
-            id="isDone__of__info"
-            name="isDone__of__info"
-            value="true"
-          />
-          Yes
-          <input
-            type="radio"
-            id="notDone__of__info"
-            name="isDone__of__info"
-            value="false"
-            checked
-          />
-          No
-        </div>
-        <div class="form__group">
-          <input type="submit" id="create__of__info" value="Create Todo" />
           <input type="button" id="cancel__of__info" value="Cancel" />
         </div>
-      </form>
+      </div>
     </dialog>
 
     <dialog id="of__about">
