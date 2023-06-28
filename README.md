@@ -29,15 +29,42 @@
 - Inside a prototype object of an object, `this` is point to that object when object use that method, but if that method create and return html elements and we want to bind events listener to elements in that html while creating them inside prototype's method at the same time, then normally `this` inside `addEventListener` is point to the element we are listening but if we want `this` to point to the object which is using the prototype's method then we have 2 approach:
   1. Using arrow function: because arrow function inherit the `this` value from their surrounding scope `element.addEventListener('click',()=>{console.log(this)});//'this' refers to the object using prototype method`
   2. Using closure: create a variable that references the object and use it inside the event listener call back
-  ```
+  ```javascript
   let self = this;
-  element.addEventListener('click',function(){
-    console.log(self);//'self' refers to object using that prototype method;
-  })
+  element.addEventListener("click", function () {
+    console.log(self); //'self' refers to object using that prototype method;
+  });
   ```
 - `format()` take a Date object and a format we want then return a time stamp or a string date format
 - `parseISO()` take date string and return a Date object
 - `isBefore()` take both 2 arguments Date objects
+- compare `undefined` with `null` E.g.
+  ```javascript
+  let a = null;
+  let b; //undefined
+  console.log(typeof a); //object
+  console.log(a == null); //true
+  console.log(a === null); //true
+  console.log(a == undefined); //true
+  console.log(a === undefined); //false
+  console.log(Object.is(a, null)); //true
+  console.log(Object.is(b, null)); //false
+  ```
+- In JavaScript, objects are passed by reference. Modifying properties of the object within the function affects the original object because they refer to the same object in memory. However, overwriting the entire object within the function does not affect the original object.
+
+```javascript
+function modifyObject(obj) {
+  obj.property = "new value"; // Modifying an existing property
+  obj.newProperty = "added value"; // Adding a new property
+  obj = { newObject: "new value" }; // Overwriting the entire object
+}
+const originalObject = {
+  property: "original value",
+};
+console.log(originalObject); // { property: 'original value' }
+modifyObject(originalObject);
+console.log(originalObject); // { property: 'new value', newProperty: 'added value' }
+```
 
 ## Requirements from The Odin Project:
 

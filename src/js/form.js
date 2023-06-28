@@ -7,6 +7,7 @@ import * as Display from "./display.js";
 import * as Data from "./data.js";
 
 export function listen(type) {
+  const dialog = document.getElementById(`of__${type}`);
   const dueDateInput = document.getElementById(`dueDate__of__${type}`);
   const inputs = document.querySelectorAll(
     `input[name="hasDueDate__of__${type}"]`
@@ -76,13 +77,13 @@ export function listen(type) {
 
     // Reset the form
     form.reset();
-    document.getElementById(`of__${type}`).close();
+    dialog.close();
   });
 
   //Close when click cancel
   document
     .querySelector(`input#cancel__of__${type}[value="Cancel"][type="button"]`)
     .addEventListener("click", () => {
-      document.getElementById(`of__${type}`).close();
+      dialog.close();
     });
 }

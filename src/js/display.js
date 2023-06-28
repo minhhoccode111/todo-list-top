@@ -2,39 +2,90 @@
 
 import * as Data from "./data.js";
 import * as Diary from "./diary.js";
+import { main } from "./listener.js";
 
-export const items = (name) => {
-  let arr = Data.projects.get(name);
-  return arr.reduce((total, item, index) => {
-    if (name === "project") {
-      return total + project(item);
-    }
-    if (name === "note") {
-      return total + note(item);
-    }
-    if (name === "diary") {
-      if (index === 0) {
-        let inputs = Diary.typeInput();
-        return total + inputs + diary(item);
+export const projectItems = (name) => {
+  let data = Data.get();
+  main.innerHTML = "";
+  if (name === "all") {
+    for (const prop in data) {
+      if (prop === "project" || prop === "note" || prop === "diary") continue;
+      for (let i = 0; i < data[prop].length; i++) {
+        let item = data[prop][i];
+        main.appendChild(todo(item));
       }
-      return total + diary(item);
     }
-
-    return total + todo(item);
-  }, "");
+    return html;
+  } else {
+    for (let i = 0; i < data[name].length; i++) {
+      let item = data[name][i];
+      if (name === "diary" && i === 0) {
+        main.appendChild(Diary.typeInput());
+        main.appendChild(diary(item));
+        continue;
+      }
+      if ((name = "diary")) {
+        main.appendChild(diary(item));
+      } else if ((name = "note")) {
+        html += note(item);
+      } else if ((name = "project")) {
+        html += project(item);
+      } else {
+        html += todo(item);
+      }
+    }
+    return html;
+  }
 };
 
 function todo(obj) {
-  return `<div class="todo__item ${obj.classDone()} ${obj.priority}" data-id="${
-    obj.id
-  }">
-            <h3 class="todo__item__title">${obj.title}</h3>
-            <em class="todo__item__date">${obj.dueDate}</em>
-            <button class="todo__item__done">${obj.htmlDone()}</button>
-            <button class="todo__item__edit edit">...</button>
-            <button class="todo__item__info info">?</button>
-            <button class="todo__item__del del">X</button>
-          </div>`;
+  let div = document.createElement("div");
+  div.className = "todo__item" + " " + obj.classDone() + " " + obj.priority;
+  div.setAttribute("data-id", obj.id);
+
+  let h3 = document.createElement("h3");
+  h3.className = "todo__item__title";
+  h3.textContent = obj.title;
+
+  let em = document.createElement("em");
+  em.className = "todo__item__date";
+  em.textContent = obj.dueDate;
+
+  let buttonDone = document.createElement("button");
+  buttonDone.className = "todo__item__done";
+  buttonDone.innerHTML = obj.htmlDone();
+  buttonDone.addEventListener("click", () => {
+    if (obj.isDone) {
+      obj.isDone = false;
+      buttonDone.innerHTML = obj.htmlDone();
+      div.classList.remove("done");
+    } else {
+      obj.isDone = true;
+      buttonDone.innerHTML = obj.htmlDone();
+      div.classList.add("done");
+    }
+  });
+
+  let buttonEdit = document.createElement("button");
+  buttonEdit.className = "todo__item__edit edit";
+  buttonEdit.innerHTML = "...";
+
+  let buttonInfo = document.createElement("button");
+  buttonInfo.className = "todo__item__info info";
+  buttonInfo.innerHTML = "?";
+
+  let buttonDel = document.createElement("button");
+  buttonDel.className = "todo__item__del del";
+  buttonDel.innerHTML = "X";
+
+  div.appendChild(h3);
+  div.appendChild(em);
+  div.appendChild(buttonDone);
+  div.appendChild(buttonEdit);
+  div.appendChild(buttonInfo);
+  div.appendChild(buttonDel);
+
+  return div;
 }
 function note(obj) {
   return `
@@ -70,4 +121,33 @@ function project(obj) {
             <button class="project__item__info info">?</button>
             <button class="project__item__del del">X</button>
           </div>`;
+}
+export function asideBtns(data) {
+  let html = "";
+  for (const name in data) {
+    let classList =
+      name === "all" ||
+      name === "project" ||
+      name === "note" ||
+      name === "diary"
+        ? "parent"
+        : "child";
+    if (name === "all") {
+      //loop through all Todo project
+      let l = Data.projects
+        .all()
+        .reduce((total, current) => total + data[current].length, 0);
+
+      html += `<div class="nav__button__ctn ${classList}">
+                <button class="nav__button button__${name}">${name}</button>
+                <span class="tinynum">${l}</span>
+              </div>`;
+      continue;
+    }
+    html += `<div class="nav__button__ctn ${classList}">
+              <button class="nav__button button__${name}">${name}</button>
+              <span class="tinynum">${data[name].length}</span>
+            </div>`;
+  }
+  return html;
 }

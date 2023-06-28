@@ -32,7 +32,9 @@ export function resetApp() {
   database.set(null, "diary");
   database.set(null, "id");
   database.set(null, "data");
+  // database.set(null, "dairy");//typos
+  // database.set(null, "date");//typos
 }
 // import * as data from "./data.js";
 // console.log(data.projects.all()); //test
-resetApp();
+// resetApp();

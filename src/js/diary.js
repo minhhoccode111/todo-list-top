@@ -34,22 +34,69 @@ export const night = (v) => {
   set();
 };
 
-export const typeInput = () => {
-  return `<div id="section__diary__inputs__ctn">
-            <em id="diary__last__modified">Last modified: ${obj.lastModified}</em>
-            <div id="diary__form__day">
-              <p class="">Your thoughts all day long.</p>
-              <hr />
-              <div id="diary__input__day" contenteditable="true" spellcheck="false">
-                ${obj.day}
-              </div>
-            </div>
-            <div id="diary__form__night">
-              <p class="">Your thoughts before bed.</p>
-              <hr />
-              <div id="diary__input__night" contenteditable="true" spellcheck="false">
-                ${obj.night}
-              </div>
-            </div>
-          </div>`;
+// export const typeInput = () => {
+//   return `<div id="section__diary__inputs__ctn">
+//             <em id="diary__last__modified">Last modified: ${obj.lastModified}</em>
+//             <div id="diary__form__day">
+//               <p class="">Your thoughts all day long.</p>
+//               <hr />
+//               <div id="diary__input__day" contenteditable="true" spellcheck="false">
+//                 ${obj.day}
+//               </div>
+//             </div>
+//             <div id="diary__form__night">
+//               <p class="">Your thoughts before bed.</p>
+//               <hr />
+//               <div id="diary__input__night" contenteditable="true" spellcheck="false">
+//                 ${obj.night}
+//               </div>
+//             </div>
+//           </div>`;
+// };
+export const typeInput = (obj) => {
+  const container = document.createElement("div");
+  container.id = "section__diary__inputs__ctn";
+
+  const lastModified = document.createElement("em");
+  lastModified.id = "diary__last__modified";
+  lastModified.textContent = `Last modified: ${obj.lastModified}`;
+  container.appendChild(lastModified);
+
+  const formDay = document.createElement("div");
+  formDay.id = "diary__form__day";
+  container.appendChild(formDay);
+
+  const dayParagraph = document.createElement("p");
+  dayParagraph.textContent = "Your thoughts all day long.";
+  formDay.appendChild(dayParagraph);
+
+  const dayHr = document.createElement("hr");
+  formDay.appendChild(dayHr);
+
+  const dayInput = document.createElement("div");
+  dayInput.id = "diary__input__day";
+  dayInput.contentEditable = true;
+  dayInput.spellcheck = false;
+  dayInput.textContent = obj.day;
+  formDay.appendChild(dayInput);
+
+  const formNight = document.createElement("div");
+  formNight.id = "diary__form__night";
+  container.appendChild(formNight);
+
+  const nightParagraph = document.createElement("p");
+  nightParagraph.textContent = "Your thoughts before bed.";
+  formNight.appendChild(nightParagraph);
+
+  const nightHr = document.createElement("hr");
+  formNight.appendChild(nightHr);
+
+  const nightInput = document.createElement("div");
+  nightInput.id = "diary__input__night";
+  nightInput.contentEditable = true;
+  nightInput.spellcheck = false;
+  nightInput.textContent = obj.night;
+  formNight.appendChild(nightInput);
+
+  return container;
 };

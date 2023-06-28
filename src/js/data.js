@@ -190,14 +190,6 @@ let data = {
       "Hát cho giờ ra chơi, mà trời mưa rơi, như ngày em không thấy nắng, em thấy không có bạn, em đứt ngang dây đàn, em sẽ không ghi bàn hôm nay. Cứ ngồi đây thôi cùng lời anh nói cứ để cơn giông đó tới, cho tới hôm em về, giữ lấy cánh thư để trong tay. Bởi vì sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy. Nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em. Cho dù ta ưa, một ngày không mưa, nhưng làm sao cây sống mãi. Nếu nắng chang chang hoài, không có hôm mưa lại, những cái hôm em phải chào thua. Buông hai tay, buông hai tay, em đã cố đã cố hôm nay, giờ kệ nó đi em không làm gì...Chỉ nhìn mặt trời đi qua, sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy, nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em...Có sao có sao đâu...Told you told you so...",
       "Hát cho giờ ra chơi, mà trời mưa rơi, như ngày em không thấy nắng, em thấy không có bạn, em đứt ngang dây đàn, em sẽ không ghi bàn hôm nay. Cứ ngồi đây thôi cùng lời anh nói cứ để cơn giông đó tới, cho tới hôm em về, giữ lấy cánh thư để trong tay. Bởi vì sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy. Nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em. Cho dù ta ưa, một ngày không mưa, nhưng làm sao cây sống mãi. Nếu nắng chang chang hoài, không có hôm mưa lại, những cái hôm em phải chào thua. Buông hai tay, buông hai tay, em đã cố đã cố hôm nay, giờ kệ nó đi em không làm gì...Chỉ nhìn mặt trời đi qua, sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy, nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em...Có sao có sao đâu...Told you told you so..."
     ),
-    Create.Diary(
-      "Hát cho giờ ra chơi, mà trời mưa rơi, như ngày em không thấy nắng, em thấy không có bạn, em đứt ngang dây đàn, em sẽ không ghi bàn hôm nay. Cứ ngồi đây thôi cùng lời anh nói cứ để cơn giông đó tới, cho tới hôm em về, giữ lấy cánh thư để trong tay. Bởi vì sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy. Nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em. Cho dù ta ưa, một ngày không mưa, nhưng làm sao cây sống mãi. Nếu nắng chang chang hoài, không có hôm mưa lại, những cái hôm em phải chào thua. Buông hai tay, buông hai tay, em đã cố đã cố hôm nay, giờ kệ nó đi em không làm gì...Chỉ nhìn mặt trời đi qua, sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy, nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em...Có sao có sao đâu...Told you told you so...",
-      "Hát cho giờ ra chơi, mà trời mưa rơi, như ngày em không thấy nắng, em thấy không có bạn, em đứt ngang dây đàn, em sẽ không ghi bàn hôm nay. Cứ ngồi đây thôi cùng lời anh nói cứ để cơn giông đó tới, cho tới hôm em về, giữ lấy cánh thư để trong tay. Bởi vì sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy. Nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em. Cho dù ta ưa, một ngày không mưa, nhưng làm sao cây sống mãi. Nếu nắng chang chang hoài, không có hôm mưa lại, những cái hôm em phải chào thua. Buông hai tay, buông hai tay, em đã cố đã cố hôm nay, giờ kệ nó đi em không làm gì...Chỉ nhìn mặt trời đi qua, sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy, nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em...Có sao có sao đâu...Told you told you so..."
-    ),
-    Create.Diary(
-      "Hát cho giờ ra chơi, mà trời mưa rơi, như ngày em không thấy nắng, em thấy không có bạn, em đứt ngang dây đàn, em sẽ không ghi bàn hôm nay. Cứ ngồi đây thôi cùng lời anh nói cứ để cơn giông đó tới, cho tới hôm em về, giữ lấy cánh thư để trong tay. Bởi vì sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy. Nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em. Cho dù ta ưa, một ngày không mưa, nhưng làm sao cây sống mãi. Nếu nắng chang chang hoài, không có hôm mưa lại, những cái hôm em phải chào thua. Buông hai tay, buông hai tay, em đã cố đã cố hôm nay, giờ kệ nó đi em không làm gì...Chỉ nhìn mặt trời đi qua, sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy, nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em...Có sao có sao đâu...Told you told you so...",
-      "Hát cho giờ ra chơi, mà trời mưa rơi, như ngày em không thấy nắng, em thấy không có bạn, em đứt ngang dây đàn, em sẽ không ghi bàn hôm nay. Cứ ngồi đây thôi cùng lời anh nói cứ để cơn giông đó tới, cho tới hôm em về, giữ lấy cánh thư để trong tay. Bởi vì sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy. Nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em. Cho dù ta ưa, một ngày không mưa, nhưng làm sao cây sống mãi. Nếu nắng chang chang hoài, không có hôm mưa lại, những cái hôm em phải chào thua. Buông hai tay, buông hai tay, em đã cố đã cố hôm nay, giờ kệ nó đi em không làm gì...Chỉ nhìn mặt trời đi qua, sẽ có ngày em thấy, những chuyện buồn hôm ấy, chỉ là chuyện cười hôm nay, dù nói không buồn cười mấy, nhưng cười để khi em vui trở lại, anh sẽ nói khẽ bên tai, thấy chưa thấy chưa em...Có sao có sao đâu...Told you told you so..."
-    ),
   ],
 };
 
@@ -228,8 +220,13 @@ export const del = (project, id) => {
   }
 };
 
-const getAllNewProjects = () => {
-  return data.project.reduce((total, current) => [...total, current.title], []);
+const getAllTodoProject = () => {
+  let arr = [];
+  for (const p in data) {
+    if (p === "project" || p === "note" || p === "diary") continue;
+    arr.push(p);
+  }
+  return arr;
 };
 
 const addAProjectToData = (name) => {
@@ -254,6 +251,6 @@ const getProjectItems = (name) => {
 export const projects = {
   add: addAProjectToData,
   del: delAProjectFromData,
-  all: getAllNewProjects,
+  all: getAllTodoProject,
   get: getProjectItems,
 };
