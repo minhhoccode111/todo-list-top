@@ -10,7 +10,7 @@
     <div id="wrapper">
       <header id="header">
         <h1 id="header__title" class="animate__animated animate__backInRight">
-          checkmate &#128196;
+          check-mate &#128196;
         </h1>
         <button
           id="header__about"
@@ -22,35 +22,35 @@
       <aside id="aside">
         <nav id="aside__nav">
           <div class="nav__button__ctn parent">
-            <button class="nav__button button__all">all</button>
+            <button class="nav__button" data-name="all">all</button>
             <span class="tinynum">1</span>
           </div>
           <div class="nav__button__ctn child">
-            <button class="nav__button button__today">today</button>
+            <button class="nav__button" data-name="today">today</button>
             <span class="tinynum">1</span>
           </div>
           <div class="nav__button__ctn child">
-            <button class="nav__button button__week">week</button>
+            <button class="nav__button" data-name="week">week</button>
             <span class="tinynum">1</span>
           </div>
           <div class="nav__button__ctn child">
-            <button class="nav__button button__month">month</button>
+            <button class="nav__button" data-name="month">month</button>
             <span class="tinynum">1</span>
           </div>
           <div class="nav__button__ctn child">
-            <button class="nav__button button__year">year</button>
+            <button class="nav__button" data-name="year">year</button>
             <span class="tinynum">1</span>
           </div>
           <div class="nav__button__ctn parent">
-            <button class="nav__button button__diary">diary</button>
+            <button class="nav__button" data-name="diary">diary</button>
             <span class="tinynum">2</span>
           </div>
           <div class="nav__button__ctn parent">
-            <button class="nav__button button__notes">note</button>
+            <button class="nav__button" data-name="note">note</button>
             <span class="tinynum">2</span>
           </div>
           <div class="nav__button__ctn parent">
-            <button class="nav__button button__projects">project</button>
+            <button class="nav__button" data-name="project">project</button>
             <span class="tinynum">2</span>
           </div>
           <!-- <div class="nav__button__ctn child">
@@ -603,54 +603,33 @@
       </form>
     </dialog>
 
-    <dialog id="of__info" class="">
-      <h2 id="dialog__info__message">Information</h2>
-      <div id="ctn__of__info">
-        <h3>
-          Title:
-          <span id="title__of__info"></span>
-        </h3>
-        <h3>
-          Detail:
-          <span id="detail__of__info"></span>
-        </h3>
-        <h3>
-          Project:
-          <span id="project__of__info"></span>
-        </h3>
-        <h3>
-          Done:
-          <span id="isDone__of__info"></span>
-        </h3>
-        <h3>
-          Due date:
-          <span id="dueDate__of__info"></span>
-        </h3>
-        <h3>
-          Has due date:
-          <span id="hasDueDate__of__info"></span>
-        </h3>
-        <h3>
-          Priority:
-          <span id="priority__of__info"></span>
-        </h3>
-        <h3>
-          Created date:
-          <span id="createdDate__of__info"></span>
-        </h3>
-        <h3>
-          Last modified:
-          <span id="lastModified__of__info"></span>
-        </h3>
-        <h3>
-          Is time expired:
-          <span id="isTimeExpired__of__info"></span>
-        </h3>
-        <div class="form__group">
-          <input type="button" id="cancel__of__info" value="Cancel" />
-        </div>
+    <div class="popup__info__wrapper hidden">
+      <div class="popup__info">
+        <h2 class="popup__info__message">Information of</h2>
+        <p>id:</p>
+        <p class="info__id">id</p>
+        <p>title:</p>
+        <p class="info__title">title</p>
+        <p>detail:</p>
+        <p class="info__detail">detail</p>
+        <p>is Done:</p>
+        <p class="info__isDone">true</p>
+        <p>project:</p>
+        <p class="info__project">project</p>
+        <p>due Date:</p>
+        <p class="info__dueDate">2023-06-30</p>
+        <p>priority:</p>
+        <p class="info__priority">high</p>
+        <p>created Date:</p>
+        <p class="info__createdDate">2023-06-20</p>
+        <p>last Modified:</p>
+        <p class="info__lastModified">2023-06-30 12:00:00</p>
+        <p>is Time Expired:</p>
+        <p class="info__isTimeExpired">true</p>
+
+        <input type="button" class="popup__info__remove" value="Got it" />
       </div>
-    </dialog>
+    </div>
 
     <dialog id="of__about">
       <div id="about__content">Hello, World!</div>
