@@ -6,12 +6,13 @@ import * as Diary from "./diary.js";
 import * as Current from "./current.js";
 import * as Dialogs from "./dialogs.js";
 import { listenForEdit } from "./edit.js";
-import { listenForInfo } from "./info.js";
+import { displayInfo } from "./info.js";
+import { intlFormat } from "date-fns";
 
 export const main = document.getElementById("main");
 export const nav = document.getElementById("aside__nav");
 
-function todoItemToggleDone(obj, buttonDone, div) {
+function todoClickedDone(obj, buttonDone, div) {
   if (obj.isDone) {
     obj.isDone = false;
     // Data.set()
@@ -25,32 +26,36 @@ function todoItemToggleDone(obj, buttonDone, div) {
   }
 }
 
-function todoItemInfoClicked(obj) {}
-
-function todoItemDeleteClicked(projectName, index) {
-  Data.projects.get(projectName).splice(index, 1);
-  // Data.set()
+function todoClickedDelete(projectName, index) {
+  Data.del(projectName, index);
 }
 
-function todoItemEditClicked(obj, projectName, index) {
+function todoClickedEdit(obj, projectName, index) {
   listenForEdit(obj, projectName, index);
   // Data.set()
 }
 
-function noteItemInputEdited(obj, property, value) {
+function noteEditedInputs(obj, property, value) {
   obj[property] = value;
   //Data.set()
 }
 
-function noteItemDeleteClicked(index) {
-  Data.projects.get("note").splice(index, 1);
-  // Data.set()
+function noteClickedDelete(index) {
+  Data.del("note", index);
 }
 
-function noteItemInfoClicked(obj) {}
+function projectClickedDelete(index, name) {
+  Data.del("project", index);
+  Data.projects.del(name);
+  nav.querySelector(`[data-name="${name}"]`).parentNode.remove();
+}
+
+function projectClickedLink(name) {
+  nav.querySelector(`[data-name="${name}"]`).click();
+}
 
 function todo(obj, projectName, index) {
-  const { id, title, dueDate, isDone, priority } = obj;
+  const { id, title, dueDate, priority } = obj;
   let div = document.createElement("div");
   div.className = "todo__item" + " " + obj.classDone() + " " + priority;
   div.setAttribute("data-id", id);
@@ -58,46 +63,46 @@ function todo(obj, projectName, index) {
   let h3 = document.createElement("h3");
   h3.className = "todo__item__title";
   h3.textContent = title;
-  div.appendChild(h3);
 
   let em = document.createElement("em");
   em.className = "todo__item__date";
   em.textContent = dueDate;
-  div.appendChild(em);
 
   let buttonDone = document.createElement("button");
   buttonDone.className = "todo__item__done";
   buttonDone.innerHTML = obj.htmlDone();
   buttonDone.addEventListener("click", () => {
-    todoItemToggleDone(obj, buttonDone, div);
+    todoClickedDone(obj, buttonDone, div);
   });
-  div.appendChild(buttonDone);
 
   let buttonInfo = document.createElement("button");
   buttonInfo.className = "todo__item__info info";
   buttonInfo.innerHTML = "?";
   buttonInfo.addEventListener("click", () => {
-    todoItemInfoClicked(obj);
+    displayInfo(obj);
   });
-  div.appendChild(buttonInfo);
 
   let buttonDel = document.createElement("button");
   buttonDel.className = "todo__item__del del";
   buttonDel.innerHTML = "X";
   buttonDel.addEventListener("click", (e) => {
     buttonDel.parentNode.remove();
-    todoItemDeleteClicked(projectName, index);
+    todoClickedDelete(projectName, index);
   });
-  div.appendChild(buttonDel);
 
   let buttonEdit = document.createElement("button");
   buttonEdit.className = "todo__item__edit edit";
   buttonEdit.innerHTML = "...";
-  div.appendChild(buttonEdit);
   buttonEdit.addEventListener("click", (e) => {
-    todoItemEditClicked(obj, projectName, index);
+    todoClickedEdit(obj, projectName, index);
   });
 
+  div.appendChild(h3);
+  div.appendChild(em);
+  div.appendChild(buttonDone);
+  div.appendChild(buttonEdit);
+  div.appendChild(buttonInfo);
+  div.appendChild(buttonDel);
   return div;
 }
 function note(obj, index) {
@@ -109,7 +114,6 @@ function note(obj, index) {
 
   const divNoteHeader = document.createElement("div");
   divNoteHeader.className = "note__item__header";
-  divNoteItem.appendChild(divNoteHeader);
 
   const divNoteTitle = document.createElement("div");
   divNoteTitle.className = "note__item__title";
@@ -117,30 +121,26 @@ function note(obj, index) {
   divNoteTitle.spellcheck = false;
   divNoteTitle.textContent = title;
   divNoteTitle.addEventListener("input", (e) => {
-    noteItemInputEdited(obj, "title", e.target.textContent);
+    noteEditedInputs(obj, "title", e.target.textContent);
   });
-  divNoteHeader.appendChild(divNoteTitle);
 
   const emLastModified = document.createElement("em");
   emLastModified.textContent = lastModified;
-  divNoteHeader.appendChild(emLastModified);
 
   const buttonInfo = document.createElement("button");
   buttonInfo.className = "note__item__info info";
   buttonInfo.textContent = "?";
   buttonInfo.addEventListener("click", () => {
-    noteItemInfoClicked(obj);
+    displayInfo(obj);
   });
-  divNoteHeader.appendChild(buttonInfo);
 
   const buttonDel = document.createElement("button");
   buttonDel.className = "note__item__del del";
   buttonDel.textContent = "X";
   buttonDel.addEventListener("click", () => {
     divNoteItem.remove();
-    noteItemDeleteClicked(index);
+    noteClickedDelete(index);
   });
-  divNoteHeader.appendChild(buttonDel);
 
   const divNoteDetail = document.createElement("div");
   divNoteDetail.className = "note__item__detail";
@@ -148,20 +148,27 @@ function note(obj, index) {
   divNoteDetail.spellcheck = false;
   divNoteDetail.textContent = detail;
   divNoteDetail.addEventListener("input", (e) => {
-    noteItemInputEdited(obj, "detail", e.target.textContent);
+    noteEditedInputs(obj, "detail", e.target.textContent);
   });
+
+  divNoteItem.appendChild(divNoteHeader);
+  divNoteHeader.appendChild(divNoteTitle);
+  divNoteHeader.appendChild(emLastModified);
+  divNoteHeader.appendChild(buttonInfo);
+  divNoteHeader.appendChild(buttonDel);
   divNoteItem.appendChild(divNoteDetail);
 
   return divNoteItem;
 }
 
 function diary(obj) {
+  let { opened, createdDate, day, night } = obj;
   const container = document.createElement("div");
   container.classList.add("diary__item");
 
   const details = document.createElement("details");
   details.classList.add("diary__item__details");
-  details.open = obj.opened;
+  details.open = opened;
   container.appendChild(details);
 
   const summary = document.createElement("summary");
@@ -170,46 +177,59 @@ function diary(obj) {
 
   const date = document.createElement("em");
   date.classList.add("diary__item__date");
-  date.textContent = obj.createdDate;
+  date.textContent = createdDate;
   summary.appendChild(date);
 
   const dayParagraph = document.createElement("p");
   dayParagraph.classList.add("diary__item__day");
-  dayParagraph.textContent = obj.day;
+  dayParagraph.textContent = day;
   details.appendChild(dayParagraph);
 
   const nightParagraph = document.createElement("p");
   nightParagraph.classList.add("diary__item__night");
-  nightParagraph.textContent = obj.night;
+  nightParagraph.textContent = night;
   details.appendChild(nightParagraph);
 
   return container;
 }
 
-function project(obj) {
+function project(obj, index) {
+  let { id, title } = obj;
+
   const container = document.createElement("div");
   container.classList.add("project__item");
-  container.dataset.id = obj.id;
+  container.dataset.id = id;
 
   const titleLink = document.createElement("a");
   titleLink.classList.add("project__item__title");
   titleLink.href = "#";
-  titleLink.textContent = obj.title;
-  container.appendChild(titleLink);
+  titleLink.textContent = title;
+  titleLink.addEventListener("click", () => {
+    projectClickedLink(title);
+  });
 
   const editButton = document.createElement("button");
   editButton.classList.add("project__item__edit", "edit");
   editButton.textContent = "...";
-  container.appendChild(editButton);
 
   const infoButton = document.createElement("button");
   infoButton.classList.add("project__item__info", "info");
   infoButton.textContent = "?";
-  container.appendChild(infoButton);
+  infoButton.addEventListener("click", () => {
+    displayInfo(obj);
+  });
 
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("project__item__del", "del");
   deleteButton.textContent = "X";
+  deleteButton.addEventListener("click", () => {
+    deleteButton.parentNode.remove();
+    projectClickedDelete(index, title);
+  });
+
+  container.appendChild(titleLink);
+  container.appendChild(editButton);
+  container.appendChild(infoButton);
   container.appendChild(deleteButton);
 
   return container;
@@ -239,7 +259,8 @@ function createNavBtn(name, attr, length) {
   container.classList.add(attr);
 
   const button = document.createElement("button");
-  button.classList.add("nav__button", `button__${name}`);
+  button.classList.add("nav__button");
+  button.setAttribute("data-name", `${name}`); //FIXME fix this classList to be data-name because if user create a project named with space then we'll have an error with classList.add()
   button.textContent = name;
   button.addEventListener("click", () => {
     if (Current.get() === name) return;

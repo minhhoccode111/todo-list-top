@@ -54,12 +54,15 @@ export function listenForCreate(type) {
       obj = Create.Note(title, detail, dueDate, hasDueDate);
     } else if (type === "project") {
       obj = Create.Project(title, detail, dueDate, hasDueDate);
+      Data.projects.add(title); //
+      Display.asideBtns(Data.get()); //display
     }
     Data.add(obj, Current.get()); //add to Data
     Display.projectItems(Current.get()); //display
-    dueDateInput.disabled = true; //disable again
+
     console.log(obj);
     // Reset the form
+    dueDateInput.disabled = true; //disable again
     form.reset();
     dialog.close();
   });

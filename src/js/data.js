@@ -210,13 +210,9 @@ export const add = (obj, project) => {
   // set();
 };
 
-export const del = (project, id) => {
-  const projectData = data[project];
-  const index = projectData.findIndex((todo) => (todo.id = id));
-  if (index > -1) {
-    projectData.splice(index, 1);
-    set();
-  }
+export const del = (project, index) => {
+  data[project].splice(index, 1);
+  // set();
 };
 
 const getAllTodoProject = () => {
@@ -230,8 +226,7 @@ const getAllTodoProject = () => {
 
 const addAProjectToData = (name) => {
   if (data.hasOwnProperty(name)) {
-    alert("That project is already existed!");
-    return;
+    return alert("That project is already existed!");
   }
   data[name] = [];
   // set();

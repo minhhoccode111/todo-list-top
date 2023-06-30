@@ -90,16 +90,59 @@ dialog input[type="submit"][value="Create Note"] {
 dialog input[type="button"][value="Create Note"]:hover {
   background-color: #45a049;
 }
-/* add note form */
-#of__info {
-}
-#of__info > div {
-}
-#of__info > div > h3 {
-  font-weight: bold;
+/* popup to show info */
+.popup__info__wrapper {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #383434ab;
 }
-#of__info > div > h3 > span {
-  font-weight: normal;
-  margin-left: 1rem;
+.popup__info {
+  padding: 1rem;
+  width: 100%;
+  max-width: 80rem;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  font-size: 1.6rem;
+  column-gap: 2rem;
+  border-radius: 1rem;
+}
+.popup__info > * {
+  justify-self: start;
+  align-self: center;
+}
+.popup__info h2 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  justify-self: center;
+}
+.popup__info p {
+  text-transform: capitalize;
+}
+.popup__info input {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  max-width: 20rem;
+  padding: 5px;
+  justify-self: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.popup__info input:hover {
+  background-color: #45a049;
 }

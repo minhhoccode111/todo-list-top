@@ -34,9 +34,9 @@ window.addEventListener("DOMContentLoaded", () => {
   Dialogs.listenForCreate("note");
   Dialogs.listenForCreate("project");
   //load data
-  Id.load();
-  Data.load();
-  Diary.load();
-  refresh();
+  // Id.load();
+  // Data.load();
+  // Diary.load();
+  Display.asideBtns(Data.get());
   Display.projectItems(Current.get());
 });

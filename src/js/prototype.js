@@ -16,7 +16,6 @@ const proto = {
 };
 
 export const todo = Object.assign(Object.create(proto), {
-  type: "todo",
   classDone() {
     return this.isDone ? "done" : "";
   },
@@ -27,13 +26,11 @@ export const todo = Object.assign(Object.create(proto), {
 
 export const note = Object.assign(Object.create(proto), {
   project: "note",
-  type: "note",
 });
 
 export const diary = Object.assign(Object.create(proto), {
   isOpened: false,
   project: "diary",
-  type: "diary",
   htmlOpened() {
     return this.isOpened ? "open" : "";
   },
@@ -41,7 +38,6 @@ export const diary = Object.assign(Object.create(proto), {
 
 export const project = Object.assign(Object.create(proto), {
   project: "project",
-  type: "project",
 });
 
 export const restore = (data) => {

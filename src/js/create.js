@@ -18,9 +18,11 @@ export function Todo(
   const createdDate = today();
   const lastModified = now();
   const isTimeExpired = checkExpired(dueDate);
+  const type = "todo";
 
   return Object.assign(Object.create(Prototype.todo), {
     id,
+    type,
     title,
     detail,
     isDone,
@@ -40,8 +42,10 @@ export function Note(title, detail, dueDate, hasDueDate) {
   const createdDate = today();
   const lastModified = now();
   const isTimeExpired = checkExpired(dueDate);
+  const type = "note";
   return Object.assign(Object.create(Prototype.note), {
     id,
+    type,
     title,
     detail,
     dueDate,
@@ -55,9 +59,11 @@ export function Note(title, detail, dueDate, hasDueDate) {
 export function Diary(day, night) {
   const createdDate = today();
   const lastModified = now();
+  const type = "diary";
 
   return Object.assign(Object.create(Prototype.diary), {
     day,
+    type,
     night,
     createdDate,
     lastModified,
@@ -69,8 +75,10 @@ export function Project(title, detail, dueDate, hasDueDate) {
   const createdDate = today();
   const lastModified = now();
   const isTimeExpired = checkExpired(dueDate);
+  const type = "project";
   return Object.assign(Object.create(Prototype.project), {
     id,
+    type,
     title,
     detail,
     dueDate,
