@@ -34,6 +34,7 @@ export function listenForCreate(type) {
     const hasDueDate =
       document.querySelector(`input[name="hasDueDate__of__${type}"]:checked`)
         .value === "yes";
+    const project = Current.get();
     if (type === "todo") {
       const priority = document.querySelector(
         'input[name="priority__of__todo"]:checked'
@@ -48,17 +49,20 @@ export function listenForCreate(type) {
         hasDueDate,
         priority,
         isDone,
-        Current.get()
+        project
       );
+      Data.add(obj, project); //add to Data
     } else if (type === "note") {
       obj = Create.Note(title, detail, dueDate, hasDueDate);
+      Data.add(obj, project); //add to Data
     } else if (type === "project") {
       obj = Create.Project(title, detail, dueDate, hasDueDate);
       Data.projects.add(title); //
-      Display.asideBtns(Data.get()); //display
+      Data.add(obj, project); //add to Data
+      Display.customProjectBtns(Data.projects.get(project)); //display
     }
-    Data.add(obj, Current.get()); //add to Data
-    Display.projectItems(Current.get()); //display
+    Display.projectItems(project); //display
+    Display.updateSpan();
 
     console.log(obj);
     // Reset the form

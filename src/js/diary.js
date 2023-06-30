@@ -31,7 +31,7 @@ export const day = (v) => {
 };
 
 export const night = (v) => {
-  obj.day = v;
+  obj.night = v;
   // set();
 };
 

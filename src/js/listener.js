@@ -2,11 +2,8 @@
 
 import * as Dialogs from "./dialogs";
 import * as Current from "./current.js";
-import * as Create from "./create.js";
 import * as Display from "./display.js";
-import * as Id from "./id.js";
 import * as Data from "./data.js";
-import * as Diary from "./diary.js";
 
 export const refresh = () => {
   Display.asideBtns(Data.get());
@@ -37,6 +34,8 @@ window.addEventListener("DOMContentLoaded", () => {
   // Id.load();
   // Data.load();
   // Diary.load();
-  Display.asideBtns(Data.get());
+  // Current.load()
+  Display.customProjectBtns(Data.projects.custom());
   Display.projectItems(Current.get());
+  Display.updateSpan();
 });

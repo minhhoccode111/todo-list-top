@@ -241,10 +241,25 @@ const getProjectItems = (name) => {
   return data[name];
 };
 
+const getProjectLength = (name) => {
+  //FIXME write this function to only count isDone: false todo items
+  if (name === "all") {
+    return getAllTodoProject().reduce(
+      (total, current) => total + data[current].length,
+      0
+    );
+  }
+  if (["note", "diary", "project"].includes(name)) return data[name].length;
+};
+
+const getCustomProjects = () => data.project;
+
 //another module inside
 export const projects = {
   add: addAProjectToData,
   del: delAProjectFromData,
   all: getAllTodoProject,
   get: getProjectItems,
+  getL: getProjectLength,
+  custom: getCustomProjects,
 };

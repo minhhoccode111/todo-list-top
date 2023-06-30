@@ -26,6 +26,10 @@ import "./dialogs.js";
 import "./listener.js";
 import "./edit.js";
 import "./info.js";
+import "./todoElement.js";
+import "./noteElement.js";
+import "./projectElement.js";
+import "./diaryElement.js";
 
 //import module
 import * as database from "./database.js";
