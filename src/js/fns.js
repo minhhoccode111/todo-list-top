@@ -9,14 +9,12 @@ import { parseISO, format, isBefore } from "date-fns";
 export const now = () => {
   const date = format(new Date(), "yyyy-MM-dd");
   const time = format(new Date(), "HH:mm:ss");
-
-  return date + " " + time;
+  return `${date} ${time}`;
 };
 
 export const today = () => format(new Date(), "yyyy-MM-dd");
 
 export const checkExpired = (dueDate) => {
-  //if dueDate empty then return false
-  if (dueDate === "") return false;
-  return isBefore(new Date(dueDate), new Date());
+  if (!dueDate) return false; // If dueDate is empty or falsy, return false
+  return isBefore(parseISO(dueDate), new Date());
 };

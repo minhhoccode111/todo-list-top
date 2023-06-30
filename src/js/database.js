@@ -4,10 +4,25 @@ export const set = (variable, name) => {
   if (variable === null) {
     localStorage.removeItem(name);
   } else {
-    localStorage.setItem(name, JSON.stringify(variable));
+    try {
+      localStorage.setItem(name, JSON.stringify(variable));
+    } catch (error) {
+      // Handle localStorage quota exceeded or other errors
+      console.error("Error while storing data in localStorage:", error);
+    }
   }
 };
 
-export const get = (name) => JSON.parse(localStorage.getItem(name));
+export const get = (name) => {
+  try {
+    return JSON.parse(localStorage.getItem(name));
+  } catch (error) {
+    // Handle invalid JSON or other errors
+    console.error("Error while retrieving data from localStorage:", error);
+    return null;
+  }
+};
 
-export const check = (name) => localStorage.getItem(name) !== null;
+export const check = (name) => {
+  return localStorage.getItem(name) !== null;
+};

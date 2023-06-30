@@ -17,7 +17,7 @@ export function Todo(
   const id = getId();
   const createdDate = today();
   const lastModified = now();
-  let isTimeExpired = checkExpired(dueDate);
+  const isTimeExpired = checkExpired(dueDate);
 
   return Object.assign(Object.create(Prototype.todo), {
     id,
@@ -39,7 +39,7 @@ export function Note(title, detail, dueDate, hasDueDate) {
   const id = getId();
   const createdDate = today();
   const lastModified = now();
-  let isTimeExpired = checkExpired(dueDate);
+  const isTimeExpired = checkExpired(dueDate);
   return Object.assign(Object.create(Prototype.note), {
     id,
     title,
@@ -68,7 +68,7 @@ export function Project(title, detail, dueDate, hasDueDate) {
   const id = getId();
   const createdDate = today();
   const lastModified = now();
-  let isTimeExpired = checkExpired(dueDate);
+  const isTimeExpired = checkExpired(dueDate);
   return Object.assign(Object.create(Prototype.project), {
     id,
     title,

@@ -19,6 +19,7 @@ export const load = () => {
   //is the created date of the diary is yesterday, then add it to 'diary' project in data, then update data to database, then create new Diary for today, then update that to 'diary' in database
   if (isBefore(new Date(obj.createdDate), new Date())) {
     Data.add(obj, "diary");
+    // Data.set()
     obj = Diary("", "");
     // set();
   }
@@ -59,6 +60,9 @@ export const typeInput = (obj) => {
   dayInput.contentEditable = true;
   dayInput.spellcheck = false;
   dayInput.textContent = obj.day;
+  dayInput.addEventListener("input", (event) => {
+    day(event.target.textContent);
+  });
   formDay.appendChild(dayInput);
 
   const formNight = document.createElement("div");
@@ -77,6 +81,9 @@ export const typeInput = (obj) => {
   nightInput.contentEditable = true;
   nightInput.spellcheck = false;
   nightInput.textContent = obj.night;
+  nightInput.addEventListener("input", (event) => {
+    night(event.target.textContent);
+  });
   formNight.appendChild(nightInput);
 
   return container;

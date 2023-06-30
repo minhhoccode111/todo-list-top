@@ -11,152 +11,148 @@ import { listenForInfo } from "./info.js";
 export const main = document.getElementById("main");
 export const nav = document.getElementById("aside__nav");
 
-export const projectItems = (name) => {
-  let data = Data.get();
-  main.innerHTML = "";
-  if (name === "all") {
-    for (const prop in data) {
-      if (prop === "project" || prop === "note" || prop === "diary") continue;
-      for (let i = 0; i < data[prop].length; i++) {
-        let item = data[prop][i];
-        main.appendChild(todo(item, prop, i));
-      }
-    }
+function todoItemToggleDone(obj, buttonDone, div) {
+  if (obj.isDone) {
+    obj.isDone = false;
+    // Data.set()
+    buttonDone.innerHTML = obj.htmlDone();
+    div.classList.remove("done");
   } else {
-    for (let i = 0; i < data[name].length; i++) {
-      let item = data[name][i];
-      if (name === "diary" && i === 0) {
-        main.appendChild(Diary.typeInput());
-        main.appendChild(diary(item, name, i));
-        continue;
-      }
-      if (name === "diary") {
-        main.appendChild(diary(item, name, i));
-      } else if (name === "note") {
-        main.appendChild(note(item, name, i));
-      } else if (name === "project") {
-        main.appendChild(project(item, name, i));
-      } else {
-        main.appendChild(todo(item, name, i));
-      }
-    }
+    obj.isDone = true;
+    // Data.set()
+    buttonDone.innerHTML = obj.htmlDone();
+    div.classList.add("done");
   }
-};
+}
+
+function todoItemInfoClicked(obj) {}
+
+function todoItemDeleteClicked(projectName, index) {
+  Data.projects.get(projectName).splice(index, 1);
+  // Data.set()
+}
+
+function todoItemEditClicked(obj, projectName, index) {
+  listenForEdit(obj, projectName, index);
+  // Data.set()
+}
+
+function noteItemInputEdited(obj, property, value) {
+  obj[property] = value;
+  //Data.set()
+}
+
+function noteItemDeleteClicked(index) {
+  Data.projects.get("note").splice(index, 1);
+  // Data.set()
+}
+
+function noteItemInfoClicked(obj) {}
 
 function todo(obj, projectName, index) {
+  const { id, title, dueDate, isDone, priority } = obj;
   let div = document.createElement("div");
-  div.className = "todo__item" + " " + obj.classDone() + " " + obj.priority;
-  div.setAttribute("data-id", obj.id);
+  div.className = "todo__item" + " " + obj.classDone() + " " + priority;
+  div.setAttribute("data-id", id);
 
   let h3 = document.createElement("h3");
   h3.className = "todo__item__title";
-  h3.textContent = obj.title;
+  h3.textContent = title;
+  div.appendChild(h3);
 
   let em = document.createElement("em");
   em.className = "todo__item__date";
-  em.textContent = obj.dueDate;
+  em.textContent = dueDate;
+  div.appendChild(em);
 
   let buttonDone = document.createElement("button");
   buttonDone.className = "todo__item__done";
   buttonDone.innerHTML = obj.htmlDone();
   buttonDone.addEventListener("click", () => {
-    if (obj.isDone) {
-      obj.isDone = false;
-      buttonDone.innerHTML = obj.htmlDone();
-      div.classList.remove("done");
-      // Data.set();
-    } else {
-      obj.isDone = true;
-      buttonDone.innerHTML = obj.htmlDone();
-      div.classList.add("done");
-      // Data.set();
-    }
+    todoItemToggleDone(obj, buttonDone, div);
   });
+  div.appendChild(buttonDone);
 
   let buttonInfo = document.createElement("button");
   buttonInfo.className = "todo__item__info info";
   buttonInfo.innerHTML = "?";
   buttonInfo.addEventListener("click", () => {
-    listenForInfo(obj);
+    todoItemInfoClicked(obj);
   });
+  div.appendChild(buttonInfo);
 
   let buttonDel = document.createElement("button");
   buttonDel.className = "todo__item__del del";
   buttonDel.innerHTML = "X";
   buttonDel.addEventListener("click", (e) => {
     buttonDel.parentNode.remove();
-    Data.get()[projectName].splice(index, 1);
+    todoItemDeleteClicked(projectName, index);
   });
+  div.appendChild(buttonDel);
 
   let buttonEdit = document.createElement("button");
   buttonEdit.className = "todo__item__edit edit";
   buttonEdit.innerHTML = "...";
-  // buttonEdit.addEventListener("click", (e) => {
-  //   let hasChanged = listenForEdit(obj, projectName, index);
-  //   if (hasChanged) {
-  //     if (obj.isDone) {
-  //       div.classList.remove("done");
-  //     } else {
-  //       div.classList.add("done");
-  //     }
-  //     buttonDone.innerHTML = obj.htmlDone();
-  //     div.className = "todo__item" + " " + obj.classDone() + " " + obj.priority;
-  //     console.dir(h3.textContent);
-  //     console.dir(obj.title);
-
-  //     h3.textContent = obj.title;
-  //     em.textContent = obj.dueDate;
-  //     // Data.set();
-  //   }
-  // });
-
-  div.appendChild(h3);
-  div.appendChild(em);
-  div.appendChild(buttonDone);
   div.appendChild(buttonEdit);
-  div.appendChild(buttonInfo);
-  div.appendChild(buttonDel);
+  buttonEdit.addEventListener("click", (e) => {
+    todoItemEditClicked(obj, projectName, index);
+  });
 
   return div;
 }
-function note(obj) {
-  const container = document.createElement("div");
-  container.classList.add("note__item");
-  container.dataset.id = obj.id;
+function note(obj, index) {
+  const { id, title, lastModified, detail } = obj;
 
-  const header = document.createElement("div");
-  header.classList.add("note__item__header");
-  container.appendChild(header);
+  const divNoteItem = document.createElement("div");
+  divNoteItem.className = "note__item";
+  divNoteItem.setAttribute("data-id", id);
 
-  const title = document.createElement("div");
-  title.classList.add("note__item__title");
-  title.contentEditable = true;
-  title.spellcheck = false;
-  title.textContent = obj.title;
-  header.appendChild(title);
+  const divNoteHeader = document.createElement("div");
+  divNoteHeader.className = "note__item__header";
+  divNoteItem.appendChild(divNoteHeader);
 
-  const lastModified = document.createElement("em");
-  lastModified.textContent = `Last modified: ${obj.lastModified}`;
-  header.appendChild(lastModified);
+  const divNoteTitle = document.createElement("div");
+  divNoteTitle.className = "note__item__title";
+  divNoteTitle.contentEditable = true;
+  divNoteTitle.spellcheck = false;
+  divNoteTitle.textContent = title;
+  divNoteTitle.addEventListener("input", (e) => {
+    noteItemInputEdited(obj, "title", e.target.textContent);
+  });
+  divNoteHeader.appendChild(divNoteTitle);
 
-  const infoButton = document.createElement("button");
-  infoButton.classList.add("note__item__info", "info");
-  infoButton.textContent = "?";
-  header.appendChild(infoButton);
+  const emLastModified = document.createElement("em");
+  emLastModified.textContent = lastModified;
+  divNoteHeader.appendChild(emLastModified);
 
-  const deleteButton = document.createElement("button");
-  deleteButton.classList.add("note__item__del", "del");
-  deleteButton.textContent = "X";
-  header.appendChild(deleteButton);
+  const buttonInfo = document.createElement("button");
+  buttonInfo.className = "note__item__info info";
+  buttonInfo.textContent = "?";
+  buttonInfo.addEventListener("click", () => {
+    noteItemInfoClicked(obj);
+  });
+  divNoteHeader.appendChild(buttonInfo);
 
-  const detail = document.createElement("div");
-  detail.classList.add("note__item__detail");
-  detail.contentEditable = true;
-  detail.spellcheck = false;
-  detail.textContent = obj.detail;
-  container.appendChild(detail);
+  const buttonDel = document.createElement("button");
+  buttonDel.className = "note__item__del del";
+  buttonDel.textContent = "X";
+  buttonDel.addEventListener("click", () => {
+    divNoteItem.remove();
+    noteItemDeleteClicked(index);
+  });
+  divNoteHeader.appendChild(buttonDel);
 
-  return container;
+  const divNoteDetail = document.createElement("div");
+  divNoteDetail.className = "note__item__detail";
+  divNoteDetail.contentEditable = true;
+  divNoteDetail.spellcheck = false;
+  divNoteDetail.textContent = detail;
+  divNoteDetail.addEventListener("input", (e) => {
+    noteItemInputEdited(obj, "detail", e.target.textContent);
+  });
+  divNoteItem.appendChild(divNoteDetail);
+
+  return divNoteItem;
 }
 
 function diary(obj) {
@@ -264,3 +260,33 @@ function createNavBtn(name, attr, length) {
 
   return container;
 }
+
+export const projectItems = (name) => {
+  let items = Data.projects.get(name);
+  let data = Data.get();
+  main.innerHTML = "";
+  if (name === "all") {
+    for (const prop in data) {
+      if (["project", "note", "diary"].includes(prop)) continue;
+      for (let i = 0; i < data[prop].length; i++) {
+        main.appendChild(todo(data[prop][i], prop, i));
+      }
+    }
+  } else {
+    for (let i = 0; i < items.length; i++) {
+      let item = items[i];
+      if (name === "diary" && i === 0) {
+        main.appendChild(Diary.typeInput());
+      }
+      if (name === "diary") {
+        main.appendChild(diary(item, i));
+      } else if (name === "note") {
+        main.appendChild(note(item, i));
+      } else if (name === "project") {
+        main.appendChild(project(item, i));
+      } else {
+        main.appendChild(todo(item, name, i));
+      }
+    }
+  }
+};

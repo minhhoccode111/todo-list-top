@@ -211,12 +211,11 @@ export const add = (obj, project) => {
 };
 
 export const del = (project, id) => {
-  for (let i = 0; i < date[project].length; i++) {
-    if (data[project][i].id === id) {
-      data[project].splice(i, 1);
-      // set();
-      return;
-    }
+  const projectData = data[project];
+  const index = projectData.findIndex((todo) => (todo.id = id));
+  if (index > -1) {
+    projectData.splice(index, 1);
+    set();
   }
 };
 

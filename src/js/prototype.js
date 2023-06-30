@@ -4,59 +4,63 @@ import { now, checkExpired } from "./fns.js";
 
 // ******************** MODULE PROTOTYPE OF FACTORIES FUNCTION ********************
 const proto = {
-  get: function (property) {
+  get(property) {
     return this[property] || "";
   },
-  setLastModified: function () {
+  setLastModified() {
     this.lastModified = now();
   },
-  setExpired: function () {
+  setExpired() {
     this.isTimeExpired = checkExpired(this.dueDate);
   },
 };
-export const todo = {
-  constructor: "Todo",
-  classDone: function () {
+
+export const todo = Object.assign(Object.create(proto), {
+  type: "todo",
+  classDone() {
     return this.isDone ? "done" : "";
   },
-  htmlDone: function () {
+  htmlDone() {
     return this.isDone ? "&#x2713;" : "";
   },
-};
-export const note = {
+});
+
+export const note = Object.assign(Object.create(proto), {
   project: "note",
-  constructor: "Note",
-};
-export const diary = {
+  type: "note",
+});
+
+export const diary = Object.assign(Object.create(proto), {
   isOpened: false,
   project: "diary",
-  constructor: "Diary",
-  htmlOpened: function () {
+  type: "diary",
+  htmlOpened() {
     return this.isOpened ? "open" : "";
   },
-};
-export const project = {
+});
+
+export const project = Object.assign(Object.create(proto), {
   project: "project",
-  constructor: "Project",
-};
-Object.setPrototypeOf(todo, proto);
-Object.setPrototypeOf(note, proto);
-Object.setPrototypeOf(diary, proto);
-Object.setPrototypeOf(project, proto);
+  type: "project",
+});
+
 export const restore = (data) => {
   for (let state in data) {
-    for (let i = 0; i < data[state].length; i++) {
-      let obj = data[state][i];
-      if (state === "note") {
-        Object.setPrototypeOf(obj, note);
-      } else if (state === "project") {
-        Object.setPrototypeOf(obj, project);
-      } else if (state === "diary") {
-        Object.setPrototypeOf(obj, diary);
-      } else {
-        Object.setPrototypeOf(obj, todo);
+    for (let obj of data[state]) {
+      switch (state) {
+        case "note":
+          Object.setPrototypeOf(obj, note);
+          break;
+        case "project":
+          Object.setPrototypeOf(obj, project);
+          break;
+        case "diary":
+          Object.setPrototypeOf(obj, diary);
+          break;
+        default:
+          Object.setPrototypeOf(obj, todo);
+          break;
       }
     }
   }
-  return data;
 };
