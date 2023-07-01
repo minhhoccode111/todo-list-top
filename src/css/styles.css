@@ -9,8 +9,6 @@
   margin: 0;
   box-sizing: border-box;
 }
-html {
-}
 body {
   font-size: 2rem;
   height: 100%;
@@ -19,14 +17,6 @@ ul,
 ol,
 li {
   list-style-type: none;
-}
-a {
-}
-h1 {
-}
-h2 {
-}
-h3 {
 }
 button {
   cursor: pointer;
@@ -64,10 +54,6 @@ button {
 }
 #button__plus:hover {
   background-color: red;
-}
-button.edit {
-}
-button.info {
 }
 button.del {
   color: white;

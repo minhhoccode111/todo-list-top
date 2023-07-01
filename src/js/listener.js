@@ -39,7 +39,9 @@ window.addEventListener("DOMContentLoaded", () => {
   Dialogs.listenForCreate("todo");
   Dialogs.listenForCreate("note");
   Dialogs.listenForCreate("project");
-  //load data
+  //data init of the app when user open the first time
+  Data.init();
+  //load data from database
   Id.load();
   Data.load();
   Diary.load();

@@ -67,7 +67,8 @@ modifyObject(originalObject);
 console.log(originalObject); // { property: 'new value', newProperty: 'added value' }
 ```
 
-- Use `isYesterday` to check if the date is yesterday instead of `isBefore`
+- Use `isYesterday` to check if the date is yesterday instead of `isBefore` because `isBefore` checking moment, mean that if it will create new diary element when we open app again (because the last moment is before this moment) no matter what.
+- Actually we should use `isBefore` with `startOfToday` to make sure the condition check in diary work correctly. Because if we use `isYesterday` but we open app after 2 days then we'll have unexpected behavior
 - Use `const div = document.createElement('div')` to create element in a function in JavaScript and when we `return div` back from that function, we must append it to the parent element with `parent.appendChild(div)`. I think this is a better way to create element with javaScript instead of just return a string element and assign it to parent innerHTML (e.g. `return "<div></div>"`, `parent.innerHTML="<div></div>"`) because at the same time inside function creation, we can `addEventListener` to the element we just created with `document.createElement('div')` and don't have to re-select it like assign innerHTML does.
 
 ```javascript
