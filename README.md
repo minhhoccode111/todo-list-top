@@ -25,7 +25,7 @@
 - when we compare dates with FNS library, if we pass is that function an empty string then it gonna throw an error NOT A FALSE. So we must double check the date we pass in first `const isTimeExpired = dueDate!=='' && isBefore(dueDate, createdDate);`
 - 'blur' event occur when a button, a link, an input, or a div contenteditable='true'...etc stop being `focus`
 - By combining the `blur` event with a suitable delay or timeout of `input` event, we can determine when the user has stopped typing and trigger the creation of an object (of update it).
-- About `parseISO()` method in date-fns library, if we pass is a string date argument e.g. "2023-6-25" then it work just fine. `fns.parseISO("2023-6-25")` but if we want to pass a `new Date()` javaScript object to it, then we have to format it first so that it can work correctly `fns.parseISO(fns.format(new Date()))`
+- About `parseISO()` method in date-fns library, if we pass is a string date argument e.g. "2023-6-25" then it work just fine. `fns.parseISO("2023-6-25")` but if we want to pass a `new Date()` javaScript object to it, then we have to format it first so that it can work correctly `fns.parseISO(fns.format(new Date(),"yyyy-MM-dd"))`
 - Inside a prototype object of an object, `this` is point to that object when object use that method, but if that method create and return html elements and we want to bind events listener to elements in that html while creating them inside prototype's method at the same time, then normally `this` inside `addEventListener` is point to the element we are listening but if we want `this` to point to the object which is using the prototype's method then we have 2 approach:
   1. Using arrow function: because arrow function inherit the `this` value from their surrounding scope `element.addEventListener('click',()=>{console.log(this)});//'this' refers to the object using prototype method`
   2. Using closure: create a variable that references the object and use it inside the event listener call back
@@ -38,6 +38,7 @@
 - `format()` take a Date object and a format we want then return a time stamp or a string date format
 - `parseISO()` take date string and return a Date object
 - `isBefore()` take both 2 arguments Date objects
+- `endOfWeek`, `endOfMonth`, `endOfYear`, `sub` ...etc
 - compare `undefined` with `null` E.g.
   ```javascript
   let a = null;
@@ -65,6 +66,26 @@ console.log(originalObject); // { property: 'original value' }
 modifyObject(originalObject);
 console.log(originalObject); // { property: 'new value', newProperty: 'added value' }
 ```
+
+- Use `isYesterday` to check if the date is yesterday instead of `isBefore`
+- Use `const div = document.createElement('div')` to create element in a function in JavaScript and when we `return div` back from that function, we must append it to the parent element with `parent.appendChild(div)`. I think this is a better way to create element with javaScript instead of just return a string element and assign it to parent innerHTML (e.g. `return "<div></div>"`, `parent.innerHTML="<div></div>"`) because at the same time inside function creation, we can `addEventListener` to the element we just created with `document.createElement('div')` and don't have to re-select it like assign innerHTML does.
+
+```javascript
+//this is better
+const button = document.createElement("button");
+button.addEventListener("click", (e) => {
+  console.log(e.target.parentNode);
+});
+parentElement.appendChild(button);
+//this is worse
+parentElement.innerHTML = `<button></button>`;
+const button = parentElement.querySelector("button");
+button.addEventListener("click", (e) => {
+  console.log(e.target.parentNode);
+});
+```
+
+- Use `textContent` instead of `innerHTML` with `div contenteditable='true'` (or any input type) to prevent unexpected behavior and security of website.
 
 ## Requirements from The Odin Project:
 

@@ -62,6 +62,9 @@ button {
   right: 2rem;
   z-index: 90;
 }
+#button__plus:hover {
+  background-color: red;
+}
 button.edit {
 }
 button.info {

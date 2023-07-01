@@ -7,6 +7,17 @@ import * as Data from "./data.js";
 import * as Id from "./id.js";
 import * as Diary from "./diary.js";
 
+//show about section
+const ofAbout = document.getElementById("of__about");
+const aboutClose = document.getElementById("about__close");
+const aboutOpen = document.getElementById("header__about");
+aboutOpen.addEventListener("click", (e) => {
+  ofAbout.show();
+});
+aboutClose.addEventListener("click", (e) => {
+  ofAbout.close();
+});
+
 //Show forms base on Current
 export const buttonPlus = document.getElementById("button__plus");
 const ofTodo = document.getElementById("of__todo");
