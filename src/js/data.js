@@ -3,6 +3,7 @@
 import * as database from "./database.js";
 import * as Prototype from "./prototype.js";
 import * as Create from "./create.js";
+import * as Fns from "date-fns";
 
 let data = {
   all: [
@@ -207,12 +208,12 @@ export const get = () => data;
 
 export const add = (obj, project) => {
   data[project].push(obj);
-  // set();
+  set();
 };
 
 export const del = (project, index) => {
   data[project].splice(index, 1);
-  // set();
+  set();
 };
 
 const getAllTodoProject = () => {
@@ -229,12 +230,12 @@ const addAProjectToData = (name) => {
     return alert("That project is already existed!");
   }
   data[name] = [];
-  // set();
+  set();
 };
 
 const delAProjectFromData = (name) => {
   delete data[name];
-  // set();
+  set();
 };
 
 const getProjectItems = (name) => {
@@ -242,14 +243,28 @@ const getProjectItems = (name) => {
 };
 
 const getProjectLength = (name) => {
-  //FIXME write this function to only count isDone: false todo items
+  if (["note", "diary", "project"].includes(name)) return data[name].length;
+
   if (name === "all") {
     return getAllTodoProject().reduce(
-      (total, current) => total + data[current].length,
+      (total, current) =>
+        total +
+        data[current].reduce((t, c) => {
+          if (c.isDone) {
+            return t;
+          } else {
+            return t + 1;
+          }
+        }, 0),
       0
     );
   }
-  if (["note", "diary", "project"].includes(name)) return data[name].length;
+  return data[name].reduce((total, current) => {
+    if (current.isDone) {
+      return total;
+    }
+    return total + 1;
+  }, 0);
 };
 
 const getCustomProjects = () => data.project;

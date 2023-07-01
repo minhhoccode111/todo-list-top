@@ -1,6 +1,7 @@
 //this is noteElement.js
 import { displayInfo } from "./info.js";
 import * as Data from "./data.js";
+import * as Display from "./display.js";
 
 export function note(obj) {
   const { id, title, lastModified, detail } = obj;
@@ -60,10 +61,12 @@ export function note(obj) {
 
 function noteEditedInputs(obj, property, value) {
   obj[property] = value;
-  //Data.set()
+  obj.setLastModified();
+  Data.set();
 }
 
 function noteClickedDelete(obj) {
   const index = Data.projects.get("note").indexOf(obj);
   Data.del("note", index);
+  Display.updateSpan();
 }

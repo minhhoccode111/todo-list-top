@@ -3,7 +3,7 @@
 import { Diary } from "./create.js";
 import * as database from "./database.js";
 import * as Prototype from "./prototype.js";
-import { isBefore } from "date-fns";
+import { isYesterday } from "date-fns";
 import * as Data from "./data.js";
 
 let obj = Diary("", "");
@@ -17,22 +17,22 @@ export const load = () => {
     obj = Object.assign(Object.create(Prototype.diary), database.get("diary"));
   }
   //is the created date of the diary is yesterday, then add it to 'diary' project in data, then update data to database, then create new Diary for today, then update that to 'diary' in database
-  if (isBefore(new Date(obj.createdDate), new Date())) {
+  if (isYesterday(new Date(obj.createdDate), new Date())) {
     Data.add(obj, "diary");
-    // Data.set()
+    Data.set();
     obj = Diary("", "");
-    // set();
+    set();
   }
 };
 
 export const day = (v) => {
   obj.day = v;
-  // set();
+  set();
 };
 
 export const night = (v) => {
   obj.night = v;
-  // set();
+  set();
 };
 
 export const typeInput = (obj) => {
@@ -61,6 +61,7 @@ export const typeInput = (obj) => {
   dayInput.spellcheck = false;
   dayInput.textContent = obj.day;
   dayInput.addEventListener("input", (event) => {
+    obj.setLastModified();
     day(event.target.textContent);
   });
   formDay.appendChild(dayInput);
@@ -82,6 +83,7 @@ export const typeInput = (obj) => {
   nightInput.spellcheck = false;
   nightInput.textContent = obj.night;
   nightInput.addEventListener("input", (event) => {
+    obj.setLastModified();
     night(event.target.textContent);
   });
   formNight.appendChild(nightInput);

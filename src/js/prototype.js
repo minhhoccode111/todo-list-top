@@ -29,7 +29,6 @@ export const note = Object.assign(Object.create(proto), {
 });
 
 export const diary = Object.assign(Object.create(proto), {
-  isOpened: false,
   project: "diary",
   htmlOpened() {
     return this.isOpened ? "open" : "";
@@ -59,4 +58,5 @@ export const restore = (data) => {
       }
     }
   }
+  return data;
 };

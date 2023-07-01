@@ -2,6 +2,7 @@
 import { displayInfo } from "./info.js";
 import * as Data from "./data.js";
 import { nav } from "./display.js";
+import * as Display from "./display.js";
 
 export function project(obj) {
   let { id, title } = obj;
@@ -45,6 +46,7 @@ function projectClickedDelete(obj, name) {
   Data.del("project", index);
   Data.projects.del(name);
   nav.querySelector(`button[data-name="${name}"]`).parentNode.remove();
+  Display.updateSpan();
 }
 
 function projectClickedLink(name) {

@@ -106,9 +106,10 @@ console.log(originalObject); // { property: 'new value', newProperty: 'added val
 - Sort by createdDate
 - Sort by dueDate
 - Sort by done
-- Sort by isTimeExpired
+- Sort by isTimeExpired and display item that is outdated so that user know
 - Add Note project to write notes on different app state(not just Todo project)
 - Implement an efficiency way to do stuffs without loop and loop and loop and forever loop (I mean loop too much!)
+- FIX BRUTALLY LOOP THROUGH EVERY THING
 
 ## Live Demos
 

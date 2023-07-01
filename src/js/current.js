@@ -7,7 +7,7 @@ export const get = () => current;
 
 export const set = (v) => {
   current = v;
-  // database.set(current,'current')
+  database.set(current, "current");
 };
 
 export const load = () => {

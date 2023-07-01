@@ -1,6 +1,8 @@
 //this is todoElement.js
 import { displayInfo } from "./info.js";
 import * as Data from "./data.js";
+import * as Display from "./display.js";
+import * as Edit from "./edit.js";
 
 export function todo(obj, projectName) {
   const { id, title, dueDate, priority } = obj;
@@ -42,7 +44,11 @@ export function todo(obj, projectName) {
   buttonEdit.className = "todo__item__edit edit";
   buttonEdit.innerHTML = "...";
   buttonEdit.addEventListener("click", (e) => {
-    todoClickedEdit(obj, projectName);
+    // todoClickedEdit(obj, projectName, div);
+    Edit.setObjCurrent(obj);
+    Edit.setElementParent(div);
+    Edit.fillEditInputs();
+    Edit.dialog.show();
   });
 
   div.appendChild(h3);
@@ -57,23 +63,23 @@ export function todo(obj, projectName) {
 function todoClickedDelete(obj, projectName) {
   const index = Data.projects.get(projectName).indexOf(obj);
   Data.del(projectName, index);
-}
-
-function todoClickedEdit(obj, projectName) {
-  listenForEdit(obj, projectName);
-  // Data.set()
+  Display.updateSpan();
 }
 
 function todoClickedDone(obj, buttonDone, div) {
   if (obj.isDone) {
     obj.isDone = false;
-    // Data.set()
+    obj.setLastModified();
+    Data.set();
     buttonDone.innerHTML = obj.htmlDone();
+    Display.updateSpan();
     div.classList.remove("done");
   } else {
     obj.isDone = true;
-    // Data.set()
+    obj.setLastModified();
+    Data.set();
     buttonDone.innerHTML = obj.htmlDone();
+    Display.updateSpan();
     div.classList.add("done");
   }
 }

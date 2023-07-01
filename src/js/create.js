@@ -60,11 +60,13 @@ export function Diary(day, night) {
   const createdDate = today();
   const lastModified = now();
   const type = "diary";
+  const isOpened = false;
 
   return Object.assign(Object.create(Prototype.diary), {
     day,
     type,
     night,
+    isOpened,
     createdDate,
     lastModified,
   });

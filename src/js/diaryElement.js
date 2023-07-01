@@ -1,11 +1,17 @@
+//this is diaryElement.js
+import * as Data from "./data.js";
+
 export function diary(obj) {
-  let { opened, createdDate, day, night } = obj;
+  let { isOpened, createdDate, day, night } = obj;
   const container = document.createElement("div");
   container.classList.add("diary__item");
 
   const details = document.createElement("details");
   details.classList.add("diary__item__details");
-  details.open = opened;
+  details.open = isOpened;
+  details.addEventListener("toggle", (e) => {
+    diaryToggledDetails(obj);
+  });
   container.appendChild(details);
 
   const summary = document.createElement("summary");
@@ -28,4 +34,13 @@ export function diary(obj) {
   details.appendChild(nightParagraph);
 
   return container;
+}
+
+function diaryToggledDetails(o) {
+  if (o.isOpened) {
+    o.isOpened = false;
+  } else {
+    o.isOpened = true;
+  }
+  Data.set();
 }

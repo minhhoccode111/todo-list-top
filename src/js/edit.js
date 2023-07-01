@@ -1,10 +1,20 @@
 //this is edit.js
 import * as Data from "./data.js";
-import * as Display from "./display.js";
-import * as Current from "./current.js";
 
 //######################## Dialogs to take inputs to edit Obj in Data #########################/
-const dialog = document.getElementById(`of__edit`);
+let objCurrent;
+
+let elementParent;
+
+export const setElementParent = (v) => (elementParent = v);
+
+export const getElementParent = () => elementParent;
+
+export const setObjCurrent = (o) => (objCurrent = o);
+
+export const getObjCurrent = () => objCurrent;
+
+export const dialog = document.getElementById(`of__edit`);
 const dueDateInput = document.getElementById(`dueDate__of__edit`);
 const inputs = document.querySelectorAll(`input[name="hasDueDate__of__edit"]`);
 inputs.forEach((input) => {
@@ -29,13 +39,17 @@ const cancel = document.querySelector(
   `input#cancel__of__edit[value="Cancel"][type="button"]`
 );
 
-export function listenForEdit(objToEdit, branch, index) {
-  let changed = false;
-  dialog.show();
-  title.value = objToEdit.title;
-  detail.value = objToEdit.detail;
-  dueDate.value = objToEdit.dueDate;
-  if (objToEdit.hasDueDate) {
+cancel.addEventListener("click", () => {
+  dialog.close();
+  form.reset();
+  dueDateInput.disabled = true;
+});
+
+export function fillEditInputs() {
+  title.value = objCurrent.title;
+  detail.value = objCurrent.detail;
+  dueDate.value = objCurrent.dueDate;
+  if (objCurrent.hasDueDate) {
     document.querySelector(
       `input[name="hasDueDate__of__edit"][value="yes"]`
     ).checked = true;
@@ -45,62 +59,52 @@ export function listenForEdit(objToEdit, branch, index) {
     ).checked = true;
   }
   document.querySelector(
-    `input[name="priority__of__edit"][value="${objToEdit.priority}"]`
+    `input[name="priority__of__edit"][value="${objCurrent.priority}"]`
   ).checked = true;
   document.querySelector(
-    `input[name="isDone__of__edit"][value="${objToEdit.isDone}"]`
+    `input[name="isDone__of__edit"][value="${objCurrent.isDone}"]`
   ).checked = true;
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    objToEdit.title = title.value;
-    objToEdit.detail = detail.value;
-    objToEdit.dueDate = dueDate.value;
-    objToEdit.hasDueDate =
-      document.querySelector(`input[name="hasDueDate__of__edit"]:checked`)
-        .value === "yes"
-        ? true
-        : false;
-    objToEdit.priority = document.querySelector(
-      `input[name="priority__of__edit"]:checked`
-    ).value;
-    objToEdit.isDone =
-      document.querySelector(`input[name="isDone__of__edit"]:checked`).value ===
-      "true"
-        ? true
-        : false;
-    console.dir(objToEdit);
-
-    updateTodoItem(objToEdit);
-
-    //disabled dueDateInput again
-    dueDateInput.disabled = true;
-
-    // Reset the form
-    form.reset();
-    dialog.close();
-    changed = true;
-  });
-  cancel.addEventListener("click", () => {
-    dialog.close();
-    form.reset();
-    dueDateInput.disabled = true;
-    form.onsubmit = null;
-  });
-  form.onsubmit = null;
-  return changed;
 }
 
-function updateTodoItem(obj) {
-  const todoItem = document.querySelector(`div[data-id="${obj.id}"]`);
-  const h3 = todoItem.querySelector(".todo__item__title");
-  const em = todoItem.querySelector(".todo__item__date");
-  const buttonDone = todoItem.querySelector(".todo__item__done");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  objCurrent.title = title.value;
+  objCurrent.detail = detail.value;
+  objCurrent.dueDate = dueDate.value;
+  objCurrent.hasDueDate =
+    document.querySelector(`input[name="hasDueDate__of__edit"]:checked`)
+      .value === "yes"
+      ? true
+      : false;
+  objCurrent.priority = document.querySelector(
+    `input[name="priority__of__edit"]:checked`
+  ).value;
+  objCurrent.isDone =
+    document.querySelector(`input[name="isDone__of__edit"]:checked`).value ===
+    "true"
+      ? true
+      : false;
+  console.dir(objCurrent);
+  objCurrent.setLastModified();
+  Data.set();
+
+  updateTodoItem(objCurrent, elementParent);
+
+  // Reset the form
+  dueDateInput.disabled = true;
+  form.reset();
+  dialog.close();
+});
+
+function updateTodoItem(obj, elementParent) {
+  const h3 = elementParent.querySelector(".todo__item__title");
+  const em = elementParent.querySelector(".todo__item__date");
+  const buttonDone = elementParent.querySelector(".todo__item__done");
 
   // Update the necessary elements with the new values
   h3.textContent = obj.title;
   em.textContent = obj.dueDate;
   buttonDone.innerHTML = obj.htmlDone();
-  todoItem.className =
+  elementParent.className =
     "todo__item" + " " + obj.classDone() + " " + obj.priority;
 }

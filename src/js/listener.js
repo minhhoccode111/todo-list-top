@@ -4,10 +4,8 @@ import * as Dialogs from "./dialogs";
 import * as Current from "./current.js";
 import * as Display from "./display.js";
 import * as Data from "./data.js";
-
-export const refresh = () => {
-  Display.asideBtns(Data.get());
-};
+import * as Id from "./id.js";
+import * as Diary from "./diary.js";
 
 //Show forms base on Current
 export const buttonPlus = document.getElementById("button__plus");
@@ -31,11 +29,16 @@ window.addEventListener("DOMContentLoaded", () => {
   Dialogs.listenForCreate("note");
   Dialogs.listenForCreate("project");
   //load data
-  // Id.load();
-  // Data.load();
-  // Diary.load();
-  // Current.load()
-  Display.customProjectBtns(Data.projects.custom());
+  Id.load();
+  Data.load();
+  Diary.load();
+  Current.load();
+  //hide button plus
+  if (Current.get() === "diary") {
+    buttonPlus.classList.add("hidden");
+  }
+  //init display
+  Display.customProjectBtns(Data.projects.get("project"));
   Display.projectItems(Current.get());
   Display.updateSpan();
 });
