@@ -25,6 +25,16 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: ["file-loader"],
       },
+      {
+        test: /\.ico$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]",
+            outputPath: "images/", // or the appropriate output directory
+          },
+        },
+      },
     ],
   },
 };

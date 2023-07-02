@@ -1,5 +1,8 @@
 //this is index.js
 
+//import icon
+import "./../img/greenCheck.ico";
+
 // import css
 import "./../css/responsive.css";
 import "./../css/animation.css";
