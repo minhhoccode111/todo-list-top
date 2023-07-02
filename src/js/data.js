@@ -3,15 +3,7 @@
 import * as database from "./database.js";
 import * as Prototype from "./prototype.js";
 import * as Create from "./create.js";
-import {
-  sub,
-  endOfWeek,
-  endOfMonth,
-  endOfYear,
-  format,
-  parseISO,
-} from "date-fns";
-import { diary } from "./diaryElement.js";
+import { sub, endOfWeek, endOfMonth, endOfYear, format } from "date-fns";
 
 const today = new Date();
 const thisDay = format(new Date(), "yyyy-MM-dd");
