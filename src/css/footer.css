@@ -3,11 +3,13 @@
   grid-column-end: 3;
   text-align: center;
   padding: 1rem;
-  background-color: lightblue;
+  background-color: rgb(78, 127, 143);
 }
 
 #footer__words {
   font-size: 2.4rem;
+  color: rgb(255, 255, 226);
 }
 #footer__link {
+  color: rgb(255, 255, 226);
 }

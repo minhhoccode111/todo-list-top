@@ -1,7 +1,7 @@
 #header {
   grid-column-start: 1;
   grid-column-end: 3;
-  background-color: lightblue;
+  background-color: rgb(78, 127, 143);
   padding: 1rem;
   border-bottom: 1px solid #000;
   display: flex;
@@ -13,12 +13,13 @@
   cursor: pointer;
   font-size: 3.2rem;
   font-weight: bold;
+  color: rgb(255, 255, 226);
 }
 #header__about {
   border: 0 solid #000;
   border-radius: 2rem;
   background-color: transparent;
-  color: white;
+  color: rgb(255, 255, 226);
   font-weight: bold;
   text-decoration: underline;
   padding: 1rem;

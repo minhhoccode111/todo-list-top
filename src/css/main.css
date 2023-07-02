@@ -1,28 +1,30 @@
 #main {
   overflow-y: auto;
   font-size: 2rem;
-  padding: 1rem 0 7.6rem;
+  padding: 1rem 1rem 7.6rem;
+  background-color: #ababab;
 }
 .todo__item {
   display: flex;
   align-items: center;
   gap: 0.4rem;
   flex-flow: row nowrap;
-  background-color: lightgrey;
+  background-color: #bfbfbf;
   margin: 0.8rem 0.4rem;
   border-left-width: 2.8rem;
   border-left-style: solid;
   border-left-color: transparent;
   padding-left: 0.8rem;
+  padding-right: 1rem;
 }
 .todo__item.low {
-  border-left-color: green;
+  border-left-color: rgb(129, 255, 129);
 }
 .todo__item.med {
-  border-left-color: yellow;
+  border-left-color: rgb(255, 255, 127);
 }
 .todo__item.high {
-  border-left-color: red;
+  border-left-color: rgb(255, 126, 126);
 }
 
 .todo__item h3 {
@@ -56,6 +58,7 @@
   flex-flow: row nowrap;
   background-color: lightgrey;
   margin: 0.8rem 0.4rem;
+  padding: 0 1rem;
 }
 .project__item a:hover {
   text-decoration: none;
@@ -101,7 +104,7 @@
 }
 
 .note__item {
-  background-color: lightgray;
+  background-color: #bfbfbf;
   padding: 0.8rem;
   margin: 0.8rem 0.4rem;
 }
@@ -115,7 +118,6 @@
   font-size: 1rem;
 }
 .note__item__title {
-  background-color: rgb(238, 238, 238);
   padding: 0.4rem 1rem;
   flex: 1;
 }

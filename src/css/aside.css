@@ -4,8 +4,7 @@
   overflow-y: auto;
   text-transform: capitalize;
   position: relative;
-}
-#aside__nav {
+  background-color: #ccc;
 }
 .nav__button__ctn {
   display: flex;
@@ -21,17 +20,26 @@
   padding-left: 4rem;
 }
 .parent .nav__button {
-  background-color: rgb(255, 113, 134);
+  background-color: gray;
+}
+.parent .nav__button:hover {
+  color: rgb(112, 112, 112);
+  background-color: rgb(255, 255, 226);
 }
 .child .nav__button {
+  background-color: rgb(146, 135, 135);
+}
+.child .nav__button:hover {
+  color: rgb(130, 119, 119);
+  background-color: rgb(255, 255, 226);
 }
 .nav__button {
+  color: rgb(255, 255, 226);
   padding: 0.4rem 1.2rem;
   flex: 1;
   font-weight: bold;
   text-align: left;
   text-transform: capitalize;
-  background-color: lightpink;
   border-radius: 1rem;
   border-width: 0;
 }
@@ -47,8 +55,8 @@
   justify-content: center;
   border-radius: 50%;
   border: 2px solid lightseagreen;
-  background-color: lightblue;
+  background-color: rgb(78, 127, 143);
   font-weight: bolder;
-  color: red;
+  color: rgb(255, 255, 226);
   font-size: 1.6rem;
 }
