@@ -610,6 +610,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/img/greenCheck.ico":
+/*!********************************!*\
+  !*** ./src/img/greenCheck.ico ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"images/greenCheck.ico\");\n\n//# sourceURL=webpack://todolisttop/./src/img/greenCheck.ico?");
+
+/***/ }),
+
 /***/ "./node_modules/animate.css/animate.css":
 /*!**********************************************!*\
   !*** ./node_modules/animate.css/animate.css ***!
@@ -886,7 +896,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   resetApp: () => (/* binding */ resetApp)\n/* harmony export */ });\n/* harmony import */ var _css_responsive_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../css/responsive.css */ \"./src/css/responsive.css\");\n/* harmony import */ var _css_animation_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../css/animation.css */ \"./src/css/animation.css\");\n/* harmony import */ var _css_dialogs_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../css/dialogs.css */ \"./src/css/dialogs.css\");\n/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../css/styles.css */ \"./src/css/styles.css\");\n/* harmony import */ var _css_header_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../css/header.css */ \"./src/css/header.css\");\n/* harmony import */ var _css_footer_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../css/footer.css */ \"./src/css/footer.css\");\n/* harmony import */ var _css_aside_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../css/aside.css */ \"./src/css/aside.css\");\n/* harmony import */ var _css_reset_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../css/reset.css */ \"./src/css/reset.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var animate_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! animate.css */ \"./node_modules/animate.css/animate.css\");\n/* harmony import */ var _fns_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./fns.js */ \"./src/js/fns.js\");\n/* harmony import */ var _database_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./database.js */ \"./src/js/database.js\");\n/* harmony import */ var _prototype_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./prototype.js */ \"./src/js/prototype.js\");\n/* harmony import */ var _create_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./create.js */ \"./src/js/create.js\");\n/* harmony import */ var _current_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./current.js */ \"./src/js/current.js\");\n/* harmony import */ var _id_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./id.js */ \"./src/js/id.js\");\n/* harmony import */ var _data_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./data.js */ \"./src/js/data.js\");\n/* harmony import */ var _diary_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./diary.js */ \"./src/js/diary.js\");\n/* harmony import */ var _display_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./display.js */ \"./src/js/display.js\");\n/* harmony import */ var _dialogs_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./dialogs.js */ \"./src/js/dialogs.js\");\n/* harmony import */ var _listener_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./listener.js */ \"./src/js/listener.js\");\n/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./edit.js */ \"./src/js/edit.js\");\n/* harmony import */ var _info_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./info.js */ \"./src/js/info.js\");\n/* harmony import */ var _todoElement_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./todoElement.js */ \"./src/js/todoElement.js\");\n/* harmony import */ var _noteElement_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./noteElement.js */ \"./src/js/noteElement.js\");\n/* harmony import */ var _projectElement_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./projectElement.js */ \"./src/js/projectElement.js\");\n/* harmony import */ var _diaryElement_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./diaryElement.js */ \"./src/js/diaryElement.js\");\n//this is index.js\n\n// import css\n\n\n\n\n\n\n\n\n\n\n\n//import javaScript\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n//import module\n\n\nfunction resetApp() {\n  _database_js__WEBPACK_IMPORTED_MODULE_11__.set(null, \"diary\");\n  _database_js__WEBPACK_IMPORTED_MODULE_11__.set(null, \"id\");\n  _database_js__WEBPACK_IMPORTED_MODULE_11__.set(null, \"data\");\n  _database_js__WEBPACK_IMPORTED_MODULE_11__.set(null, \"current\");\n  _database_js__WEBPACK_IMPORTED_MODULE_11__.set(null, \"dairy\"); //typos\n  _database_js__WEBPACK_IMPORTED_MODULE_11__.set(null, \"date\"); //typos\n}\n// resetApp();\n\n\n//# sourceURL=webpack://todolisttop/./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   resetApp: () => (/* binding */ resetApp)\n/* harmony export */ });\n/* harmony import */ var _img_greenCheck_ico__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../img/greenCheck.ico */ \"./src/img/greenCheck.ico\");\n/* harmony import */ var _css_responsive_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../css/responsive.css */ \"./src/css/responsive.css\");\n/* harmony import */ var _css_animation_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../css/animation.css */ \"./src/css/animation.css\");\n/* harmony import */ var _css_dialogs_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../css/dialogs.css */ \"./src/css/dialogs.css\");\n/* harmony import */ var _css_styles_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../css/styles.css */ \"./src/css/styles.css\");\n/* harmony import */ var _css_header_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../css/header.css */ \"./src/css/header.css\");\n/* harmony import */ var _css_footer_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../css/footer.css */ \"./src/css/footer.css\");\n/* harmony import */ var _css_aside_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../css/aside.css */ \"./src/css/aside.css\");\n/* harmony import */ var _css_reset_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../css/reset.css */ \"./src/css/reset.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./../css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var animate_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! animate.css */ \"./node_modules/animate.css/animate.css\");\n/* harmony import */ var _fns_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fns.js */ \"./src/js/fns.js\");\n/* harmony import */ var _database_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./database.js */ \"./src/js/database.js\");\n/* harmony import */ var _prototype_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./prototype.js */ \"./src/js/prototype.js\");\n/* harmony import */ var _create_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./create.js */ \"./src/js/create.js\");\n/* harmony import */ var _current_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./current.js */ \"./src/js/current.js\");\n/* harmony import */ var _id_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./id.js */ \"./src/js/id.js\");\n/* harmony import */ var _data_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./data.js */ \"./src/js/data.js\");\n/* harmony import */ var _diary_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./diary.js */ \"./src/js/diary.js\");\n/* harmony import */ var _display_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./display.js */ \"./src/js/display.js\");\n/* harmony import */ var _dialogs_js__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./dialogs.js */ \"./src/js/dialogs.js\");\n/* harmony import */ var _listener_js__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./listener.js */ \"./src/js/listener.js\");\n/* harmony import */ var _edit_js__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./edit.js */ \"./src/js/edit.js\");\n/* harmony import */ var _info_js__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./info.js */ \"./src/js/info.js\");\n/* harmony import */ var _todoElement_js__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./todoElement.js */ \"./src/js/todoElement.js\");\n/* harmony import */ var _noteElement_js__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./noteElement.js */ \"./src/js/noteElement.js\");\n/* harmony import */ var _projectElement_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./projectElement.js */ \"./src/js/projectElement.js\");\n/* harmony import */ var _diaryElement_js__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./diaryElement.js */ \"./src/js/diaryElement.js\");\n//this is index.js\n\n//import icon\n\n\n// import css\n\n\n\n\n\n\n\n\n\n\n\n//import javaScript\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n//import module\n\n\nfunction resetApp() {\n  _database_js__WEBPACK_IMPORTED_MODULE_12__.set(null, \"diary\");\n  _database_js__WEBPACK_IMPORTED_MODULE_12__.set(null, \"id\");\n  _database_js__WEBPACK_IMPORTED_MODULE_12__.set(null, \"data\");\n  _database_js__WEBPACK_IMPORTED_MODULE_12__.set(null, \"current\");\n  _database_js__WEBPACK_IMPORTED_MODULE_12__.set(null, \"dairy\"); //typos\n  _database_js__WEBPACK_IMPORTED_MODULE_12__.set(null, \"date\"); //typos\n}\n// resetApp();\n\n\n//# sourceURL=webpack://todolisttop/./src/js/index.js?");
 
 /***/ }),
 
@@ -1011,6 +1021,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -1025,6 +1047,29 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && !scriptUrl) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/nonce */
