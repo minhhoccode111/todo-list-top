@@ -4,7 +4,7 @@
   overflow-y: auto;
   text-transform: capitalize;
   position: relative;
-  background-color: #ccc;
+  background-color: #292929;
 }
 .nav__button__ctn {
   display: flex;
@@ -24,17 +24,17 @@
 }
 .parent .nav__button:hover {
   color: rgb(112, 112, 112);
-  background-color: rgb(255, 255, 226);
+  background-color: rgb(209, 209, 209);
 }
 .child .nav__button {
   background-color: rgb(146, 135, 135);
 }
 .child .nav__button:hover {
   color: rgb(130, 119, 119);
-  background-color: rgb(255, 255, 226);
+  background-color: rgb(209, 209, 209);
 }
 .nav__button {
-  color: rgb(255, 255, 226);
+  color: rgb(211, 211, 211);
   padding: 0.4rem 1.2rem;
   flex: 1;
   font-weight: bold;

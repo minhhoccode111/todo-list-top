@@ -2,29 +2,31 @@
   overflow-y: auto;
   font-size: 2rem;
   padding: 1rem 1rem 7.6rem;
-  background-color: #ababab;
+  background-color: #292929;
 }
 .todo__item {
   display: flex;
   align-items: center;
   gap: 0.4rem;
   flex-flow: row nowrap;
-  background-color: #bfbfbf;
   margin: 0.8rem 0.4rem;
-  border-left-width: 2.8rem;
+  border-left-width: 1.2rem;
   border-left-style: solid;
   border-left-color: transparent;
   padding-left: 0.8rem;
   padding-right: 1rem;
+  border-radius: 1rem 0.4rem 0.4rem 1rem;
+  background-color: #5a5a5a;
+  color: #cecece;
 }
 .todo__item.low {
-  border-left-color: rgb(129, 255, 129);
+  border-left-color: rgb(58, 110, 58);
 }
 .todo__item.med {
-  border-left-color: rgb(255, 255, 127);
+  border-left-color: rgb(112, 112, 54);
 }
 .todo__item.high {
-  border-left-color: rgb(255, 126, 126);
+  border-left-color: rgb(107, 52, 52);
 }
 
 .todo__item h3 {
@@ -37,18 +39,25 @@
 .todo__item button {
   align-self: center;
   height: 2rem;
-  border: 1px solid #000;
   flex-basis: 2rem;
+  border-radius: 0.4rem;
+  color: #fff;
+  border: 1px solid #868686;
+}
+.todo__item__done {
+  color: rgb(255, 133, 133) !important;
 }
 
 .todo__item.done {
-  opacity: 0.4;
+  opacity: 0.55;
 }
-.todo__item.done h3 {
-  text-decoration: line-through;
-}
+.todo__item.done h3,
 .todo__item.done em {
   text-decoration: line-through;
+  text-decoration-color: rgb(0, 0, 0); /* Color of the line */
+  text-decoration-style: solid; /* Style of the line (e.g., solid, double, dashed) */
+  text-decoration-line: line-through; /* Position of the line (e.g., overline, underline, line-through) */
+  text-decoration-thickness: 1px; /* Thickness of the line */
 }
 
 .project__item {
@@ -56,15 +65,17 @@
   align-items: center;
   gap: 0.4rem;
   flex-flow: row nowrap;
-  background-color: lightgrey;
+  background-color: rgb(100, 100, 100);
   margin: 0.8rem 0.4rem;
+  color: rgb(214, 214, 214);
   padding: 0 1rem;
+  border-radius: 1.2rem;
 }
 .project__item a:hover {
   text-decoration: none;
 }
 .project__item a {
-  color: #000;
+  color: rgb(214, 214, 214);
   cursor: pointer;
   margin: 1rem 0 1rem 1rem;
   flex: 1;
@@ -72,13 +83,14 @@
 .project__item button {
   align-self: center;
   height: 2rem;
-  border: 1px solid #000;
+  border: 1px solid #c2c2c2;
+  border-radius: 0.4rem;
   flex-basis: 2rem;
 }
 #section__diary__inputs__ctn {
   padding: 0.8rem;
   margin: 0.8rem 0.4rem;
-  background-color: lightgray;
+  background-color: rgb(141, 141, 141);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
@@ -89,7 +101,7 @@
   justify-self: center;
 }
 .diary__item {
-  background-color: lightgray;
+  background-color: rgb(141, 141, 141);
   padding: 0.8rem;
   margin: 0.8rem 0.4rem;
 }
@@ -104,7 +116,7 @@
 }
 
 .note__item {
-  background-color: #bfbfbf;
+  background-color: rgb(102, 102, 102);
   padding: 0.8rem;
   margin: 0.8rem 0.4rem;
 }
@@ -126,6 +138,8 @@
 }
 .note__item button {
   align-self: start;
-  padding: 0.4rem;
-  border: 1px solid #000;
+  padding: 0.6rem;
+  border-radius: 0.4rem;
+  color: #fff;
+  border: 1px solid #868686;
 }

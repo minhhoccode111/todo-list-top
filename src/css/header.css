@@ -1,7 +1,7 @@
 #header {
   grid-column-start: 1;
   grid-column-end: 3;
-  background-color: rgb(78, 127, 143);
+  background-color: rgb(50, 81, 92);
   padding: 1rem;
   border-bottom: 1px solid #000;
   display: flex;

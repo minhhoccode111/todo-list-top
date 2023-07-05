@@ -22,6 +22,7 @@ button {
   cursor: pointer;
   border-style: solid;
 }
+
 .center {
   display: flex;
   align-items: center;
@@ -56,12 +57,26 @@ button {
   background-color: red;
 }
 button.del {
+  background-color: rgb(148, 75, 75);
   color: white;
-  background-color: red;
+  border-radius: 0.4rem;
+  border: 1px solid #868686;
+}
+button.info {
+  color: white;
+  background-color: rgb(65, 65, 136);
+  border-radius: 0.4rem;
+  border: 1px solid #868686;
+}
+button.edit {
+  color: white;
+  background-color: rgb(133, 64, 133);
+  border-radius: 0.4rem;
+  border: 1px solid #868686;
 }
 
-div[contenteditable="true"] {
-  background-color: rgb(210 210 210);
+div[contenteditable='true'] {
+  background-color: rgb(141, 141, 141);
   padding: 0.4rem 1rem;
   border-radius: 0.4rem;
 }
