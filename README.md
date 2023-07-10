@@ -22,16 +22,16 @@
 - but the `show()` method set the `<dialog></dialog>` element style to `display: block;` we can change this default behavior with the css selector: `dialog[open] {display: flex;}` (or any display style you want)
 - we can use `input.disabled = true;` to disable any input with javaScript
 - when we want to listen to `<input type='radio'/>` 'change' event, we have to select all inputs element with the same name `document.querySelectorAll('input[name="radioInputGroupName"]').forEach(input=>{input.addEventListener('change',()=>{//do something with its value maybe})})`
-- when we compare dates with FNS library, if we pass is that function an empty string then it gonna throw an error NOT A FALSE. So we must double check the date we pass in first `const isTimeExpired = dueDate!=='' && isBefore(dueDate, createdDate);`
+- when we compare dates with FNS library, if we pass in that function an empty string then it gonna throw an error NOT A FALSE. So we must double check the date we pass in first `const isTimeExpired = dueDate!=='' && isBefore(dueDate, createdDate);`
 - 'blur' event occur when a button, a link, an input, or a div contenteditable='true'...etc stop being `focus`
 - By combining the `blur` event with a suitable delay or timeout of `input` event, we can determine when the user has stopped typing and trigger the creation of an object (of update it).
-- About `parseISO()` method in date-fns library, if we pass is a string date argument e.g. "2023-6-25" then it work just fine. `fns.parseISO("2023-6-25")` but if we want to pass a `new Date()` javaScript object to it, then we have to format it first so that it can work correctly `fns.parseISO(fns.format(new Date(),"yyyy-MM-dd"))`
+- About `parseISO()` method in date-fns library, if we pass in a string date argument e.g. "2023-6-25" then it work just fine. `fns.parseISO("2023-6-25")` but if we want to pass a `new Date()` javaScript object to it, then we have to format it first so that it can work correctly `fns.parseISO(fns.format(new Date(),"yyyy-MM-dd"))`
 - Inside a prototype object of an object, `this` is point to that object when object use that method, but if that method create and return html elements and we want to bind events listener to elements in that html while creating them inside prototype's method at the same time, then normally `this` inside `addEventListener` is point to the element we are listening but if we want `this` to point to the object which is using the prototype's method then we have 2 approach:
   1. Using arrow function: because arrow function inherit the `this` value from their surrounding scope `element.addEventListener('click',()=>{console.log(this)});//'this' refers to the object using prototype method`
   2. Using closure: create a variable that references the object and use it inside the event listener call back
   ```javascript
   let self = this;
-  element.addEventListener("click", function () {
+  element.addEventListener('click', function () {
     console.log(self); //'self' refers to object using that prototype method;
   });
   ```
@@ -55,12 +55,12 @@
 
 ```javascript
 function modifyObject(obj) {
-  obj.property = "new value"; // Modifying an existing property
-  obj.newProperty = "added value"; // Adding a new property
-  obj = { newObject: "new value" }; // Overwriting the entire object
+  obj.property = 'new value'; // Modifying an existing property
+  obj.newProperty = 'added value'; // Adding a new property
+  obj = { newObject: 'new value' }; // Overwriting the entire object
 }
 const originalObject = {
-  property: "original value",
+  property: 'original value',
 };
 console.log(originalObject); // { property: 'original value' }
 modifyObject(originalObject);
@@ -73,20 +73,26 @@ console.log(originalObject); // { property: 'new value', newProperty: 'added val
 
 ```javascript
 //this is better
-const button = document.createElement("button");
-button.addEventListener("click", (e) => {
-  console.log(e.target.parentNode);
-});
-parentElement.appendChild(button);
+function createButton() {
+  const button = document.createElement('button');
+  button.addEventListener('click', (e) => {
+    console.log(e.target.parentNode);
+  });
+  return button;
+}
+parentElement.appendChild(createButton());
 //this is worse
-parentElement.innerHTML = `<button></button>`;
-const button = parentElement.querySelector("button");
-button.addEventListener("click", (e) => {
+function createButton() {
+  return '<button></button>';
+}
+parentElement.innerHTML = createButton();
+const button = parentElement.querySelector('button');
+button.addEventListener('click', (e) => {
   console.log(e.target.parentNode);
 });
 ```
 
-- Use `textContent` instead of `innerHTML` with `div contenteditable='true'` (or any input type) to prevent unexpected behavior and security of website.
+- Use `textContent` instead of `innerHTML` in `div contenteditable='true'` (or any input field when we want to get user input's value) to prevent unexpected behavior and security of website (because when we use `innerHTML` user can pass a function, a script or any harm to break our website, so it's best practice is avoid it).
 
 ## Requirements from The Odin Project:
 
@@ -132,6 +138,7 @@ button.addEventListener("click", (e) => {
 - Add Note project to write notes on different app state(not just Todo project)
 - Implement an efficiency way to do stuffs without loop and loop and loop and forever loop (I mean loop too much!)
 - FIX BRUTALLY LOOP THROUGH EVERY THING
+- Implement a better UI (the current UI is so ugly that even me can't handle it :<)
 
 ## Live Demos
 
