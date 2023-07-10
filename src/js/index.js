@@ -48,4 +48,4 @@ export function resetApp() {
   database.set(null, 'dairy'); //typos
   database.set(null, 'date'); //typos
 }
-resetApp();
+// resetApp();
