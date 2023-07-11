@@ -122,6 +122,7 @@ const delItem = (obj, type) => {
 const typeOfClassLength = (ofClass, type) => data[ofClass][type].length;
 
 const specificProjectOfTypeInItemsLength = (type, project) => {
+  if (project === 'all') return data.items[type].length;
   return data.items[type].reduce((total, current) => {
     if (current.project === project) {
       total++;

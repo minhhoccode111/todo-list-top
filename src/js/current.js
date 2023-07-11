@@ -7,15 +7,23 @@ let current = {
   ofClass: 'items',
 };
 
-export const get = (prop) => current[prop];
+const get = (prop) => current[prop];
 
-export const set = (prop, value) => {
+const set = (prop, value) => {
   current[prop] = value;
   database.set('current', current);
 };
 
-export const load = () => {
+const load = () => {
   if (database.check('current')) {
     current = database.get('current');
   }
 };
+
+const methods = {
+  get,
+  set,
+  load,
+};
+
+export default methods;

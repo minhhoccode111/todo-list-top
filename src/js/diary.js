@@ -4,7 +4,7 @@ import { Diary } from './create.js';
 import * as database from './database.js';
 import * as Prototype from './prototype.js';
 import { isBefore, startOfToday } from 'date-fns';
-import * as Data from './data.js';
+import Data from './data.js';
 
 let obj = Diary('I am not productive, I feel sad about that', 'I will push harder tomorrow! Learn and do new project on The Odin Project and become a Backend Engineer. I Can do it!');
 
@@ -19,7 +19,7 @@ export const load = () => {
   //is the created date of the diary is yesterday, then add it to 'diary' project in data, then update data to database, then create new Diary for today, then update that to 'diary' in database
   const today = startOfToday();
   if (isBefore(new Date(obj.createdDate), today)) {
-    Data.add(obj, 'diary');
+    Data.items.add(obj, 'diary');
     Data.set();
     obj = Diary('write your thoughts here', 'write your thoughts here');
     set();

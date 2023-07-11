@@ -1,8 +1,8 @@
 //this is display.js
 
-import * as Data from './data.js';
+import Data from './data.js';
 import * as Diary from './diary.js';
-import * as Current from './current.js';
+import Current from './current.js';
 import { buttonPlus } from './listener.js';
 import { todo } from './todoElement.js';
 import { note } from './noteElement.js';
@@ -16,11 +16,18 @@ export const custom = document.getElementById('custom__projects__ctn');
 const buttons = document.querySelectorAll('.nav__button');
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
-    const name = e.target.dataset.name;
-    if (Current.get() === name) return;
-    Current.set(name);
-    projectItems(name);
-    if (name === 'diary') {
+    // const name = e.target.dataset.name;
+    const ofClass = e.target.dataset.ofClass;
+    const project = e.target.dataset.project;
+    const type = e.target.dataset.type;
+    if (Current.get('project') === project && Current.get('type') === type && Current.get('ofClass') === ofClass) {
+      return;
+    }
+    Current.set('ofClass') === ofClass;
+    Current.set('type') === type;
+    Current.set('project') === project;
+    projectItems(ofClass, type, project);
+    if (type === 'diary') {
       buttonPlus.classList.add('hidden');
     } else {
       buttonPlus.classList.remove('hidden');
@@ -31,16 +38,23 @@ buttons.forEach((button) => {
 export function updateSpan() {
   const buttons = nav.querySelectorAll('.nav__button');
   buttons.forEach((button) => {
-    const name = button.dataset.name;
+    const ofClass = button.dataset.ofClass;
+    const type = button.dataset.type;
+    const project = button.dataset.project;
     const span = button.nextElementSibling;
-    span.textContent = Data.projects.getL(name);
+    if (ofClass === 'items') {
+      span.textContent = Data.len.project(type, project);
+    }
+    if (ofClass === 'projects') {
+      span.textContent = Data.len.type(ofClass, type);
+    }
   });
 }
 
 export function customProjectBtns(customProjects) {
   custom.innerHTML = '';
   for (const item of customProjects) {
-    const name = item['title'];
+    const name = item.title;
     const length = Data.projects.getL(name);
     custom.appendChild(createCustomButtons(name, length));
   }
@@ -70,7 +84,7 @@ function createCustomButtons(name, length) {
   return container;
 }
 
-export const projectItems = (name) => {
+export const projectItems = (ofClass, type, project) => {
   let items = Data.projects.get(name);
   let data = Data.get();
   main.innerHTML = '';
