@@ -40,7 +40,7 @@ import './id.js';
 //import module
 import * as database from './database.js';
 
-export function resetApp() {
+function resetApp() {
   database.set(null, 'diary');
   database.set(null, 'id');
   database.set(null, 'data');

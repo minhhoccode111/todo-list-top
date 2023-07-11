@@ -8,7 +8,7 @@ export const set = (variable, name) => {
       localStorage.setItem(name, JSON.stringify(variable));
     } catch (error) {
       // Handle localStorage quota exceeded or other errors
-      console.error("Error while storing data in localStorage:", error);
+      console.error('Error while storing data in localStorage:', error);
     }
   }
 };
@@ -18,7 +18,7 @@ export const get = (name) => {
     return JSON.parse(localStorage.getItem(name));
   } catch (error) {
     // Handle invalid JSON or other errors
-    console.error("Error while retrieving data from localStorage:", error);
+    console.error('Error while retrieving data from localStorage:', error);
     return null;
   }
 };

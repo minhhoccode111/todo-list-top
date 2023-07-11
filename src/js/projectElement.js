@@ -1,35 +1,34 @@
 //this is projectElement.js
-import { displayInfo } from "./info.js";
-import * as Data from "./data.js";
-import { nav } from "./display.js";
-import * as Display from "./display.js";
+import { displayInfo } from './info.js';
+import * as Data from './data.js';
+import * as Display from './display.js';
 
 export function project(obj) {
   let { id, title } = obj;
 
-  const container = document.createElement("div");
-  container.classList.add("project__item");
+  const container = document.createElement('div');
+  container.classList.add('project__item');
   container.dataset.id = id;
 
-  const titleLink = document.createElement("a");
-  titleLink.classList.add("project__item__title");
-  titleLink.href = "#";
+  const titleLink = document.createElement('a');
+  titleLink.classList.add('project__item__title');
+  titleLink.href = '#';
   titleLink.textContent = title;
-  titleLink.addEventListener("click", () => {
+  titleLink.addEventListener('click', () => {
     projectClickedLink(title);
   });
 
-  const infoButton = document.createElement("button");
-  infoButton.classList.add("project__item__info", "info");
-  infoButton.textContent = "?";
-  infoButton.addEventListener("click", () => {
+  const infoButton = document.createElement('button');
+  infoButton.classList.add('project__item__info', 'info');
+  infoButton.textContent = '?';
+  infoButton.addEventListener('click', () => {
     displayInfo(obj);
   });
 
-  const deleteButton = document.createElement("button");
-  deleteButton.classList.add("project__item__del", "del");
-  deleteButton.textContent = "X";
-  deleteButton.addEventListener("click", () => {
+  const deleteButton = document.createElement('button');
+  deleteButton.classList.add('project__item__del', 'del');
+  deleteButton.textContent = 'X';
+  deleteButton.addEventListener('click', () => {
     deleteButton.parentNode.remove();
     projectClickedDelete(obj, title);
   });
@@ -42,13 +41,13 @@ export function project(obj) {
 }
 
 function projectClickedDelete(obj, name) {
-  const index = Data.projects.get("project").indexOf(obj);
-  Data.del("project", index);
+  const index = Data.projects.get('project').indexOf(obj);
+  Data.del('project', index);
   Data.projects.del(name);
-  nav.querySelector(`button[data-name="${name}"]`).parentNode.remove();
+  Display.nav.querySelector(`button[data-name="${name}"]`).parentNode.remove();
   Display.updateSpan();
 }
 
 function projectClickedLink(name) {
-  nav.querySelector(`button[data-name="${name}"]`).click();
+  Display.nav.querySelector(`button[data-name="${name}"]`).click();
 }

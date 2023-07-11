@@ -10,63 +10,53 @@
   <body>
     <div id="wrapper">
       <header id="header">
-        <h1 id="header__title" class="animate__animated animate__backInRight">
-          check-mate &#128196;
-        </h1>
-        <button
-          id="header__about"
-          class="animate__animated animate__backInRight"
-        >
-          About
-        </button>
+        <h1 id="header__title" class="animate__animated animate__backInRight">check-mate &#128196;</h1>
+        <button id="header__about" class="animate__animated animate__backInRight">About</button>
       </header>
       <aside id="aside">
         <nav id="aside__nav">
+          <!-- //////////////////// start about todos \\\\\\\\\\\\\\\\\\\\ -->
           <div class="nav__button__ctn parent">
-            <button class="nav__button" data-name="all">all</button>
+            <button class="nav__button" data-of-class="items" data-type="todo" data-project="all">all todos</button>
             <span class="tinynum">1</span>
           </div>
-          <div class="nav__button__ctn child">
-            <button class="nav__button" data-name="today">today</button>
-            <span class="tinynum">1</span>
-          </div>
-          <div class="nav__button__ctn child">
-            <button class="nav__button" data-name="week">week</button>
-            <span class="tinynum">1</span>
-          </div>
-          <div class="nav__button__ctn child">
-            <button class="nav__button" data-name="month">month</button>
-            <span class="tinynum">1</span>
-          </div>
-          <div class="nav__button__ctn child">
-            <button class="nav__button" data-name="year">year</button>
-            <span class="tinynum">1</span>
-          </div>
-          <div class="nav__button__ctn parent">
-            <button class="nav__button" data-name="diary">diary</button>
-            <span class="tinynum">2</span>
-          </div>
-          <div class="nav__button__ctn parent">
-            <button class="nav__button" data-name="note">note</button>
-            <span class="tinynum">2</span>
-          </div>
-          <div class="nav__button__ctn parent">
-            <button class="nav__button" data-name="project">project</button>
-            <span class="tinynum">2</span>
-          </div>
-          <div id="custom__projects__ctn">
-            <!-- <div class="nav__button__ctn child">
-              <button class="nav__button" data-name="work">work</button>
-              <span class="tinynum">2</span>
-            </div>
+
+          <div id="todo_projects_ctn">
             <div class="nav__button__ctn child">
-              <button class="nav__button" data-name="learn">learn</button>
-              <span class="tinynum">2</span>
+              <button class="nav__button" data-of-class="items" data-type="todo" data-project="today">today</button>
+              <span class="tinynum">1</span>
             </div>
+          </div>
+
+          <div class="nav__button__ctn parent">
+            <button class="nav__button" data-of-class="projects" data-type="todo" data-project="todo-projects">todo projects</button>
+            <span class="tinynum">1</span>
+          </div>
+
+          <!-- //////////////////// start about notes \\\\\\\\\\\\\\\\\\\\ -->
+
+          <div class="nav__button__ctn parent">
+            <button class="nav__button" data-of-class="items" data-type="note" data-project="all">all notes</button>
+            <span class="tinynum">1</span>
+          </div>
+
+          <div id="note_projects_ctn">
             <div class="nav__button__ctn child">
-              <button class="nav__button" data-name="gym">gym</button>
-              <span class="tinynum">2</span>
-            </div> -->
+              <button class="nav__button" data-of-class="items" data-type="note" data-project="book">book</button>
+              <span class="tinynum">1</span>
+            </div>
+          </div>
+
+          <div class="nav__button__ctn parent">
+            <button class="nav__button" data-of-class="projects" data-type="note" data-project="note-projects">note projects</button>
+            <span class="tinynum">1</span>
+          </div>
+
+          <!-- //////////////////// start about diaries \\\\\\\\\\\\\\\\\\\\ -->
+
+          <div class="nav__button__ctn parent">
+            <button class="nav__button" data-of-class="items" data-type="diary" data-project="diary">diary</button>
+            <span class="tinynum">2</span>
           </div>
         </nav>
       </aside>
@@ -282,12 +272,7 @@
       <footer id="footer">
         <p id="footer__words" class="animate__animated animate__backInRight">
           Made with love by
-          <a
-            href="https://github.com/minhhoccode111"
-            target="_blank"
-            id="footer__link"
-            >Đặng Hoàng Minh.</a
-          >
+          <a href="https://github.com/minhhoccode111" target="_blank" id="footer__link">Đặng Hoàng Minh.</a>
           :)
         </p>
       </footer>
@@ -297,93 +282,37 @@
       <form id="form__of__todo">
         <div class="form__group">
           <label for="title__of__todo">Title:</label>
-          <input
-            type="text"
-            id="title__of__todo"
-            name="title__of__todo"
-            maxlength="60"
-            required
-          />
+          <input type="text" id="title__of__todo" name="title__of__todo" maxlength="60" required />
         </div>
         <div class="form__group">
           <label for="detail__of__todo">Detail:</label>
-          <textarea
-            id="detail__of__todo"
-            name="detail__of__todo"
-            rows="4"
-            required
-          ></textarea>
+          <textarea id="detail__of__todo" name="detail__of__todo" rows="4" required></textarea>
         </div>
         <div class="form__group">
           <label for="dueDate__of__todo">Due Date:</label>
-          <input
-            type="date"
-            id="dueDate__of__todo"
-            name="dueDate__of__todo"
-            value=""
-            required
-            disabled
-          />
+          <input type="date" id="dueDate__of__todo" name="dueDate__of__todo" value="" required disabled />
         </div>
         <div class="form__group">
           <label for="hasDueDate__of__todo">Has Due Date:</label>
-          <input
-            type="radio"
-            id="hasDueDate__of__todo"
-            name="hasDueDate__of__todo"
-            value="yes"
-          />
+          <input type="radio" id="hasDueDate__of__todo" name="hasDueDate__of__todo" value="yes" />
           Yes
-          <input
-            type="radio"
-            id="noDueDate__of__todo"
-            name="hasDueDate__of__todo"
-            value="no"
-            checked
-          />
+          <input type="radio" id="noDueDate__of__todo" name="hasDueDate__of__todo" value="no" checked />
           No
         </div>
         <div class="form__group">
           <label for="priority__of__todo">Priority:</label>
-          <input
-            type="radio"
-            id="low__of__todo"
-            name="priority__of__todo"
-            value="low"
-            checked
-          />
+          <input type="radio" id="low__of__todo" name="priority__of__todo" value="low" checked />
           Low
-          <input
-            type="radio"
-            id="med__of__todo"
-            name="priority__of__todo"
-            value="med"
-          />
+          <input type="radio" id="med__of__todo" name="priority__of__todo" value="med" />
           Medium
-          <input
-            type="radio"
-            id="high__of__todo"
-            name="priority__of__todo"
-            value="high"
-          />
+          <input type="radio" id="high__of__todo" name="priority__of__todo" value="high" />
           High
         </div>
         <div class="form__group">
           <label for="isDone__of__todo">Is Done:</label>
-          <input
-            type="radio"
-            id="isDone__of__todo"
-            name="isDone__of__todo"
-            value="true"
-          />
+          <input type="radio" id="isDone__of__todo" name="isDone__of__todo" value="true" />
           Yes
-          <input
-            type="radio"
-            id="notDone__of__todo"
-            name="isDone__of__todo"
-            value="false"
-            checked
-          />
+          <input type="radio" id="notDone__of__todo" name="isDone__of__todo" value="false" checked />
           No
         </div>
         <div class="form__group">
@@ -397,49 +326,21 @@
       <form id="form__of__note">
         <div class="form__group">
           <label for="title__of__note">Title:</label>
-          <input
-            type="text"
-            id="title__of__note"
-            name="title__of__note"
-            required
-          />
+          <input type="text" id="title__of__note" name="title__of__note" required />
         </div>
         <div class="form__group">
           <label for="detail__of__note">Detail:</label>
-          <textarea
-            id="detail__of__note"
-            name="detail__of__note"
-            rows="4"
-            required
-          ></textarea>
+          <textarea id="detail__of__note" name="detail__of__note" rows="4" required></textarea>
         </div>
         <div class="form__group">
           <label for="dueDate__of__note">Due Date:</label>
-          <input
-            type="date"
-            id="dueDate__of__note"
-            name="dueDate__of__note"
-            value=""
-            required
-            disabled
-          />
+          <input type="date" id="dueDate__of__note" name="dueDate__of__note" value="" required disabled />
         </div>
         <div class="form__group">
           <label for="hasDueDate__of__note">Has Due Date:</label>
-          <input
-            type="radio"
-            id="hasDueDate__of__note"
-            name="hasDueDate__of__note"
-            value="yes"
-          />
+          <input type="radio" id="hasDueDate__of__note" name="hasDueDate__of__note" value="yes" />
           Yes
-          <input
-            type="radio"
-            id="noDueDate__of__note"
-            name="hasDueDate__of__note"
-            value="no"
-            checked
-          />
+          <input type="radio" id="noDueDate__of__note" name="hasDueDate__of__note" value="no" checked />
           No
         </div>
         <div class="form__group">
@@ -454,58 +355,25 @@
       <form id="form__of__project">
         <div class="form__group">
           <label for="title__of__project">Title:</label>
-          <input
-            type="text"
-            id="title__of__project"
-            name="title__of__project"
-            maxlength="20"
-            required
-          />
+          <input type="text" id="title__of__project" name="title__of__project" maxlength="20" required />
         </div>
         <div class="form__group">
           <label for="detail__of__project">Detail:</label>
-          <textarea
-            id="detail__of__project"
-            name="detail__of__project"
-            rows="4"
-            required
-          ></textarea>
+          <textarea id="detail__of__project" name="detail__of__project" rows="4" required></textarea>
         </div>
         <div class="form__group">
           <label for="dueDate__of__project">Due Date:</label>
-          <input
-            type="date"
-            id="dueDate__of__project"
-            name="dueDate__of__project"
-            value=""
-            required
-            disabled
-          />
+          <input type="date" id="dueDate__of__project" name="dueDate__of__project" value="" required disabled />
         </div>
         <div class="form__group">
           <label for="hasDueDate__of__project">Has Due Date:</label>
-          <input
-            type="radio"
-            id="hasDueDate__of__project"
-            name="hasDueDate__of__project"
-            value="yes"
-          />
+          <input type="radio" id="hasDueDate__of__project" name="hasDueDate__of__project" value="yes" />
           Yes
-          <input
-            type="radio"
-            id="noDueDate__of__project"
-            name="hasDueDate__of__project"
-            value="no"
-            checked
-          />
+          <input type="radio" id="noDueDate__of__project" name="hasDueDate__of__project" value="no" checked />
           No
         </div>
         <div class="form__group">
-          <input
-            type="submit"
-            id="create__of__project"
-            value="Create Project"
-          />
+          <input type="submit" id="create__of__project" value="Create Project" />
           <input type="button" id="cancel__of__project" value="Cancel" />
         </div>
       </form>
@@ -515,93 +383,37 @@
       <form id="form__of__edit">
         <div class="form__group">
           <label for="title__of__edit">Title:</label>
-          <input
-            type="text"
-            id="title__of__edit"
-            name="title__of__edit"
-            maxlength="60"
-            required
-          />
+          <input type="text" id="title__of__edit" name="title__of__edit" maxlength="60" required />
         </div>
         <div class="form__group">
           <label for="detail__of__edit">Detail:</label>
-          <textarea
-            id="detail__of__edit"
-            name="detail__of__edit"
-            rows="4"
-            required
-          ></textarea>
+          <textarea id="detail__of__edit" name="detail__of__edit" rows="4" required></textarea>
         </div>
         <div class="form__group">
           <label for="dueDate__of__edit">Due Date:</label>
-          <input
-            type="date"
-            id="dueDate__of__edit"
-            name="dueDate__of__edit"
-            value=""
-            required
-            disabled
-          />
+          <input type="date" id="dueDate__of__edit" name="dueDate__of__edit" value="" required disabled />
         </div>
         <div class="form__group">
           <label for="hasDueDate__of__edit">Has Due Date:</label>
-          <input
-            type="radio"
-            id="hasDueDate__of__edit"
-            name="hasDueDate__of__edit"
-            value="yes"
-          />
+          <input type="radio" id="hasDueDate__of__edit" name="hasDueDate__of__edit" value="yes" />
           Yes
-          <input
-            type="radio"
-            id="noDueDate__of__edit"
-            name="hasDueDate__of__edit"
-            value="no"
-            checked
-          />
+          <input type="radio" id="noDueDate__of__edit" name="hasDueDate__of__edit" value="no" checked />
           No
         </div>
         <div class="form__group">
           <label for="priority__of__edit">Priority:</label>
-          <input
-            type="radio"
-            id="low__of__edit"
-            name="priority__of__edit"
-            value="low"
-            checked
-          />
+          <input type="radio" id="low__of__edit" name="priority__of__edit" value="low" checked />
           Low
-          <input
-            type="radio"
-            id="med__of__edit"
-            name="priority__of__edit"
-            value="med"
-          />
+          <input type="radio" id="med__of__edit" name="priority__of__edit" value="med" />
           Medium
-          <input
-            type="radio"
-            id="high__of__edit"
-            name="priority__of__edit"
-            value="high"
-          />
+          <input type="radio" id="high__of__edit" name="priority__of__edit" value="high" />
           High
         </div>
         <div class="form__group">
           <label for="isDone__of__edit">Is Done:</label>
-          <input
-            type="radio"
-            id="isDone__of__edit"
-            name="isDone__of__edit"
-            value="true"
-          />
+          <input type="radio" id="isDone__of__edit" name="isDone__of__edit" value="true" />
           Yes
-          <input
-            type="radio"
-            id="notDone__of__edit"
-            name="isDone__of__edit"
-            value="false"
-            checked
-          />
+          <input type="radio" id="notDone__of__edit" name="isDone__of__edit" value="false" checked />
           No
         </div>
         <div class="form__group">
@@ -644,98 +456,60 @@
         <em>Content generated by ChatGPT</em>
         <h2>About Check-mate</h2>
         <p>
-          Welcome to Check-mate, your ultimate productivity companion!
-          Check-mate is a feature-rich Todo List app designed to help you stay
-          organized, focused, and accomplish your goals. Whether you need to
-          manage your daily tasks, create project-specific to-do lists, or
-          simply reflect on your thoughts in a personal diary, Check-mate has
-          got you covered.
+          Welcome to Check-mate, your ultimate productivity companion! Check-mate is a feature-rich Todo List app designed to help you stay organized, focused, and accomplish your goals. Whether you
+          need to manage your daily tasks, create project-specific to-do lists, or simply reflect on your thoughts in a personal diary, Check-mate has got you covered.
         </p>
 
         <h3>Key Features</h3>
         <ul>
           <li>
-            <strong>Todo List:</strong> Create and manage multiple to-do lists
-            for different projects or areas of your life. Stay on top of your
-            tasks and prioritize your activities effectively.
+            <strong>Todo List:</strong> Create and manage multiple to-do lists for different projects or areas of your life. Stay on top of your tasks and prioritize your activities effectively.
           </li>
+          <li><strong>Notes:</strong> Take quick notes, jot down ideas, and save important information for easy reference. Keep all your important details in one place.</li>
           <li>
-            <strong>Notes:</strong> Take quick notes, jot down ideas, and save
-            important information for easy reference. Keep all your important
-            details in one place.
-          </li>
-          <li>
-            <strong>Diary:</strong> Reflect on your day with our built-in diary
-            feature. Capture your thoughts, experiences, and goals in a personal
-            journal. The diary automatically generates entries for the previous
-            day, helping you track your progress and gain valuable insights.
+            <strong>Diary:</strong> Reflect on your day with our built-in diary feature. Capture your thoughts, experiences, and goals in a personal journal. The diary automatically generates entries
+            for the previous day, helping you track your progress and gain valuable insights.
           </li>
         </ul>
 
         <h3>How Check-mate Boosts Your Productivity</h3>
-        <p>
-          Check-mate understands the importance of a well-structured workflow
-          and provides you with the tools to enhance your productivity:
-        </p>
+        <p>Check-mate understands the importance of a well-structured workflow and provides you with the tools to enhance your productivity:</p>
         <ul>
           <li>
-            <strong>Project Management:</strong> Stay organized by creating
-            individual projects for different areas of your life, such as work,
-            studies, fitness, and more. Keep your tasks segmented and easily
-            manageable.
+            <strong>Project Management:</strong> Stay organized by creating individual projects for different areas of your life, such as work, studies, fitness, and more. Keep your tasks segmented
+            and easily manageable.
           </li>
           <li>
-            <strong>Task Prioritization:</strong> Assign priorities to your
-            tasks, ensuring you focus on what matters most. Mark tasks as high,
-            medium, or low priority to stay focused and achieve your goals
-            efficiently.
+            <strong>Task Prioritization:</strong> Assign priorities to your tasks, ensuring you focus on what matters most. Mark tasks as high, medium, or low priority to stay focused and achieve your
+            goals efficiently.
           </li>
+          <li><strong>Deadline Tracking:</strong> Set due dates for your tasks and receive reminders to stay on schedule. Never miss an important deadline again.</li>
           <li>
-            <strong>Deadline Tracking:</strong> Set due dates for your tasks and
-            receive reminders to stay on schedule. Never miss an important
-            deadline again.
-          </li>
-          <li>
-            <strong>Daily Reflection:</strong> Take a few moments each day to
-            reflect on your accomplishments, challenges, and personal growth.
-            The built-in diary feature encourages self-reflection and helps you
-            gain clarity and motivation.
+            <strong>Daily Reflection:</strong> Take a few moments each day to reflect on your accomplishments, challenges, and personal growth. The built-in diary feature encourages self-reflection
+            and helps you gain clarity and motivation.
           </li>
         </ul>
 
         <h3>Get Started with Check-mate</h3>
         <p>
-          Check-mate is your all-in-one productivity solution, empowering you to
-          take control of your tasks, thoughts, and goals. Download the app
-          today and experience the power of organization and self-reflection.
+          Check-mate is your all-in-one productivity solution, empowering you to take control of your tasks, thoughts, and goals. Download the app today and experience the power of organization and
+          self-reflection.
         </p>
 
         <h2>About Dang Hoang Minh</h2>
         <p>
-          Hello, I'm Dang Hoang Minh, a self-taught developer passionate about
-          creating innovative solutions and leveraging technology to improve
-          productivity. As an aspiring tech professional, I have dedicated
-          myself to honing my skills and expanding my knowledge in the field of
-          software development.
+          Hello, I'm Dang Hoang Minh, a self-taught developer passionate about creating innovative solutions and leveraging technology to improve productivity. As an aspiring tech professional, I have
+          dedicated myself to honing my skills and expanding my knowledge in the field of software development.
         </p>
         <p>
-          With Check-mate, I aim to provide individuals like you with a powerful
-          tool to optimize your daily routines, achieve your goals, and maintain
-          a healthy work-life balance. Check-mate is the culmination of my
-          dedication to crafting intuitive and user-friendly applications that
-          enhance productivity and streamline everyday tasks.
+          With Check-mate, I aim to provide individuals like you with a powerful tool to optimize your daily routines, achieve your goals, and maintain a healthy work-life balance. Check-mate is the
+          culmination of my dedication to crafting intuitive and user-friendly applications that enhance productivity and streamline everyday tasks.
         </p>
         <p>
-          I believe in continuous improvement and actively seek opportunities to
-          learn and grow. By combining my passion for technology,
-          self-motivation, and a deep understanding of productivity needs, I
-          strive to create software that positively impacts people's lives.
+          I believe in continuous improvement and actively seek opportunities to learn and grow. By combining my passion for technology, self-motivation, and a deep understanding of productivity
+          needs, I strive to create software that positively impacts people's lives.
         </p>
-        <p>
-          Thank you for choosing Check-mate as your productivity partner.
-          Together, let's unlock your full potential and make each day a
-          success!
-        </p>
+        <p>Thank you for choosing Check-mate as your productivity partner. Together, let's unlock your full potential and make each day a success!</p>
       </div>
 
       <hr />
