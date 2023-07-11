@@ -1,8 +1,16 @@
 # The Odin Project: Todo List
 
-# Check Mate (Check the todo list, mate.)
+## Check Mate (Check the todo list, mate.)
 
-## What I've learned.
+- You can add todos, notes
+- You can create new todo projects (e.g. tomorrow, week, month, gym, learn, ...etc) for a specific use case or subject
+- You can create new note projects (e.g. reading notes, learning notes, cooking recipes, ...etc) for a specific use case or subject
+- You CANNOT add new diary (diary is like your daily journal, you can write 2 section, throughout the day and before going to sleep) manually because it is going to be added automatically at the end of the day (every time you open this app, it's going to check if the section you wrote is yesterday then if yes it will be pushed to database and display new section for you to write)
+- Todo items, Note items can be showed, added, edited, and deleted
+- Todo projects, Note projects can be showed, added, and deleted (edit feature is coming soon.)
+- Diary items can only be modified is current day, and will be read-only after pushing to database.
+
+## What I've learned
 
 - Don't over doing stuffs too much
 - Using Webpack
@@ -27,19 +35,23 @@
 - By combining the `blur` event with a suitable delay or timeout of `input` event, we can determine when the user has stopped typing and trigger the creation of an object (of update it).
 - About `parseISO()` method in date-fns library, if we pass in a string date argument e.g. "2023-6-25" then it work just fine. `fns.parseISO("2023-6-25")` but if we want to pass a `new Date()` javaScript object to it, then we have to format it first so that it can work correctly `fns.parseISO(fns.format(new Date(),"yyyy-MM-dd"))`
 - Inside a prototype object of an object, `this` is point to that object when object use that method, but if that method create and return html elements and we want to bind events listener to elements in that html while creating them inside prototype's method at the same time, then normally `this` inside `addEventListener` is point to the element we are listening but if we want `this` to point to the object which is using the prototype's method then we have 2 approach:
+
   1. Using arrow function: because arrow function inherit the `this` value from their surrounding scope `element.addEventListener('click',()=>{console.log(this)});//'this' refers to the object using prototype method`
   2. Using closure: create a variable that references the object and use it inside the event listener call back
+
   ```javascript
   let self = this;
   element.addEventListener('click', function () {
     console.log(self); //'self' refers to object using that prototype method;
   });
   ```
+
 - `format()` take a Date object and a format we want then return a time stamp or a string date format
 - `parseISO()` take date string and return a Date object
 - `isBefore()` take both 2 arguments Date objects
 - `endOfWeek`, `endOfMonth`, `endOfYear`, `sub` ...etc
 - compare `undefined` with `null` E.g.
+
   ```javascript
   let a = null;
   let b; //undefined
@@ -51,6 +63,7 @@
   console.log(Object.is(a, null)); //true
   console.log(Object.is(b, null)); //false
   ```
+
 - In JavaScript, objects are passed by reference. Modifying properties of the object within the function affects the original object because they refer to the same object in memory. However, overwriting the entire object within the function does not affect the original object.
 
 ```javascript
@@ -94,7 +107,7 @@ button.addEventListener('click', (e) => {
 
 - Use `textContent` instead of `innerHTML` in `div contenteditable='true'` (or any input field when we want to get user input's value) to prevent unexpected behavior and security of website (because when we use `innerHTML` user can pass a function, a script or any harm to break our website, so it's best practice is avoid it).
 
-## Requirements from The Odin Project:
+## Requirements from The Odin Project
 
 - "Todos" are going to be objects that we'll want to dynamically create, which means either using factories or constructors/classes to generate them.
 - "Todos" should have properties: "title", "description", "dueDate" and "priority"
@@ -127,9 +140,69 @@ button.addEventListener('click', (e) => {
     - localStorage use [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) to send and store data
     - **WE CANNOT STORE FUNCTIONS IN JSON**, so we'll have to figure out **how to add methods back to our object properties once we fetch them**
 
-## Check Mate Documentation:
+## Check Mate Documentation
 
-## Check Mate ideas to implement:
+- Pattern of data in this project:
+
+```javascript
+const data = {
+  projects: {
+    note: [
+      {
+        // ...others properties
+        title: 'reading',
+        type: 'note',
+        ofClass: 'projects',
+      },
+      //... others note projects
+      // used to create note project buttons in #aside .note_projects_ctn
+    ],
+    todo: [
+      {
+        // ...others properties
+        title: 'today',
+        type: 'todo',
+        ofClass: 'projects',
+      },
+      //... others todo projects
+      // used to create todo project buttons in #aside .todo_project_ctn
+    ],
+  },
+  items: {
+    diary: [
+      {
+        // ...others properties
+        day: '...foo ...baz',
+        night: '...foo ...baz',
+      },
+      // ...other items
+    ],
+    todo: [
+      {
+        // ...others properties
+        title: 'finish Check-Mate project',
+        ofClass: 'items',
+        type: 'todo',
+        project: 'today', // must be included in data.projects.todo
+      },
+      // ...other items
+    ],
+    note: [
+      {
+        // ...others properties
+        title: 'how to be productive',
+        detail: 'stay focus',
+        ofClass: 'items',
+        type: 'note',
+        project: 'life', // must be included in data.projects.note
+      },
+      // ...other items
+    ],
+  },
+};
+```
+
+## Check Mate ideas to implement
 
 - Sort by createdDate
 - Sort by dueDate
