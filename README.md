@@ -145,7 +145,7 @@ button.addEventListener('click', (e) => {
 - Pattern of data in this project:
 
 ```javascript
-const data = {
+let data = {
   projects: {
     note: [
       {

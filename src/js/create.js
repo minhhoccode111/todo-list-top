@@ -1,28 +1,18 @@
 //this is create.js
 
-import { now, today, checkExpired } from "./fns.js";
-import { get as getId } from "./id.js";
-import * as Prototype from "./prototype";
+import { now, today, checkExpired } from './fns.js';
+import { get as getId } from './id.js';
+import * as Prototype from './prototype';
 
 //Todo Factory function
-export function Todo(
-  title,
-  detail,
-  dueDate,
-  hasDueDate,
-  priority,
-  isDone,
-  project
-) {
+export function Todo(title, detail, dueDate, hasDueDate, priority, isDone, project) {
   const id = getId();
   const createdDate = today();
   const lastModified = now();
   const isTimeExpired = checkExpired(dueDate);
-  const type = "todo";
 
   return Object.assign(Object.create(Prototype.todo), {
     id,
-    type,
     title,
     detail,
     isDone,
@@ -37,17 +27,16 @@ export function Todo(
 }
 
 //Note Factory function
-export function Note(title, detail, dueDate, hasDueDate) {
+export function Note(title, detail, dueDate, hasDueDate, project) {
   const id = getId();
   const createdDate = today();
   const lastModified = now();
   const isTimeExpired = checkExpired(dueDate);
-  const type = "note";
   return Object.assign(Object.create(Prototype.note), {
     id,
-    type,
     title,
     detail,
+    project,
     dueDate,
     hasDueDate,
     createdDate,
@@ -59,12 +48,10 @@ export function Note(title, detail, dueDate, hasDueDate) {
 export function Diary(day, night) {
   const createdDate = today();
   const lastModified = now();
-  const type = "diary";
   const isOpened = false;
 
   return Object.assign(Object.create(Prototype.diary), {
     day,
-    type,
     night,
     isOpened,
     createdDate,
@@ -72,12 +59,11 @@ export function Diary(day, night) {
   });
 }
 //Project Factory function
-export function Project(title, detail, dueDate, hasDueDate) {
+export function Project(title, detail, dueDate, hasDueDate, type) {
   const id = getId();
   const createdDate = today();
   const lastModified = now();
   const isTimeExpired = checkExpired(dueDate);
-  const type = "project";
   return Object.assign(Object.create(Prototype.project), {
     id,
     type,
