@@ -40,7 +40,7 @@ export const diary = Object.assign(Object.create(proto), {
 });
 
 export const project = Object.assign(Object.create(proto), {
-  ofClass: 'projects',
+  ofClass: 'items',
 });
 
 export const restore = (data) => {

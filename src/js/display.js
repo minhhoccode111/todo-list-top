@@ -9,11 +9,11 @@ import { note } from './noteElement.js';
 import { project } from './projectElement.js';
 import { diary } from './diaryElement.js';
 
-export const main = document.getElementById('main');
+const main = document.getElementById('main');
 export const nav = document.getElementById('aside__nav');
 // export const custom = document.getElementById('custom__projects__ctn');
-export const todoProjectsCtn = document.getElementById('todo_projects_ctn');
-export const noteProjectsCtn = document.getElementById('note_projects_ctn');
+const todoProjectsCtn = document.getElementById('todo_projects_ctn');
+const noteProjectsCtn = document.getElementById('note_projects_ctn');
 
 const buttons = document.querySelectorAll('.nav__button');
 buttons.forEach((button) => {
@@ -138,7 +138,7 @@ export const projectItems = (ofClass, type, projectName) => {
   } else {
     const projects = Data.projects.get(type);
     for (const item of projects) {
-      main.appendChild(project(item));
+      main.appendChild(project(projects[item]));
     }
   }
 };
