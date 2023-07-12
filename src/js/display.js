@@ -11,7 +11,9 @@ import { diary } from './diaryElement.js';
 
 export const main = document.getElementById('main');
 export const nav = document.getElementById('aside__nav');
-export const custom = document.getElementById('custom__projects__ctn');
+// export const custom = document.getElementById('custom__projects__ctn');
+export const todoProjectsCtn = document.getElementById('todo_projects_ctn');
+export const noteProjectsCtn = document.getElementById('note_projects_ctn');
 
 const buttons = document.querySelectorAll('.nav__button');
 buttons.forEach((button) => {
@@ -23,9 +25,8 @@ buttons.forEach((button) => {
     if (Current.get('project') === project && Current.get('type') === type && Current.get('ofClass') === ofClass) {
       return;
     }
-    Current.set('ofClass') === ofClass;
-    Current.set('type') === type;
-    Current.set('project') === project;
+    Current.set(ofClass, type, project);
+
     projectItems(ofClass, type, project);
     if (type === 'diary') {
       buttonPlus.classList.add('hidden');
@@ -51,28 +52,42 @@ export function updateSpan() {
   });
 }
 
-export function customProjectBtns(customProjects) {
-  custom.innerHTML = '';
-  for (const item of customProjects) {
-    const name = item.title;
-    const length = Data.projects.getL(name);
-    custom.appendChild(createCustomButtons(name, length));
+// export function customProjectBtns(allTodoProjects) {
+export function allProjectsOfTypeBtns(type) {
+  if (type === 'note') {
+    noteProjectsCtn.innerHTML = '';
+    for (const item of Data.projects.get('note')) {
+      const name = item.title;
+      const len = Data.len.project('note', name);
+      noteProjectsCtn.appendChild(createCustomButtons(name, len, 'note'));
+    }
+  } else {
+    todoProjectsCtn.innerHTML = '';
+    for (const item of Data.projects.get('todo')) {
+      const name = item.title;
+      const len = Data.len.project('todo', name);
+      todoProjectsCtn.appendChild(createCustomButtons(name, len, 'todo'));
+    }
   }
 }
 
-function createCustomButtons(name, length) {
+function createCustomButtons(name, length, type) {
   const container = document.createElement('div');
   container.classList.add('nav__button__ctn');
   container.classList.add('child');
 
   const button = document.createElement('button');
   button.classList.add('nav__button');
-  button.setAttribute('data-name', `${name}`); //FIXME fix this classList to be data-name because if user create a project named with space then we'll have an error with classList.add()
+  button.setAttribute('data-of-class', `items`);
+  button.setAttribute('data-type', `${type}`);
+  button.setAttribute('data-project', `${name}`);
   button.textContent = name;
   button.addEventListener('click', () => {
-    if (Current.get() === name) return;
-    Current.set(name);
-    projectItems(Current.get());
+    if (Current.get('project') === name && Current.get('type') === type && Current.get('ofClass') === 'items') {
+      return;
+    }
+    Current.set('items', type, name);
+    projectItems('items', type, name);
   });
   container.appendChild(button);
 
@@ -84,32 +99,46 @@ function createCustomButtons(name, length) {
   return container;
 }
 
-export const projectItems = (ofClass, type, project) => {
-  let items = Data.projects.get(name);
-  let data = Data.get();
+export const projectItems = (ofClass, type, projectName) => {
   main.innerHTML = '';
-  if (name === 'all') {
-    for (const prop in data) {
-      if (['project', 'note', 'diary'].includes(prop)) continue;
-      for (let i = 0; i < data[prop].length; i++) {
-        main.appendChild(todo(data[prop][i], prop, i));
+  if (ofClass === 'items') {
+    const allItemsOfType = Data.items.get(type); //use when we want to display all items
+    if (type === 'todo') {
+      if (projectName === 'all') {
+        for (const item of allItemsOfType) {
+          main.appendChild(todo(allItemsOfType[item]));
+        }
+      } else {
+        const itemsOfATodoProject = Data.items.project('todo', projectName);
+        for (const item of itemsOfATodoProject) {
+          main.appendChild(todo(itemsOfATodoProject[item]));
+        }
+      }
+      return;
+    }
+    if (type === 'note') {
+      if (projectName === 'all') {
+        for (const item of allItemsOfType) {
+          main.appendChild(note(allItemsOfType[item]));
+        }
+      } else {
+        const itemsOfANoteProject = Data.items.project('note', projectName);
+        for (const item of itemsOfANoteProject) {
+          main.appendChild(note(itemsOfANoteProject[item]));
+        }
+      }
+      return;
+    }
+    if (type === 'diary') {
+      main.appendChild(Diary.typeInput(Diary.get()));
+      for (const item of allItemsOfType) {
+        main.appendChild(diary(allItemsOfType[item]));
       }
     }
   } else {
-    for (let i = 0; i < items.length; i++) {
-      let item = items[i];
-      if (name === 'diary' && i === 0) {
-        main.appendChild(Diary.typeInput(Diary.get()));
-      }
-      if (name === 'diary') {
-        main.appendChild(diary(item, i));
-      } else if (name === 'note') {
-        main.appendChild(note(item, i));
-      } else if (name === 'project') {
-        main.appendChild(project(item, i));
-      } else {
-        main.appendChild(todo(item, name, i));
-      }
+    const projects = Data.projects.get(type);
+    for (const item of projects) {
+      main.appendChild(project(item));
     }
   }
 };

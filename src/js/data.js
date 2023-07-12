@@ -78,9 +78,9 @@ const saveData = () => database.set(data, 'data');
 const getData = () => data;
 
 //////////////////// data.projects methods \\\\\\\\\\\\\\\\\\\\
-const getProjects = (type) => data.projects[type];
+const getAllProjectsOfASpecificType = (type) => data.projects[type];
 
-const addProject = (obj, type) => {
+const addNewProjectToASpecificType = (obj, type) => {
   const projectsOfType = data.projects[type];
   //check if all projects in that type (note or todo) has 1 project with the same title then return
   for (const item of projectsOfType) {
@@ -94,7 +94,7 @@ const addProject = (obj, type) => {
   saveData();
 };
 
-const delProject = (obj, type) => {
+const deleteAProjectAndAllItsItemsOfASpecificType = (obj, type) => {
   // del that project in projects[type]
   let index = data.projects[type].indexOf(obj);
   data.projects[type].splice(index, 1);
@@ -105,23 +105,32 @@ const delProject = (obj, type) => {
 };
 
 //////////////////// data.items methods \\\\\\\\\\\\\\\\\\\\
-const getItems = (type) => data.items[type];
+const getASpecificTypeAllItems = (type) => data.items[type];
 
-const addItem = (obj, type) => {
+const getASpecificProjectAllItems = (type, project) => {
+  return data.items[type].reduce((total, current) => {
+    if (current.project === project) {
+      total.push(current);
+    }
+    return total;
+  }, []);
+};
+
+const addOneObjToASpecificType = (obj, type) => {
   data.items[type].unshift(obj);
   saveData();
 };
 
-const delItem = (obj, type) => {
+const deleteOneObjFromASpecificType = (obj, type) => {
   let index = data.items[type].indexOf(obj);
   data.items[type].splice(index, 1);
   saveData();
 };
 
 //////////////////// lengths in data \\\\\\\\\\\\\\\\\\\\
-const typeOfClassLength = (ofClass, type) => data[ofClass][type].length;
+const allItemsOfASpecificTypeOfAClass = (ofClass, type) => data[ofClass][type].length;
 
-const specificProjectOfTypeInItemsLength = (type, project) => {
+const allItemsOfASpecificProjectOfTypeInItemsProperty = (type, project) => {
   if (project === 'all') return data.items[type].length;
   return data.items[type].reduce((total, current) => {
     if (current.project === project) {
@@ -137,18 +146,19 @@ const methods = {
   get: getData,
   load: loadData,
   projects: {
-    get: getProjects,
-    add: addProject,
-    del: delProject,
+    get: getAllProjectsOfASpecificType,
+    add: addNewProjectToASpecificType,
+    del: deleteAProjectAndAllItsItemsOfASpecificType,
   },
   items: {
-    get: getItems,
-    add: addItem,
-    del: delItem,
+    get: getASpecificTypeAllItems,
+    add: addOneObjToASpecificType,
+    del: deleteOneObjFromASpecificType,
+    project: getASpecificProjectAllItems,
   },
   len: {
-    project: specificProjectOfTypeInItemsLength, // (type, project)
-    type: typeOfClassLength, // (ofClass, type)
+    project: allItemsOfASpecificProjectOfTypeInItemsProperty, // (type, project)
+    type: allItemsOfASpecificTypeOfAClass, // (ofClass, type)
   },
 };
 

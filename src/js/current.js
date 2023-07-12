@@ -9,8 +9,10 @@ let current = {
 
 const get = (prop) => current[prop];
 
-const set = (prop, value) => {
-  current[prop] = value;
+const set = (ofClass, type, project) => {
+  current.type = type;
+  current.project = project;
+  current.ofClass = ofClass;
   database.set('current', current);
 };
 
