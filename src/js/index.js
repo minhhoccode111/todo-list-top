@@ -20,8 +20,6 @@ import './diaryElement.js';
 import './todoElement.js';
 import './noteElement.js';
 import './prototype.js';
-import './animation.js';
-import './hamburger.js';
 import './listener.js';
 import './database.js';
 import './current.js';
@@ -46,4 +44,4 @@ function resetApp() {
   database.set(null, 'dairy'); //typos
   database.set(null, 'date'); //typos
 }
-resetApp();
+// resetApp();

@@ -16,14 +16,18 @@ const noteProjectsCtn = document.getElementById('note_projects_ctn');
 const buttons = document.querySelectorAll('.nav__button');
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
+    button.classList.add('animate__animated', 'animate__rubberBand');
+    setTimeout(() => {
+      button.classList.remove('animate__animated', 'animate__rubberBand');
+    }, 1000);
     const ofClass = e.target.dataset.ofClass;
     const project = e.target.dataset.project;
     const type = e.target.dataset.type;
     if (Current.get('project') === project && Current.get('type') === type && Current.get('ofClass') === ofClass) {
+      console.dir('You are currently on that project.');
       return;
     }
     Current.set(ofClass, type, project);
-
     projectItems(ofClass, type, project);
     if (type === 'diary') {
       buttonPlus.classList.add('hidden');
@@ -81,7 +85,12 @@ function createCustomButtons(name, length, type) {
   button.setAttribute('data-project', `${name}`);
   button.textContent = name;
   button.addEventListener('click', () => {
+    button.classList.add('animate__animated', 'animate__rubberBand');
+    setTimeout(() => {
+      button.classList.remove('animate__animated', 'animate__rubberBand');
+    }, 1000);
     if (Current.get('project') === name && Current.get('type') === type && Current.get('ofClass') === 'items') {
+      console.dir('You are currently on that project.');
       return;
     }
     Current.set('items', type, name);

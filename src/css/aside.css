@@ -42,9 +42,11 @@
   text-transform: capitalize;
   border-radius: 1rem;
   border-width: 0;
+  transition: background-color 250ms ease, color 250ms ease, transform 250ms ease;
 }
 .nav__button:hover {
   text-decoration: underline;
+  transform: scale(0.96);
 }
 .nav__button__ctn .tinynum {
   padding: 1rem;
@@ -59,4 +61,9 @@
   font-weight: bolder;
   color: rgb(255, 255, 226);
   font-size: 1.6rem;
+  cursor: pointer;
+  transition: transform 250ms ease;
+}
+.nav__button__ctn .tinynum:hover {
+  transform: scale(1.2) rotate(20deg);
 }

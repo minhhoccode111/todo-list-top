@@ -18,15 +18,20 @@
   border-radius: 1rem 0.4rem 0.4rem 1rem;
   background-color: #5a5a5a;
   color: #cecece;
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+.todo__item:hover {
+  opacity: 0.8;
 }
 .todo__item.low {
-  border-left-color: rgb(58, 110, 58);
+  border-left-color: rgb(134, 255, 134);
 }
 .todo__item.med {
-  border-left-color: rgb(112, 112, 54);
+  border-left-color: rgb(255, 255, 125);
 }
 .todo__item.high {
-  border-left-color: rgb(107, 52, 52);
+  border-left-color: rgb(255, 126, 126);
 }
 
 .todo__item h3 {
@@ -46,10 +51,23 @@
 }
 .todo__item__done {
   color: rgb(255, 133, 133) !important;
+  transition: transform 250ms linear;
+}
+.todo__item__done:hover {
+  transform: scale(1.2) rotate(90deg);
 }
 
 .todo__item.done {
   opacity: 0.55;
+}
+.todo__item.done.low {
+  border-left-color: rgb(64, 130, 64);
+}
+.todo__item.done.med {
+  border-left-color: rgb(139, 139, 66);
+}
+.todo__item.done.high {
+  border-left-color: rgb(135, 64, 64);
 }
 .todo__item.done h3,
 .todo__item.done em {
