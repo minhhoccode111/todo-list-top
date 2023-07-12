@@ -39,9 +39,13 @@ const dueDate = document.getElementById(`dueDate__of__edit`);
 const cancel = document.querySelector(`input#cancel__of__edit[value="Cancel"][type="button"]`);
 
 cancel.addEventListener('click', () => {
-  dialog.close();
-  form.reset();
-  dueDateInput.disabled = true;
+  dialog.classList.remove('animate__animated', 'animate__zoomIn');
+  dialog.classList.add('animate__animated', 'animate__zoomOut');
+  setTimeout(() => {
+    dueDateInput.disabled = true;
+    form.reset();
+    dialog.close();
+  }, 500);
 });
 
 ////////// fill all inputs in form base on current object's value  \\\\\\\\\\
@@ -74,9 +78,13 @@ form.addEventListener('submit', function (event) {
   updateTodoItem(objCurrent, elementParent);
 
   // Reset the form
-  dueDateInput.disabled = true;
-  form.reset();
-  dialog.close();
+  dialog.classList.remove('animate__animated', 'animate__zoomIn');
+  dialog.classList.add('animate__animated', 'animate__zoomOut');
+  setTimeout(() => {
+    dueDateInput.disabled = true;
+    form.reset();
+    dialog.close();
+  }, 500);
 });
 
 ////////// update DOM element base on current object's value  \\\\\\\\\\

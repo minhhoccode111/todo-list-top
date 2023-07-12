@@ -11,9 +11,17 @@ const aboutClose = document.getElementById('about__close');
 const aboutOpen = document.getElementById('header__about');
 aboutOpen.addEventListener('click', (e) => {
   ofAbout.show();
+  ofAbout.classList.add('animate__animated', 'animate__backInDown');
+  setTimeout(() => {
+    ofAbout.classList.remove('animate__animated', 'animate__backInDown');
+  }, 1000);
 });
 aboutClose.addEventListener('click', (e) => {
-  ofAbout.close();
+  ofAbout.classList.add('animate__animated', 'animate__backOutDown');
+  setTimeout(() => {
+    ofAbout.classList.remove('animate__animated', 'animate__backOutDown');
+    ofAbout.close();
+  }, 1000);
 });
 
 //////////////////// Show which form to display base on Current \\\\\\\\\\\\\\\\\\\\
@@ -28,14 +36,26 @@ buttonPlus.addEventListener('click', () => {
 
   if (currentOfClass === 'items' && currentType === 'todo') {
     ofTodo.show();
+    ofTodo.classList.add('animate__animated', 'animate__backInDown');
+    setTimeout(() => {
+      ofTodo.classList.remove('animate__animated', 'animate__backInDown');
+    }, 1000);
     return;
   }
   if (currentOfClass === 'items' && currentType === 'note') {
     ofNote.show();
+    ofNote.classList.add('animate__animated', 'animate__backInDown');
+    setTimeout(() => {
+      ofNote.classList.remove('animate__animated', 'animate__backInDown');
+    }, 1000);
     return;
   }
   if (currentOfClass === 'projects') {
     ofProject.show();
+    ofProject.classList.add('animate__animated', 'animate__backInDown');
+    setTimeout(() => {
+      ofProject.classList.remove('animate__animated', 'animate__backInDown');
+    }, 1000);
     return;
   }
 });

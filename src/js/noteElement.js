@@ -36,7 +36,10 @@ export default function note(obj) {
   buttonDel.className = 'note__item__del del';
   buttonDel.textContent = 'X';
   buttonDel.addEventListener('click', () => {
-    divNoteItem.remove();
+    divNoteItem.classList.add('animate__animated', 'animate__backOutRight');
+    setTimeout(() => {
+      divNoteItem.remove();
+    }, 500);
     noteClickedDelete(obj);
   });
 

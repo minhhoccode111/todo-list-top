@@ -22,7 +22,11 @@ export default function todo(obj) {
   buttonDone.className = 'todo__item__done';
   buttonDone.innerHTML = obj.htmlDone();
   buttonDone.addEventListener('click', () => {
-    todoClickedDone(obj, buttonDone, div);
+    div.classList.add('animate__animated', 'animate__headShake');
+    setTimeout(() => {
+      todoClickedDone(obj, buttonDone, div);
+      div.classList.remove('animate__animated', 'animate__headShake');
+    }, 500);
   });
 
   let buttonInfo = document.createElement('button');
@@ -36,11 +40,11 @@ export default function todo(obj) {
   buttonDel.className = 'todo__item__del del';
   buttonDel.innerHTML = 'X';
   buttonDel.addEventListener('click', (e) => {
-    div.classList.add('animate-animated', 'animate__backOutRight');
+    div.classList.add('animate__animated', 'animate__backOutRight');
     todoClickedDelete(obj);
     setTimeout(() => {
-      buttonDel.parentNode.remove(); //TODO animation FIXME
-    }, 2000);
+      buttonDel.parentNode.remove();
+    }, 500);
   });
 
   let buttonEdit = document.createElement('button');
@@ -51,6 +55,8 @@ export default function todo(obj) {
     Edit.setElementParent(div);
     Edit.fillEditInputs();
     Edit.dialog.show();
+    Edit.dialog.classList.remove('animate__animated', 'animate__zoomOut');
+    Edit.dialog.classList.add('animate__animated', 'animate__zoomIn');
   });
 
   div.appendChild(h3);

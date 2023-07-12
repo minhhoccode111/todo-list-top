@@ -54,15 +54,26 @@ export function listenForCreate(type) {
 
     console.log(obj);
     // Reset the form
-    dueDateInput.disabled = true;
-    form.reset();
-    dialog.close();
+    dialog.classList.add('animate__animated', 'animate__backOutDown');
+    setTimeout(() => {
+      dialog.classList.remove('animate__animated', 'animate__backOutDown');
+      resetForm();
+    }, 1000); //declared at this file below-most
   });
 
   //Close when click cancel
-  document.querySelector(`input#cancel__of__${type}[value="Cancel"][type="button"]`).addEventListener('click', () => {
-    dialog.close();
+  const cancel = document.querySelector(`input#cancel__of__${type}[value="Cancel"][type="button"]`);
+  cancel.addEventListener('click', () => {
+    dialog.classList.add('animate__animated', 'animate__backOutDown');
+    setTimeout(() => {
+      dialog.classList.remove('animate__animated', 'animate__backOutDown');
+      resetForm();
+    }, 1000); //declared at this file below-most
+  });
+
+  function resetForm() {
     dueDateInput.disabled = true;
     form.reset();
-  });
+    dialog.close();
+  }
 }

@@ -15,7 +15,11 @@ const isTimeExpiredP = wrapper.querySelector('.info__isTimeExpired');
 const removeButton = wrapper.querySelector('.popup__info__remove');
 
 removeButton.addEventListener('click', () => {
-  wrapper.classList.add('hidden');
+  wrapper.classList.remove('animate__animated', 'animate__zoomIn');
+  wrapper.classList.add('animate__animated', 'animate__zoomOut');
+  setTimeout(() => {
+    wrapper.classList.add('hidden');
+  }, 500);
 });
 
 /////////////// display all infos in an object \\\\\\\\\\\\\\\
@@ -42,4 +46,6 @@ export function displayInfo(o) {
 
   ////////// remove hidden to display \\\\\\\\\\
   wrapper.classList.remove('hidden');
+  wrapper.classList.remove('animate__animated', 'animate__zoomOut');
+  wrapper.classList.add('animate__animated', 'animate__zoomIn');
 }

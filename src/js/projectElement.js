@@ -29,7 +29,10 @@ export default function project(obj) {
   deleteButton.classList.add('project__item__del', 'del');
   deleteButton.textContent = 'X';
   deleteButton.addEventListener('click', () => {
-    deleteButton.parentNode.remove();
+    container.classList.add('animate__animated', 'animate__backOutRight');
+    setTimeout(() => {
+      deleteButton.parentNode.remove();
+    }, 500);
     projectClickedDelete(obj, type, title);
   });
 
@@ -42,7 +45,11 @@ export default function project(obj) {
 
 function projectClickedDelete(obj, type, name) {
   Data.projects.del(obj, type);
-  nav.querySelector(`button[data-of-class="items"][data-type="${type}"][data-project="${name}"]`).parentNode.remove();
+  const element = nav.querySelector(`button[data-of-class="items"][data-type="${type}"][data-project="${name}"]`);
+  element.classList.add('animate__animated', 'animate__backOutLeft');
+  setTimeout(() => {
+    element.parentNode.remove();
+  }, 500);
   updateSpan();
 }
 
