@@ -1,13 +1,11 @@
-//this is listener.js
-
 import Data from './data.js';
 import Current from './current.js';
+import Id from './id.js';
 import * as Dialogs from './dialogs';
 import * as Display from './display.js';
-import * as Id from './id.js';
 import * as Diary from './diary.js';
 
-//show about section
+//////////////////// show about section \\\\\\\\\\\\\\\\\\\\
 const ofAbout = document.getElementById('of__about');
 const aboutClose = document.getElementById('about__close');
 const aboutOpen = document.getElementById('header__about');
@@ -18,7 +16,7 @@ aboutClose.addEventListener('click', (e) => {
   ofAbout.close();
 });
 
-//Show forms base on Current
+//////////////////// Show which form to display base on Current \\\\\\\\\\\\\\\\\\\\
 export const buttonPlus = document.getElementById('button__plus');
 const ofTodo = document.getElementById('of__todo');
 const ofNote = document.getElementById('of__note');
@@ -41,21 +39,21 @@ buttonPlus.addEventListener('click', () => {
     return;
   }
 });
-//DOM Loaded
+//////////////////// when DOM loaded \\\\\\\\\\\\\\\\\\\\
 window.addEventListener('DOMContentLoaded', () => {
   Dialogs.listenForCreate('todo');
   Dialogs.listenForCreate('note');
   Dialogs.listenForCreate('project');
-  //load data from database
+  //////////////////// load data from database \\\\\\\\\\\\\\\\\\\\
   Id.load();
   Data.load();
   Diary.load();
   Current.load();
-  //hide button plus
+  //hide button plus if Current is diary after load
   if (Current.get('type') === 'diary' && Current.get('project') === 'diary' && Current.get('ofClass') === 'items') {
     buttonPlus.classList.add('hidden');
   }
-  //init display
+  //////////////////// init display \\\\\\\\\\\\\\\\\\\\
   Display.allProjectsOfTypeBtns('todo');
   Display.allProjectsOfTypeBtns('note');
   Display.projectItems(Current.get('ofClass'), Current.get('type'), Current.get('project'));

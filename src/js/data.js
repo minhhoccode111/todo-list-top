@@ -1,17 +1,12 @@
-//this is data.js
-
 import * as database from './database.js';
-import * as Prototype from './prototype.js';
+import Prototype from './prototype.js';
 import * as Create from './create.js';
-import { sub, endOfWeek, endOfMonth, endOfYear, format } from 'date-fns';
+import { sub, format } from 'date-fns';
 
+////////// app's all data and methods to interact with data \\\\\\\\\\
 const today = new Date();
-// const thisDay = format(new Date(), 'yyyy-MM-dd');
 const yesterday = format(sub(today, { days: 1 }), 'yyyy-MM-dd');
 const twoDaysPast = format(sub(today, { days: 2 }), 'yyyy-MM-dd');
-// const thisWeek = format(endOfWeek(today), 'yyyy-MM-dd');
-// const thisMonth = format(endOfMonth(today), 'yyyy-MM-dd');
-// const thisYear = format(endOfYear(today), 'yyyy-MM-dd');
 
 const yesterdayDiary = Create.Diary(
   'diary project is used to save your diary record, daily events, daybook, just write down your thoughts, talk to yourself to be more mindfulness',
@@ -86,7 +81,8 @@ const addNewProjectToASpecificType = (obj, type) => {
   for (const item of projectsOfType) {
     if (item.title === obj.title) {
       alert(`This ${type} project is already existed, please choose another title.`);
-      return `This ${type} project is already existed, please choose another title.`;
+      console.log(`This ${type} project is already existed, please choose another title.`);
+      return;
     }
   }
   // else add it to the beginning of array
@@ -95,12 +91,11 @@ const addNewProjectToASpecificType = (obj, type) => {
 };
 
 const deleteAProjectAndAllItsItemsOfASpecificType = (obj, type) => {
-  // del that project in projects[type]
+  // del that project in data.projects[type]
   let index = data.projects[type].indexOf(obj);
   data.projects[type].splice(index, 1);
-  // del all items of that project in items[type]
+  // del all items of that project in data.items[type]
   data.items[type] = data.items[type].filter((item) => obj.title !== item.project);
-  // if item in that items[type] array has 'project' property === title of the obj we remove in projects[type] then that item should be removed too
   saveData();
 };
 
@@ -161,7 +156,7 @@ const allItemsOfASpecificProjectOfTypeInItemsProperty = (type, project) => {
   }
 };
 
-//////////////////// export everything in a small object \\\\\\\\\\\\\\\\\\\\
+//////////////////// export everything in a small object with shorter names \\\\\\\\\\\\\\\\\\\\
 const methods = {
   set: saveData,
   get: getData,

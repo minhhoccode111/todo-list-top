@@ -1,8 +1,8 @@
-//this is projectElement.js
 import { displayInfo } from './info.js';
 import Data from './data.js';
 import { nav, updateSpan } from './display.js';
 
+////////// create project item and add event listeners \\\\\\\\\\
 export default function project(obj) {
   let { id, title, type } = obj;
 

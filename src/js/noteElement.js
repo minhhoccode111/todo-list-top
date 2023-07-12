@@ -1,8 +1,8 @@
-//this is noteElement.js
 import { displayInfo } from './info.js';
 import Data from './data.js';
 import * as Display from './display.js';
 
+////////// create note item and add event listeners \\\\\\\\\\
 export default function note(obj) {
   const { id, title, lastModified, detail } = obj;
 

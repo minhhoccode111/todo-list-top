@@ -1,6 +1,6 @@
-//this is diaryElement.js
 import Data from './data.js';
 
+////////// save details element state (open or not) to display next session  \\\\\\\\\\
 function diaryToggledDetails(o) {
   if (o.isOpened) {
     o.isOpened = false;
@@ -10,6 +10,7 @@ function diaryToggledDetails(o) {
   Data.set();
 }
 
+////////// display diary elements  \\\\\\\\\\
 export default function diary(obj) {
   let { isOpened, createdDate, day, night } = obj;
   const container = document.createElement('div');

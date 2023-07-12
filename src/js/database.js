@@ -1,5 +1,4 @@
-//this is database.js
-
+////////// set a variable to database with a specific name \\\\\\\\\\
 export const set = (variable, name) => {
   if (variable === null) {
     localStorage.removeItem(name);
@@ -13,6 +12,7 @@ export const set = (variable, name) => {
   }
 };
 
+////////// get name's data from database \\\\\\\\\\
 export const get = (name) => {
   try {
     return JSON.parse(localStorage.getItem(name));
@@ -23,6 +23,7 @@ export const get = (name) => {
   }
 };
 
+////////// to check a name existed before using get() \\\\\\\\\\
 export const check = (name) => {
   return localStorage.getItem(name) !== null;
 };

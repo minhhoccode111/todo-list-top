@@ -1,17 +1,5 @@
-//this is info.js
-
-//######################## Dialogs to show info #########################/
-// Selecting the wrapper element
-const wrapper = document.querySelector('.popup__info__wrapper');
-const popup = document.querySelector('.popup__info');
-popup.addEventListener('mouseover', () => {
-  popup.classList.add(`animate__animated`, `animate__pulse`);
-});
-popup.addEventListener('mouseout', () => {
-  popup.classList.remove(`animate__animated`, `animate__pulse`);
-});
-
-// Selecting the elements within the wrapper
+/////////////// elements to display an object's info \\\\\\\\\\\\\\\
+export const wrapper = document.querySelector('.popup__info__wrapper');
 const messageH2 = wrapper.querySelector('.popup__info__message');
 const idP = wrapper.querySelector('.info__id');
 const titleP = wrapper.querySelector('.info__title');
@@ -25,25 +13,22 @@ const lastModifiedP = wrapper.querySelector('.info__lastModified');
 const isTimeExpiredP = wrapper.querySelector('.info__isTimeExpired');
 
 const removeButton = wrapper.querySelector('.popup__info__remove');
-removeButton.addEventListener('mouseover', () => {
-  removeButton.classList.add(`animate__animated`, `animate__pulse`);
-});
-removeButton.addEventListener('mouseout', () => {
-  removeButton.classList.remove(`animate__animated`, `animate__pulse`);
-});
 
 removeButton.addEventListener('click', () => {
   wrapper.classList.add('hidden');
 });
 
+/////////////// display all infos in an object \\\\\\\\\\\\\\\
 export function displayInfo(o) {
   let { id, ofClass, type, title, detail, isDone, project, dueDate, priority, createdDate, lastModified, isTimeExpired } = o;
 
+  ////////// header base on object's type \\\\\\\\\\
   if (type === 'todo' && ofClass === 'items') messageH2.textContent = 'Information of Todo item';
   if (type === 'note' && ofClass === 'items') messageH2.textContent = 'Information of Note item';
   if (type === 'todo' && ofClass === 'projects') messageH2.textContent = 'Information of Todo project';
   if (type === 'note' && ofClass === 'projects') messageH2.textContent = 'Information of Note project';
 
+  ////////// the rest base on object's values \\\\\\\\\\
   idP.textContent = id;
   titleP.textContent = title;
   isDoneP.textContent = isDone ?? '';
@@ -55,5 +40,6 @@ export function displayInfo(o) {
   lastModifiedP.textContent = lastModified;
   isTimeExpiredP.textContent = isTimeExpired;
 
+  ////////// remove hidden to display \\\\\\\\\\
   wrapper.classList.remove('hidden');
 }

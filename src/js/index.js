@@ -1,6 +1,4 @@
-//this is index.js
-
-//import icon
+/////////////// import icon \\\\\\\\\\\\\\\
 import './../img/greenCheck.ico';
 
 // import css
@@ -16,7 +14,7 @@ import './../css/reset.css';
 import './../css/main.css';
 import 'animate.css';
 
-//import javaScript
+/////////////// import javaScripts \\\\\\\\\\\\\\\
 import './projectElement.js';
 import './diaryElement.js';
 import './todoElement.js';
@@ -37,7 +35,7 @@ import './info.js';
 import './fns.js';
 import './id.js';
 
-//import module
+/////////////// import module \\\\\\\\\\\\\\\
 import * as database from './database.js';
 
 function resetApp() {

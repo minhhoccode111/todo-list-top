@@ -1,12 +1,10 @@
-//this is create.js
-
 import { now, today, checkExpired } from './fns.js';
-import { get as getId } from './id.js';
-import * as Prototype from './prototype';
+import Id from './id.js';
+import Prototype from './prototype';
 
-//Todo Factory function
+////////// factory functions that return an object wit a specific prototype \\\\\\\\\\
 export function Todo(title, detail, dueDate, hasDueDate, priority, isDone, project) {
-  const id = getId();
+  const id = Id.get();
   const createdDate = today();
   const lastModified = now();
   const isTimeExpired = checkExpired(dueDate);
@@ -26,9 +24,8 @@ export function Todo(title, detail, dueDate, hasDueDate, priority, isDone, proje
   });
 }
 
-//Note Factory function
 export function Note(title, detail, dueDate, hasDueDate, project) {
-  const id = getId();
+  const id = Id.get();
   const createdDate = today();
   const lastModified = now();
   const isTimeExpired = checkExpired(dueDate);
@@ -44,7 +41,7 @@ export function Note(title, detail, dueDate, hasDueDate, project) {
     isTimeExpired,
   });
 }
-//Diary Factory function
+
 export function Diary(day, night) {
   const createdDate = today();
   const lastModified = now();
@@ -58,9 +55,9 @@ export function Diary(day, night) {
     lastModified,
   });
 }
-//Project Factory function
+
 export function Project(title, detail, dueDate, hasDueDate, type) {
-  const id = getId();
+  const id = Id.get();
   const createdDate = today();
   const lastModified = now();
   const isTimeExpired = checkExpired(dueDate);

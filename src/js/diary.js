@@ -1,11 +1,10 @@
-//this is diary.js
-
 import { Diary } from './create.js';
 import * as database from './database.js';
-import * as Prototype from './prototype.js';
+import Prototype from './prototype.js';
 import { isBefore, startOfToday } from 'date-fns';
 import Data from './data.js';
 
+////////// default when first open app  \\\\\\\\\\
 let obj = Diary('I am not productive, I feel sad about that', 'I will push harder tomorrow! Learn and do new project on The Odin Project and become a Backend Engineer. I Can do it!');
 
 const set = () => database.set(obj, 'diary');
@@ -16,16 +15,21 @@ export const load = () => {
   if (database.check('diary')) {
     obj = Object.assign(Object.create(Prototype.diary), database.get('diary'));
   }
-  //is the created date of the diary is yesterday, then add it to 'diary' project in data, then update data to database, then create new Diary for today, then update that to 'diary' in database
+  //if the created date of the diary is yesterday,
   const today = startOfToday();
   if (isBefore(new Date(obj.createdDate), today)) {
+    // then add it to 'diary' project in data,
     Data.items.add(obj, 'diary');
+    // then update data to database,
     Data.set();
+    // then create new Diary for today,
     obj = Diary('write your thoughts here', 'write your thoughts here');
+    // then update that to 'diary' in database
     set();
   }
 };
 
+////////// set day and night property ob current diary object  \\\\\\\\\\
 export const day = (v) => {
   obj.day = v;
   set();
@@ -36,6 +40,7 @@ export const night = (v) => {
   set();
 };
 
+////////// inputs form to write diaries  \\\\\\\\\\
 export const typeInput = (obj) => {
   const container = document.createElement('div');
   container.id = 'section__diary__inputs__ctn';

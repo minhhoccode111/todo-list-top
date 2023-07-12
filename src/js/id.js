@@ -1,21 +1,26 @@
-//this is id.js
-
 import * as database from './database.js';
 
 let id = 0;
 
+////////// to create a unique id for items \\\\\\\\\\
 const set = () => database.set(id, 'id');
 
-//Use to load id from database when app is loaded
-export const load = () => {
+const load = () => {
   if (database.check('id')) {
     id = database.get('id');
   }
 };
 
-export const get = () => {
+const get = () => {
   let i = id;
   id++;
   set();
   return i;
 };
+
+const methods = {
+  get,
+  load,
+};
+
+export default methods;

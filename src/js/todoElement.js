@@ -1,11 +1,11 @@
-//this is todoElement.js
 import { displayInfo } from './info.js';
 import Data from './data.js';
 import * as Display from './display.js';
 import * as Edit from './edit.js';
 
+////////// create todo item and add event listeners \\\\\\\\\\
 export default function todo(obj) {
-  const { id, title, dueDate, priority, project } = obj;
+  const { id, title, dueDate, priority } = obj;
   let div = document.createElement('div');
   div.className = 'todo__item' + ' ' + obj.classDone() + ' ' + priority;
   div.setAttribute('data-id', id);
@@ -36,8 +36,11 @@ export default function todo(obj) {
   buttonDel.className = 'todo__item__del del';
   buttonDel.innerHTML = 'X';
   buttonDel.addEventListener('click', (e) => {
-    buttonDel.parentNode.remove();
+    div.classList.add('animate-animated', 'animate__backOutRight');
     todoClickedDelete(obj);
+    setTimeout(() => {
+      buttonDel.parentNode.remove(); //TODO animation FIXME
+    }, 2000);
   });
 
   let buttonEdit = document.createElement('button');

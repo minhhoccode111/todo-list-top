@@ -1,5 +1,3 @@
-//this is display.js
-
 import Data from './data.js';
 import * as Diary from './diary.js';
 import Current from './current.js';
@@ -9,16 +7,15 @@ import Note from './noteElement.js';
 import Project from './projectElement.js';
 import DiaryHtml from './diaryElement.js';
 
+//////////   \\\\\\\\\\
 const main = document.getElementById('main');
 export const nav = document.getElementById('aside__nav');
-// export const custom = document.getElementById('custom__projects__ctn');
 const todoProjectsCtn = document.getElementById('todo_projects_ctn');
 const noteProjectsCtn = document.getElementById('note_projects_ctn');
 
 const buttons = document.querySelectorAll('.nav__button');
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
-    // const name = e.target.dataset.name;
     const ofClass = e.target.dataset.ofClass;
     const project = e.target.dataset.project;
     const type = e.target.dataset.type;
@@ -36,6 +33,7 @@ buttons.forEach((button) => {
   });
 });
 
+////////// small number next to each button to display how many item it has \\\\\\\\\\
 export function updateSpan() {
   const buttons = nav.querySelectorAll('.nav__button');
   buttons.forEach((button) => {
@@ -51,7 +49,7 @@ export function updateSpan() {
   });
 }
 
-// export function customProjectBtns(allTodoProjects) {
+////////// display all projects of a specific type (note or todo) \\\\\\\\\\
 export function allProjectsOfTypeBtns(type) {
   if (type === 'note') {
     noteProjectsCtn.innerHTML = '';
@@ -70,6 +68,7 @@ export function allProjectsOfTypeBtns(type) {
   }
 }
 
+////////// create buttons for all projects of a specific type (note or todo) \\\\\\\\\\
 function createCustomButtons(name, length, type) {
   const container = document.createElement('div');
   container.classList.add('nav__button__ctn');
@@ -98,6 +97,7 @@ function createCustomButtons(name, length, type) {
   return container;
 }
 
+////////// display all items of a project in main element \\\\\\\\\\
 export const projectItems = (ofClass, type, projectName) => {
   main.innerHTML = '';
   if (ofClass === 'items') {

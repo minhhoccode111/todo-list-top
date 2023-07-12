@@ -1,10 +1,10 @@
-//this is form.js
-
 import Data from './data.js';
 import Current from './current.js';
 import * as Create from './create.js';
 import * as Display from './display.js';
 
+////////// function to call 3 times with 3 different dialogs element \\\\\\\\\\
+////////// instead of writing 3 time longer for note dialog, todo dialog, project dialog \\\\\\\\\\
 export function listenForCreate(type) {
   const dialog = document.getElementById(`of__${type}`);
   const dueDateInput = document.getElementById(`dueDate__of__${type}`);
@@ -22,6 +22,7 @@ export function listenForCreate(type) {
     });
   });
   const form = document.getElementById(`form__of__${type}`);
+  ////////// listen for submit to create an obj and save to database \\\\\\\\\\
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     // Retrieve form data
@@ -46,14 +47,14 @@ export function listenForCreate(type) {
     } else if (type === 'project') {
       obj = Create.Project(title, detail, dueDate, hasDueDate, currentType);
       Data.projects.add(obj, currentType);
-      Display.allProjectsOfTypeBtns(currentType); //display
+      Display.allProjectsOfTypeBtns(currentType);
     }
-    Display.projectItems(currentOfClass, currentType, currentProject); //display
+    Display.projectItems(currentOfClass, currentType, currentProject);
     Display.updateSpan();
 
     console.log(obj);
     // Reset the form
-    dueDateInput.disabled = true; //disable again
+    dueDateInput.disabled = true;
     form.reset();
     dialog.close();
   });
