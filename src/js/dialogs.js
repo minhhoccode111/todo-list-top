@@ -30,22 +30,25 @@ export function listenForCreate(type) {
     const detail = document.getElementById(`detail__of__${type}`).value;
     const dueDate = document.getElementById(`dueDate__of__${type}`).value;
     const hasDueDate = document.querySelector(`input[name="hasDueDate__of__${type}"]:checked`).value === 'yes';
-    const project = Current.get();
+
+    const currentProject = Current.get('project');
+    const currentType = Current.get('type');
+    const currentOfClass = Current.get('ofClass');
+
     if (type === 'todo') {
       const priority = document.querySelector('input[name="priority__of__todo"]:checked').value;
       const isDone = document.querySelector('input[name="isDone__of__todo"]:checked').value === 'true';
-      obj = Create.Todo(title, detail, dueDate, hasDueDate, priority, isDone, project);
-      Data.add(obj, project); //add to Data
+      obj = Create.Todo(title, detail, dueDate, hasDueDate, priority, isDone, currentProject);
+      Data.items.add(obj, 'todo');
     } else if (type === 'note') {
-      obj = Create.Note(title, detail, dueDate, hasDueDate);
-      Data.add(obj, project); //add to Data
+      obj = Create.Note(title, detail, dueDate, hasDueDate, currentProject);
+      Data.items.add(obj, 'note');
     } else if (type === 'project') {
-      obj = Create.Project(title, detail, dueDate, hasDueDate);
-      Data.projects.add(title); //
-      Data.add(obj, project); //add to Data
-      Display.customProjectBtns(Data.projects.get(project)); //display
+      obj = Create.Project(title, detail, dueDate, hasDueDate, currentType);
+      Data.projects.add(obj, currentType);
+      Display.allProjectsOfTypeBtns(currentType); //display
     }
-    Display.projectItems(project); //display
+    Display.projectItems(currentOfClass, currentType, currentProject); //display
     Display.updateSpan();
 
     console.log(obj);
