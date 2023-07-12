@@ -25,13 +25,20 @@ const ofNote = document.getElementById('of__note');
 const ofProject = document.getElementById('of__project');
 
 buttonPlus.addEventListener('click', () => {
-  const name = Current.get();
-  if (name === 'note') {
-    ofNote.show();
-  } else if (name === 'project') {
-    ofProject.show();
-  } else {
+  const currentType = Current.get('type');
+  const currentOfClass = Current.get('ofClass');
+
+  if (currentOfClass === 'items' && currentType === 'todo') {
     ofTodo.show();
+    return;
+  }
+  if (currentOfClass === 'items' && currentType === 'note') {
+    ofNote.show();
+    return;
+  }
+  if (currentOfClass === 'projects') {
+    ofProject.show();
+    return;
   }
 });
 //DOM Loaded
@@ -45,11 +52,12 @@ window.addEventListener('DOMContentLoaded', () => {
   Diary.load();
   Current.load();
   //hide button plus
-  if (Current.get('type') === 'diary' && Current.get('project') === 'diary' && Current.get('ofClass') === 'diary') {
+  if (Current.get('type') === 'diary' && Current.get('project') === 'diary' && Current.get('ofClass') === 'items') {
     buttonPlus.classList.add('hidden');
   }
   //init display
-  Display.customProjectBtns(Data.projects.get('project'));
-  Display.projectItems(Current.get());
+  Display.allProjectsOfTypeBtns('todo');
+  Display.allProjectsOfTypeBtns('note');
+  Display.projectItems(Current.get('ofClass'), Current.get('type'), Current.get('project'));
   Display.updateSpan();
 });
