@@ -1,9 +1,9 @@
 //this is projectElement.js
 import { displayInfo } from './info.js';
-import * as Data from './data.js';
+import Data from './data.js';
 import { nav, updateSpan } from './display.js';
 
-export function project(obj) {
+export default function project(obj) {
   let { id, title, type } = obj;
 
   const container = document.createElement('div');
@@ -42,10 +42,10 @@ export function project(obj) {
 
 function projectClickedDelete(obj, type, name) {
   Data.projects.del(obj, type);
-  nav.querySelector(`button[data-of-class="items"][data-type="${type}"][data-project]="${name}"`).parentNode.remove();
+  nav.querySelector(`button[data-of-class="items"][data-type="${type}"][data-project="${name}"]`).parentNode.remove();
   updateSpan();
 }
 
 function projectClickedLink(type, name) {
-  nav.querySelector(`button[data-of-class="items"][data-type="${type}"][data-project]="${name}"`).click();
+  nav.querySelector(`button[data-of-class="items"][data-type="${type}"][data-project="${name}"]`).click();
 }

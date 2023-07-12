@@ -3,7 +3,7 @@ import { displayInfo } from './info.js';
 import Data from './data.js';
 import * as Display from './display.js';
 
-export function note(obj) {
+export default function note(obj) {
   const { id, title, lastModified, detail } = obj;
 
   const divNoteItem = document.createElement('div');

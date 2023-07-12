@@ -10,7 +10,7 @@ function diaryToggledDetails(o) {
   Data.set();
 }
 
-export function diary(obj) {
+export default function diary(obj) {
   let { isOpened, createdDate, day, night } = obj;
   const container = document.createElement('div');
   container.classList.add('diary__item');

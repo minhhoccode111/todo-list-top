@@ -84,7 +84,7 @@ const addNewProjectToASpecificType = (obj, type) => {
   const projectsOfType = data.projects[type];
   //check if all projects in that type (note or todo) has 1 project with the same title then return
   for (const item of projectsOfType) {
-    if (projectsOfType[item].title === obj.title) {
+    if (item.title === obj.title) {
       alert(`This ${type} project is already existed, please choose another title.`);
       return `This ${type} project is already existed, please choose another title.`;
     }

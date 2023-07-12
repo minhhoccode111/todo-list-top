@@ -4,10 +4,10 @@ import Data from './data.js';
 import * as Diary from './diary.js';
 import Current from './current.js';
 import { buttonPlus } from './listener.js';
-import { todo } from './todoElement.js';
-import { note } from './noteElement.js';
-import { project } from './projectElement.js';
-import { diary } from './diaryElement.js';
+import Todo from './todoElement.js';
+import Note from './noteElement.js';
+import Project from './projectElement.js';
+import DiaryHtml from './diaryElement.js';
 
 const main = document.getElementById('main');
 export const nav = document.getElementById('aside__nav');
@@ -46,7 +46,7 @@ export function updateSpan() {
     if (ofClass === 'items') {
       span.textContent = Data.len.project(type, project);
     } else {
-      span.textContent = Data.len.type('project', type);
+      span.textContent = Data.len.type('projects', type);
     }
   });
 }
@@ -105,12 +105,12 @@ export const projectItems = (ofClass, type, projectName) => {
     if (type === 'todo') {
       if (projectName === 'all') {
         for (const item of allItemsOfType) {
-          main.appendChild(todo(allItemsOfType[item]));
+          main.appendChild(Todo(item));
         }
       } else {
         const itemsOfATodoProject = Data.items.project('todo', projectName);
         for (const item of itemsOfATodoProject) {
-          main.appendChild(todo(itemsOfATodoProject[item]));
+          main.appendChild(Todo(item));
         }
       }
       return;
@@ -118,12 +118,12 @@ export const projectItems = (ofClass, type, projectName) => {
     if (type === 'note') {
       if (projectName === 'all') {
         for (const item of allItemsOfType) {
-          main.appendChild(note(allItemsOfType[item]));
+          main.appendChild(Note(item));
         }
       } else {
         const itemsOfANoteProject = Data.items.project('note', projectName);
         for (const item of itemsOfANoteProject) {
-          main.appendChild(note(itemsOfANoteProject[item]));
+          main.appendChild(Note(item));
         }
       }
       return;
@@ -131,13 +131,13 @@ export const projectItems = (ofClass, type, projectName) => {
     if (type === 'diary') {
       main.appendChild(Diary.typeInput(Diary.get()));
       for (const item of allItemsOfType) {
-        main.appendChild(diary(allItemsOfType[item]));
+        main.appendChild(DiaryHtml(item));
       }
     }
   } else {
     const projects = Data.projects.get(type);
     for (const item of projects) {
-      main.appendChild(project(projects[item]));
+      main.appendChild(Project(item));
     }
   }
 };

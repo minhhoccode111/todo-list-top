@@ -107,6 +107,8 @@ button.addEventListener('click', (e) => {
 
 - Use `textContent` instead of `innerHTML` in `div contenteditable='true'` (or any input field when we want to get user input's value) to prevent unexpected behavior and security of website (because when we use `innerHTML` user can pass a function, a script or any harm to break our website, so it's best practice is avoid it).
 
+- When we use shorthand loop like `for (const property in obj)` and `for (const item of array)` while the `property` in `for...in` loop is pointing to the `obj`'s `property`'s name (not the `property`'s value), the `item` in `for...of` loop is actually pointing to `item` in the `array` not the `index`. So when to access array's item just use `item` (not `array[item]`)
+
 ## Requirements from The Odin Project
 
 - "Todos" are going to be objects that we'll want to dynamically create, which means either using factories or constructors/classes to generate them.

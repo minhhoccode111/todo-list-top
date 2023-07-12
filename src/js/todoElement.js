@@ -4,7 +4,7 @@ import Data from './data.js';
 import * as Display from './display.js';
 import * as Edit from './edit.js';
 
-export function todo(obj) {
+export default function todo(obj) {
   const { id, title, dueDate, priority, project } = obj;
   let div = document.createElement('div');
   div.className = 'todo__item' + ' ' + obj.classDone() + ' ' + priority;
