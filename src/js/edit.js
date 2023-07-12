@@ -2,9 +2,12 @@
 import Data from './data.js';
 
 //######################## Dialogs to take inputs to edit Obj in Data #########################/
-let objCurrent;
 
+// used to determine the parent element of the obj we're editing
 let elementParent;
+
+// used to determine the current obj we're editing
+let objCurrent;
 
 export const setElementParent = (v) => (elementParent = v);
 

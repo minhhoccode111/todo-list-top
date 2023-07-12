@@ -4,8 +4,8 @@ import Data from './data.js';
 import * as Display from './display.js';
 import * as Edit from './edit.js';
 
-export function todo(obj, projectName) {
-  const { id, title, dueDate, priority } = obj;
+export function todo(obj) {
+  const { id, title, dueDate, priority, project } = obj;
   let div = document.createElement('div');
   div.className = 'todo__item' + ' ' + obj.classDone() + ' ' + priority;
   div.setAttribute('data-id', id);
@@ -37,14 +37,13 @@ export function todo(obj, projectName) {
   buttonDel.innerHTML = 'X';
   buttonDel.addEventListener('click', (e) => {
     buttonDel.parentNode.remove();
-    todoClickedDelete(obj, projectName);
+    todoClickedDelete(obj);
   });
 
   let buttonEdit = document.createElement('button');
   buttonEdit.className = 'todo__item__edit edit';
   buttonEdit.innerHTML = '...';
   buttonEdit.addEventListener('click', (e) => {
-    // todoClickedEdit(obj, projectName, div);
     Edit.setObjCurrent(obj);
     Edit.setElementParent(div);
     Edit.fillEditInputs();
@@ -60,26 +59,21 @@ export function todo(obj, projectName) {
   return div;
 }
 
-function todoClickedDelete(obj, projectName) {
-  const index = Data.projects.get(projectName).indexOf(obj);
-  Data.items.del(projectName, index); //FIXME
+function todoClickedDelete(obj) {
+  Data.items.del(obj, 'todo');
   Display.updateSpan();
 }
 
 function todoClickedDone(obj, buttonDone, div) {
   if (obj.isDone) {
     obj.isDone = false;
-    obj.setLastModified();
-    Data.set();
-    buttonDone.innerHTML = obj.htmlDone();
-    Display.updateSpan();
     div.classList.remove('done');
   } else {
     obj.isDone = true;
-    obj.setLastModified();
-    Data.set();
-    buttonDone.innerHTML = obj.htmlDone();
-    Display.updateSpan();
     div.classList.add('done');
   }
+  obj.setLastModified();
+  Data.set();
+  buttonDone.innerHTML = obj.htmlDone();
+  Display.updateSpan();
 }

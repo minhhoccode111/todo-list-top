@@ -34,6 +34,7 @@ export const note = Object.assign(Object.create(proto), {
 export const diary = Object.assign(Object.create(proto), {
   type: 'diary',
   ofClass: 'items',
+  project: 'diary',
   htmlOpened() {
     return this.isOpened ? 'open' : '';
   },

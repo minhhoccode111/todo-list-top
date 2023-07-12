@@ -23,7 +23,6 @@ const priorityP = wrapper.querySelector('.info__priority');
 const createdDateP = wrapper.querySelector('.info__createdDate');
 const lastModifiedP = wrapper.querySelector('.info__lastModified');
 const isTimeExpiredP = wrapper.querySelector('.info__isTimeExpired');
-//FIXME TODO add an element to display type (note or todo) and edit html too
 
 const removeButton = wrapper.querySelector('.popup__info__remove');
 removeButton.addEventListener('mouseover', () => {
@@ -38,17 +37,12 @@ removeButton.addEventListener('click', () => {
 });
 
 export function displayInfo(o) {
-  let { id, type, title, detail, isDone, project, dueDate, priority, createdDate, lastModified, isTimeExpired } = o;
+  let { id, ofClass, type, title, detail, isDone, project, dueDate, priority, createdDate, lastModified, isTimeExpired } = o;
 
-  if ((type = 'todo')) {
-    messageH2.textContent = 'Information of Todo';
-  }
-  if ((type = 'note')) {
-    messageH2.textContent = 'Information of Note';
-  }
-  if ((type = 'project')) {
-    messageH2.textContent = 'Information of Project';
-  }
+  if (type === 'todo' && ofClass === 'items') messageH2.textContent = 'Information of Todo item';
+  if (type === 'note' && ofClass === 'items') messageH2.textContent = 'Information of Note item';
+  if (type === 'todo' && ofClass === 'projects') messageH2.textContent = 'Information of Todo project';
+  if (type === 'note' && ofClass === 'projects') messageH2.textContent = 'Information of Note project';
 
   idP.textContent = id;
   titleP.textContent = title;

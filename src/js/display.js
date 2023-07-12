@@ -45,9 +45,8 @@ export function updateSpan() {
     const span = button.nextElementSibling;
     if (ofClass === 'items') {
       span.textContent = Data.len.project(type, project);
-    }
-    if (ofClass === 'projects') {
-      span.textContent = Data.len.type(ofClass, type);
+    } else {
+      span.textContent = Data.len.type('project', type);
     }
   });
 }

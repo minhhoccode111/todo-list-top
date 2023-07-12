@@ -128,16 +128,37 @@ const deleteOneObjFromASpecificType = (obj, type) => {
 };
 
 //////////////////// lengths in data \\\\\\\\\\\\\\\\\\\\
-const allItemsOfASpecificTypeOfAClass = (ofClass, type) => data[ofClass][type].length;
+const allItemsOfASpecificTypeOfAClass = (ofClass, type) => {
+  if (ofClass === 'items' && type === 'todo') {
+    return data.items.todo.reduce((total, current) => {
+      if (!current.isDone) total++;
+      return total;
+    }, 0);
+  }
+
+  return data[ofClass][type].length;
+};
 
 const allItemsOfASpecificProjectOfTypeInItemsProperty = (type, project) => {
-  if (project === 'all') return data.items[type].length;
-  return data.items[type].reduce((total, current) => {
-    if (current.project === project) {
-      total++;
-    }
-    return total;
-  }, 0);
+  if (type === 'diary' && project === 'diary') return data.items.diary.length;
+
+  if (type === 'note' && project === 'all') return data.items.note.length;
+
+  if (type === 'note' && project !== 'all') {
+    return data.items.note.reduce((total, current) => {
+      if (current.project === project) total++;
+      return total;
+    }, 0);
+  }
+
+  if (type === 'todo' && project === 'all') return allItemsOfASpecificTypeOfAClass('items', 'todo');
+
+  if (type === 'todo' && project !== 'all') {
+    return data.items.todo.reduce((total, current) => {
+      if (current.project === project && !current.isDone) total++;
+      return total;
+    }, 0);
+  }
 };
 
 //////////////////// export everything in a small object \\\\\\\\\\\\\\\\\\\\
@@ -157,8 +178,8 @@ const methods = {
     project: getASpecificProjectAllItems,
   },
   len: {
-    project: allItemsOfASpecificProjectOfTypeInItemsProperty, // (type, project)
     type: allItemsOfASpecificTypeOfAClass, // (ofClass, type)
+    project: allItemsOfASpecificProjectOfTypeInItemsProperty, // (type, project)
   },
 };
 
