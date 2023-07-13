@@ -5,6 +5,7 @@
   text-transform: capitalize;
   position: relative;
   background-color: #292929;
+  overflow-x: hidden;
 }
 .nav__button__ctn {
   display: flex;

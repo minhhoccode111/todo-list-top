@@ -36,11 +36,11 @@ dialog label {
   font-weight: bold;
 }
 
-dialog input[type="text"],
+dialog input[type='text'],
 dialog textarea,
-dialog input[type="date"],
-dialog input[type="button"],
-dialog input[type="submit"] {
+dialog input[type='date'],
+dialog input[type='button'],
+dialog input[type='submit'] {
   width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
@@ -51,44 +51,44 @@ dialog textarea {
   resize: vertical;
 }
 
-dialog input[type="submit"][value="Create Todo"],
-dialog input[type="submit"][value="Confirm edit"] {
+dialog input[type='submit'][value='Create Todo'],
+dialog input[type='submit'][value='Confirm edit'] {
   background-color: #4caf50;
   color: white;
   cursor: pointer;
 }
 
-dialog input[type="button"][value="Create Todo"]:hover,
-dialog input[type="button"][value="Confirm edit"]:hover {
+dialog input[type='button'][value='Create Todo']:hover,
+dialog input[type='button'][value='Confirm edit']:hover {
   background-color: #45a049;
 }
-dialog input[type="button"][value="Cancel"] {
+dialog input[type='button'][value='Cancel'] {
   background-color: #af4c4c;
   color: white;
   cursor: pointer;
 }
 
-dialog input[type="button"][value="Cancel"]:hover {
+dialog input[type='button'][value='Cancel']:hover {
   background-color: #a04545;
 }
 /* add input of todo's form */
-dialog input[type="submit"][value="Create Project"] {
+dialog input[type='submit'][value='Create Project'] {
   background-color: #4caf50;
   color: white;
   cursor: pointer;
 }
 
-dialog input[type="button"][value="Create Project"]:hover {
+dialog input[type='button'][value='Create Project']:hover {
   background-color: #45a049;
 }
 /* add project form */
-dialog input[type="submit"][value="Create Note"] {
+dialog input[type='submit'][value='Create Note'] {
   background-color: #4caf50;
   color: white;
   cursor: pointer;
 }
 
-dialog input[type="button"][value="Create Note"]:hover {
+dialog input[type='button'][value='Create Note']:hover {
   background-color: #45a049;
 }
 /* popup to show info */
@@ -114,6 +114,9 @@ dialog input[type="button"][value="Create Note"]:hover {
   font-size: 1.6rem;
   column-gap: 2rem;
   border-radius: 1rem;
+}
+.popup__info:hover input {
+  transform: scale(1.1) rotate(-5deg);
 }
 .popup__info > * {
   justify-self: start;
@@ -142,6 +145,7 @@ dialog input[type="button"][value="Create Note"]:hover {
   justify-self: center;
   border: 1px solid #ccc;
   border-radius: 4px;
+  transition: transform 250ms ease-in-out;
 }
 
 .popup__info input:hover {

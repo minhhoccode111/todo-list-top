@@ -3,6 +3,7 @@
   font-size: 2rem;
   padding: 1rem 1rem 7.6rem;
   background-color: #292929;
+  overflow-x: hidden;
 }
 .todo__item {
   display: flex;
