@@ -217,6 +217,6 @@ let data = {
 
 ## Live Demos
 
-- [All projects's live demos](https://minhhoccode111.github.io/allProjectssLiveDemo)
+[View all projects' live demos](https://minhhoccode111.github.io/all-projects-live-demos/) 
 
-- [Check mate demo](https://minhhoccode111.github.io/todoListTOP/)
+[Check Mate Todo List](https://minhhoccode111.github.io/todo-list-top/)
