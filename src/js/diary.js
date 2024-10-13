@@ -5,7 +5,7 @@ import { isBefore, startOfToday } from 'date-fns';
 import Data from './data.js';
 
 ////////// default when first open app  \\\\\\\\\\
-let obj = Diary('I am not productive, I feel sad about that', 'I will push harder tomorrow! Learn and do new project on The Odin Project and become a Backend Engineer. I Can do it!');
+let obj = Diary('what is happening inside my head all day long?', 'what is happening inside my head before i go to bed?');
 
 const set = () => database.set(obj, 'diary');
 

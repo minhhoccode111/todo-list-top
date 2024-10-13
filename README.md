@@ -10,11 +10,13 @@ The **Checkmate** application is created according to the assignment from **The 
 
 ## **Features**
 
+- Dynamic in plain JavaScript
 - Create new project to store to-dos
 - Create new project to store notes
 - CRUD todos and notes
 - Create new diary every day automatically
 - Keep track of last modified, time add, due date ...
+- Remember app's state when you left
 
 ## **Outcome**
 
@@ -48,13 +50,13 @@ git clone git@github.com:minhhoccode111/todo-list-top.git
 then
 
 ```bash
-cd something
-bun install
-bun start
+cd todo-list-top
+npm install
+npm start
 ```
 
 ## **Navigation**
 
-- See [all my projects'](https://github.com/minhhoccode111/all-projects-live-demos) live demos
+- See [my profile](https://github.com/minhhoccode111)
 - See my previous project [Restaurant page TOP](https://github.com/minhhoccode111/restaurant-page-top)
 - See my next project [Weather app TOP](https://github.com/minhhoccode111/weather-app-top)

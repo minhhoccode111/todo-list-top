@@ -9,13 +9,13 @@ const yesterday = format(sub(today, { days: 1 }), 'yyyy-MM-dd');
 const twoDaysPast = format(sub(today, { days: 2 }), 'yyyy-MM-dd');
 
 const yesterdayDiary = Create.Diary(
-  'diary project is used to save your diary record, daily events, daybook, just write down your thoughts, talk to yourself to be more mindfulness',
-  'it has 2 sections, your thoughts along the day and your thoughts before going to bed'
+  'this is yesterday all day long',
+  'this is yesterday before bed'
 );
 yesterdayDiary.createdDate = yesterday;
 const twoDaysBeforeDiary = Create.Diary(
-  'Hmmm I did dopamine detox quite well today, just learn and play soccer, not wasting time on game or social media :)',
-  'Today I did 8 pomodoros 1 hours, but still feel like I am not productive as I want, I must push harder tomorrow and become a Backend Engineer in the future :) '
+  'this is the day before yesterday all day long',
+  'this is the day before yesterday before bed',
 );
 twoDaysBeforeDiary.createdDate = twoDaysPast;
 
